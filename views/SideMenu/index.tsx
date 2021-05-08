@@ -1,12 +1,22 @@
 import React from 'react';
+import { useRouter } from 'next/router'
 
 import DataMenu from '@components/DataMenu';
 import { menus } from './schema';
 
 export default function SideMenu() {
+  const router = useRouter();
 
   const handleSelect = ({ key }) => {
-    alert('key: ' + key);
+    if (key === '/account/logout') {
+      if (confirm('Logout from Application?')) {
+        // Logout action here...
+      }
+      
+      return;
+    }
+
+    router.push(key);
   };
 
   return (
