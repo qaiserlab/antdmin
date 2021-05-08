@@ -1,16 +1,10 @@
-import { useState, ReactChildren } from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
-import {
-  DashboardOutlined,
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+
+import { Layout } from 'antd';
+import { DashboardOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
 
 import style from './style.module.scss';
 
@@ -20,13 +14,13 @@ import RootLayout from '@layouts/RootLayout';
 import SideMenu from '@views/SideMenu';
 
 export default function AppLayout({ children }: any) {
-  const [collapsed, setCollapsed] = useState(true);
-  const [url, setUrl] = useState('/test/address/next');
+  const router = useRouter();
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   return (
     <RootLayout>
       <Layout id={style.root}>
-        <Sider collapsible collapsed={collapsed} onCollapse={() => setCollapsed(!collapsed)}>
+        <Sider collapsible collapsed={isCollapsed} onCollapse={() => setIsCollapsed(!isCollapsed)}>
           <SideMenu />
         </Sider>
 
@@ -35,7 +29,7 @@ export default function AppLayout({ children }: any) {
           
           <Content id={style.content}>
             <header>
-              <UrlBreadcrumb url={url} icon={<DashboardOutlined />} />
+              <UrlBreadcrumb url={router.pathname} icon={<DashboardOutlined />} />
             </header>
             <section>
               {children}
