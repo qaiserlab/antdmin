@@ -20,6 +20,7 @@
     "baseUrl": "./",
     "paths": {
       "@pages/*": ["pages/*"],
+      "@views/*": ["views/*"],
       "@components/*": ["components/*"],
       "@layouts/*": ["layouts/*"]
     }
