@@ -19,11 +19,7 @@ import RootLayout from '@layouts/RootLayout';
 
 import SideMenu from '@views/SideMenu';
 
-interface AuxProps {
-  children: ReactChildren;
-};
-
-export default function AppLayout({ children }: AuxProps) {
+export default function AppLayout({ children }: any) {
   const [collapsed, setCollapsed] = useState(true);
   const [url, setUrl] = useState('/test/address/next');
 
