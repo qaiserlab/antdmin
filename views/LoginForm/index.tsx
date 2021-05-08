@@ -44,7 +44,7 @@ export default function LoginForm() {
             onBlur={formik.handleBlur}
           />
           {formik.errors.userName && formik.touched.userName && (
-            <div style={{ color: "red" }}>{formik.errors.userName}</div>
+            <small style={{ color: "#d50000" }}>{formik.errors.userName}</small>
           )}
         </Col>
       
@@ -60,7 +60,7 @@ export default function LoginForm() {
             onBlur={formik.handleBlur}
           />
           {formik.errors.password && formik.touched.password && (
-            <div style={{ color: "red" }}>{formik.errors.password}</div>
+            <small style={{ color: "#d50000" }}>{formik.errors.password}</small>
           )}
         </Col>
 

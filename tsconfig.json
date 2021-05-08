@@ -19,6 +19,7 @@
     "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
+      "@styles/*": ["styles/*"],
       "@pages/*": ["pages/*"],
       "@views/*": ["views/*"],
       "@components/*": ["components/*"],
