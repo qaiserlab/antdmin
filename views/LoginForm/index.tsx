@@ -41,7 +41,7 @@ export default function LoginForm() {
             placeholder={'Username'}
             value={formik.values.userName}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            // onBlur={formik.handleBlur}
           />
           {formik.errors.userName && formik.touched.userName && (
             <small style={{ color: "#d50000" }}>{formik.errors.userName}</small>
