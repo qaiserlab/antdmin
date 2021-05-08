@@ -38,6 +38,16 @@ export default class RouterBreadcrumb extends React.Component<
     });
   }
 
+  mkTitleCase(text: string) {
+    const sentence = text.toLowerCase().split(' ');
+
+    for(let i = 0; i< sentence.length; i++){
+      sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
+    }
+    
+    return sentence.join(' ');
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -49,7 +59,7 @@ export default class RouterBreadcrumb extends React.Component<
           {this.getDataSource().map((item: any) => {
             return (
               <Breadcrumb.Item>
-                <a href={item.href}>{item.title}</a>
+                <a href={item.href}>{this.mkTitleCase(item.title)}</a>
               </Breadcrumb.Item>
             );
           })}
