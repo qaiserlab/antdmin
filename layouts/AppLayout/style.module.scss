@@ -7,8 +7,17 @@
 }
 
 #content {
-  padding: 24px;
-  background-color: cyan;
+  > header {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  > section {
+    padding: 24px;
+    background-color: cyan;
+  }
 }
 
 #footer {

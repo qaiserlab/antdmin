@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
+  DashboardOutlined,
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
@@ -12,10 +13,13 @@ const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 import style from './style.module.scss';
+
+import UrlBreadcrumb from '@components/UrlBreadcrumb';
 import RootLayout from '@layouts/RootLayout';
 
 export default function AppLayout({ children }) {
   const [collapsed, setCollapsed] = useState(true);
+  const [url, setUrl] = useState('/test/address/next');
 
   return (
     <RootLayout>
@@ -46,16 +50,15 @@ export default function AppLayout({ children }) {
         <Layout>
           <Header id={style.header} />
           
-          <Content style={{ margin: '0 16px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
-
-            <section id={style.content}>
+          <Content id={style.content}>
+            <header>
+              <UrlBreadcrumb url={url} icon={<DashboardOutlined />} />
+            </header>
+            <section>
               {children}
             </section>
           </Content>
+
           <Footer id={style.footer}>
             Next.js Admin ©2021 Created by QaiserLab/Fadlun Anaturdasa Wibawa
           </Footer>
