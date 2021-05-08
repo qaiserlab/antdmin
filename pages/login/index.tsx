@@ -1,8 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 
-import "antd/dist/antd.css";
 import { Button } from 'antd';
+
+import MainLayout from '@layouts/MainLayout'
+import StickArea from '@components/StickArea'
 
 export default function Login() {
 
@@ -11,9 +13,8 @@ export default function Login() {
   };
 
   return (
-    <React.Fragment>
-      <section style={{textAlign: 'center'}}>
-        <br />
+    <MainLayout>
+      <StickArea align={'center'} valign={'center'}>
         
         LOGIN PAGE<br />
         <Link href={'/'}>
@@ -24,7 +25,7 @@ export default function Login() {
         <br />
         
         <Button onClick={() => handleClick('Developer')}>TEST</Button>
-      </section>
-    </React.Fragment>
+      </StickArea>
+    </MainLayout>
   );
 }
