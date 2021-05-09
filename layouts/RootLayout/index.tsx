@@ -1,11 +1,6 @@
-import { ReactNode } from 'react';
 import Head from 'next/head';
 
-interface MainLayoutProps {
-  children: ReactNode;
-};
-
-export default function MainLayout({ children }: MainLayoutProps) {
+export default function RootLayout({ children }: any) {
   return (
     <section>
       <Head>
