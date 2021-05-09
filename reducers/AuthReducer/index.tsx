@@ -15,25 +15,31 @@ const initialState = {
     phoneNumber: '',
   },
 };
-const authStore = createContext({ state: {}, dispatch: {} });
+const authStore = createContext({ state: {}, dispatch: (payload: any) => {} });
 const { Provider } = authStore;
 
 function AuthProvider({ children }: any) {
   const [state, dispatch] = useReducer((state: AuthStateInterface, action: AuthActionInterface) => {
     switch (action.type) {
       case 'login':
-        localStorage.token = action.payload.authInfo.token;
-        localStorage.isLogin = action.payload.authInfo.isLogin;
+
+        const token = action.payload.token;
+        const userInfo = action.payload.userInfo;
+
+        const isLogin = true;
+
+        localStorage.token = token;
+        localStorage.isLogin = isLogin;
 
         return {
           authInfo: {
             ...state.authInfo,
-            ...action.payload.authInfo,
-            isLogin: true
+            token,
+            isLogin,
           },
           userInfo: {
             ...state.userInfo,
-            ...action.payload.userInfo
+            ...userInfo,
           }
         };
       case 'logout':

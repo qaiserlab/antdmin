@@ -1,12 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import { useFormik } from "formik";
 
 import { Row, Col, Space, Input, Button } from 'antd';
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons";
 
+import { authStore } from '@reducers/AuthReducer';
 import { initialValues, validationSchema } from './schema';
 
 export default function LoginForm() {
+  const { dispatch } = useContext(authStore);
   const userNameRef = useRef(null);
 
   const formik = useFormik({
@@ -14,14 +16,27 @@ export default function LoginForm() {
     validationSchema,
 
     onSubmit: (values, { resetForm, setSubmitting }) => {
-      alert(JSON.stringify(values));
+      const token = '727f3d03-52e3-43d2-af80-1c3912c45194';
+      const userInfo = {
+        userName: values.userName,
+        email: 'f.anaturdasa@gmail.com',
+      };
+
+      dispatch({
+        type: 'login',
+        payload: {
+          authInfo: { token },
+          userInfo: userInfo,
+        }
+      })
+
       resetForm();
       setSubmitting(false);
     }
   });
 
   useEffect(() => {
-    userNameRef.current.focus();
+    // userNameRef.current.focus();
   }, []); // Second param empty, mean only execute once time
 
   const handleReset = () => {
@@ -41,7 +56,7 @@ export default function LoginForm() {
             placeholder={'Username'}
             value={formik.values.userName}
             onChange={formik.handleChange}
-            // onBlur={formik.handleBlur}
+            onBlur={formik.handleBlur}
           />
           {formik.errors.userName && formik.touched.userName && (
             <small style={{ color: "#d50000" }}>{formik.errors.userName}</small>
