@@ -20,6 +20,7 @@
     "baseUrl": "./",
     "paths": {
       "@config/*": ["config/*"],
+      "@reducers/*": ["reducers/*"],
       "@styles/*": ["styles/*"],
       "@pages/*": ["pages/*"],
       "@views/*": ["views/*"],
