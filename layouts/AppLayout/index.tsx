@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 
-import { Layout } from 'antd';
-import { DashboardOutlined } from '@ant-design/icons';
+import { Layout, Space } from 'antd';
+import { DashboardOutlined, UserOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -18,22 +18,6 @@ export default function AppLayout({ children }: any) {
   const { state, dispatch } = useContext(authStore);
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const handleClick = () => {
-    const token = '727f3d03-52e3-43d2-af80-1c3912c45194';
-    const userInfo = {
-      userName: 'qaiserlab',
-      email: 'f.anaturdasa@gmail.com',
-    };
-
-    dispatch({
-      type: 'login',
-      payload: {
-        authInfo: { token },
-        userInfo: userInfo,
-      }
-    })
-  };
-
   return (
     <RootLayout>
       <Layout id={style.root}>
@@ -42,12 +26,17 @@ export default function AppLayout({ children }: any) {
         </Sider>
 
         <Layout>
-          <Header id={style.header} />
+          <Header id={style.header}>
+            <figure>
+              <Space>
+                <UserOutlined />
+                {state.userInfo.userName}
+              </Space>
+            </figure>
+          </Header>
           <Content id={style.content}>
             <header>
               <UrlBreadcrumb url={router.pathname} icon={<DashboardOutlined />} />
-              {JSON.stringify(state)}
-              <button onClick={handleClick}>Test</button>
             </header>
             <section>
               {children}
