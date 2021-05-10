@@ -15,8 +15,8 @@ const initialState = {
     phoneNumber: '',
   },
 };
-const authStore = createContext({ state: initialState, dispatch: (payload: any) => {} });
-const { Provider } = authStore;
+const AuthStore = createContext({ state: initialState, dispatch: (payload: any) => {} });
+const { Provider } = AuthStore;
 
 function AuthProvider({ children }: any) {
   const [state, dispatch] = useReducer((state: AuthStateInterface, action: AuthActionInterface) => {
@@ -59,4 +59,4 @@ function AuthProvider({ children }: any) {
   );
 }
 
-export { authStore, AuthProvider }
+export { AuthStore, AuthProvider }

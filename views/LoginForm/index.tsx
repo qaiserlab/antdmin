@@ -4,11 +4,11 @@ import { useFormik } from "formik";
 import { Row, Col, Space, Input, Button } from 'antd';
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons";
 
-import { authStore } from '@reducers/AuthReducer';
+import { AuthStore } from '@reducers/AuthReducer';
 import { initialValues, validationSchema } from './schema';
 
 export default function LoginForm() {
-  const { dispatch } = useContext(authStore);
+  const { dispatch } = useContext(AuthStore);
   const userNameRef = useRef(null);
 
   const formik = useFormik({

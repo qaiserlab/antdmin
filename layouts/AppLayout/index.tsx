@@ -8,14 +8,14 @@ const { Header, Content, Footer, Sider } = Layout;
 
 import style from './style.module.scss';
 
-import { authStore } from '@reducers/AuthReducer';
+import { AuthStore } from '@reducers/AuthReducer';
 import UrlBreadcrumb from '@components/UrlBreadcrumb';
 import RootLayout from '@layouts/RootLayout';
 import SideMenu from '@views/SideMenu';
 
 export default function AppLayout({ children }: any) {
   const router = useRouter();
-  const { state, dispatch } = useContext(authStore);
+  const { state, dispatch } = useContext(AuthStore);
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   return (
