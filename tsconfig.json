@@ -21,7 +21,7 @@
     "paths": {
       "@config/*": ["config/*"],
       "@helpers/*": ["helpers/*"],
-      "@reducers/*": ["reducers/*"],
+      "@stores/*": ["stores/*"],
       "@components/*": ["components/*"],
       "@styles/*": ["styles/*"],
       "@pages/*": ["pages/*"],
