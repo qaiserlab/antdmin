@@ -1,13 +1,16 @@
 import React, { useEffect, useContext, useRef } from 'react';
-import { useFormik } from "formik";
+import { useRouter } from 'next/router';
+import { useFormik } from 'formik';
 
 import { Row, Col, Space, Input, Button } from 'antd';
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons";
 
+import Api from '@helpers/Api';
 import { AuthStore } from '@stores/AuthStore';
 import { initialValues, validationSchema } from './schema';
 
 export default function LoginForm() {
+  const router = useRouter();
   const { dispatch } = useContext(AuthStore);
   const userNameRef = useRef(null);
 
@@ -15,22 +18,31 @@ export default function LoginForm() {
     initialValues,
     validationSchema,
 
-    onSubmit: (values, { resetForm, setSubmitting }) => {
+    onSubmit: async (values, { setSubmitting }) => {
       const token = '727f3d03-52e3-43d2-af80-1c3912c45194';
       const userInfo = {
         userName: values.userName,
         email: 'f.anaturdasa@gmail.com',
       };
 
-      dispatch({
-        type: 'login',
-        payload: {
-          authInfo: { token },
-          userInfo: userInfo,
-        }
-      })
+      const response = await Api.post('/api/auth/login', values);
+      const result = await response.json();
 
-      resetForm();
+      if (response.ok) {
+        dispatch({
+          type: 'login',
+          payload: {
+            authInfo: { token },
+            userInfo: userInfo,
+          }
+        })
+
+        router.push('/');
+      }
+      else {
+        alert('error: ' + JSON.stringify(result));
+      }
+
       setSubmitting(false);
     }
   });

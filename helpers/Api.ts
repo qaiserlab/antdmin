@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:3000';
 
-export async function get(url: string, data: any) {
+async function get(url: string, data: any) {
   const urlObject = new URL(BASE_URL + url)
 
   urlObject.search = new URLSearchParams(data).toString();
@@ -9,7 +9,7 @@ export async function get(url: string, data: any) {
   return response;
 }
 
-export async function del(url: string, data: any) {
+async function del(url: string, data: any) {
   const urlObject = new URL(BASE_URL + url)
   
   urlObject.search = new URLSearchParams(data).toString();
@@ -24,7 +24,7 @@ export async function del(url: string, data: any) {
   return response;
 }
 
-export async function post(url: string, data: Object) {
+async function post(url: string, data: Object) {
   const response = await fetch(BASE_URL + url, {
     method: 'POST',
     headers: {
@@ -36,7 +36,7 @@ export async function post(url: string, data: Object) {
   return response;
 }
 
-export async function put(url: string, data: Object) {
+async function put(url: string, data: Object) {
   const response = await fetch(BASE_URL + url, {
     method: 'PUT',
     headers: {
@@ -47,3 +47,10 @@ export async function put(url: string, data: Object) {
   
   return response;
 }
+
+export default {
+  get,
+  del,
+  post,
+  put
+};
