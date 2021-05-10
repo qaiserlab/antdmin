@@ -20,11 +20,12 @@
     "baseUrl": "./",
     "paths": {
       "@config/*": ["config/*"],
+      "@helpers/*": ["helpers/*"],
       "@reducers/*": ["reducers/*"],
+      "@components/*": ["components/*"],
       "@styles/*": ["styles/*"],
       "@pages/*": ["pages/*"],
       "@views/*": ["views/*"],
-      "@components/*": ["components/*"],
       "@layouts/*": ["layouts/*"]
     }
   },
