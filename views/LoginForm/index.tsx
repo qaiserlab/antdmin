@@ -69,6 +69,7 @@ export default function LoginForm() {
             value={formik.values.userName}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            disabled={formik.isSubmitting}
           />
           {formik.errors.userName && formik.touched.userName && (
             <small style={{ color: "#d50000" }}>{formik.errors.userName}</small>
@@ -85,6 +86,7 @@ export default function LoginForm() {
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            disabled={formik.isSubmitting}
           />
           {formik.errors.password && formik.touched.password && (
             <small style={{ color: "#d50000" }}>{formik.errors.password}</small>
@@ -94,11 +96,18 @@ export default function LoginForm() {
         <Col span={6} />
         <Col span={18}>
           <Space>
-            <Button htmlType={'submit'} type={'primary'}>
+            <Button 
+              htmlType={'submit'} 
+              type={'primary'}
+              loading={formik.isSubmitting}
+            >
               <LoginOutlined />
               Login
             </Button>
-            <Button onClick={handleReset}>
+            <Button 
+              onClick={handleReset}
+              disabled={formik.isSubmitting}
+            >
               <UndoOutlined />
               Reset
             </Button>
