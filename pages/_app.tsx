@@ -1,7 +1,7 @@
 import 'antd/dist/antd.css';
 import '@styles/global.scss';
 
-import { AuthProvider } from '@stores/AuthReducer';
+import { AuthProvider } from '@stores/AuthStore';
 
 export default function App({ Component, pageProps }) {
   return (

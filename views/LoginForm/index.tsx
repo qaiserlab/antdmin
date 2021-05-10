@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { Row, Col, Space, Input, Button } from 'antd';
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons";
 
-import { AuthStore } from '@stores/AuthReducer';
+import { AuthStore } from '@stores/AuthStore';
 import { initialValues, validationSchema } from './schema';
 
 export default function LoginForm() {
