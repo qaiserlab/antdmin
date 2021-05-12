@@ -1,21 +1,20 @@
 import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
-
 import { Layout, Space } from 'antd';
 import { DashboardOutlined, UserOutlined } from '@ant-design/icons';
 
-const { Header, Content, Footer, Sider } = Layout;
-
 import style from './style.module.scss';
-
 import { AuthStore } from '@stores/AuthStore';
 import UrlBreadcrumb from '@components/UrlBreadcrumb';
 import RootLayout from '@layouts/RootLayout';
 import SideMenu from '@views/SideMenu';
+import AlertMessage from '@bound/AlertMessage';
+
+const { Header, Content, Footer, Sider } = Layout;
 
 export default function AppLayout({ children }: any) {
   const router = useRouter();
-  const { state, dispatch } = useContext(AuthStore);
+  const { state } = useContext(AuthStore);
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   return (
@@ -39,6 +38,7 @@ export default function AppLayout({ children }: any) {
               <UrlBreadcrumb url={router.pathname} icon={<DashboardOutlined />} />
             </header>
             <section>
+              <AlertMessage />
               {children}
             </section>
           </Content>

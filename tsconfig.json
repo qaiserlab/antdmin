@@ -23,6 +23,7 @@
       "@helpers/*": ["helpers/*"],
       "@stores/*": ["stores/*"],
       "@components/*": ["components/*"],
+      "@bound/*": ["bound/*"],
       "@styles/*": ["styles/*"],
       "@pages/*": ["pages/*"],
       "@views/*": ["views/*"],

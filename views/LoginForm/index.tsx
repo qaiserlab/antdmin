@@ -1,16 +1,18 @@
 import React, { useEffect, useContext, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
-
 import { Row, Col, Space, Input, Button } from 'antd';
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons";
 
-import { api } from '@helpers/Api';
-import { AuthStore } from '@stores/AuthStore';
 import { initialValues, validationSchema } from './schema';
+import { api } from '@helpers/Api';
+import { ActivityStore } from '@stores/ActivityStore';
+import { AuthStore } from '@stores/AuthStore';
+import AlertMessage from '@bound/AlertMessage';
 
 export default function LoginForm() {
   const router = useRouter();
+  const { setErrorMessage, errorMessage } = useContext(ActivityStore);
   const { dispatch } = useContext(AuthStore);
   const userNameRef = useRef(null);
 
@@ -37,10 +39,11 @@ export default function LoginForm() {
           }
         })
 
+        setErrorMessage('');
         router.push('/');
       }
       else {
-        alert('error: ' + JSON.stringify(result));
+        setErrorMessage(result.message);
       }
 
       setSubmitting(false);
@@ -58,6 +61,8 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={formik.handleSubmit}>
+      <AlertMessage />
+
       <Row gutter={[8, 16]}>
         <Col span={6}>Username</Col>
         <Col span={18}>
