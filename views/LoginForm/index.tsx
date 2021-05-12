@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { Row, Col, Space, Input, Button } from 'antd';
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons";
 
-import Api from '@helpers/Api';
+import { api } from '@helpers/Api';
 import { AuthStore } from '@stores/AuthStore';
 import { initialValues, validationSchema } from './schema';
 
@@ -25,7 +25,7 @@ export default function LoginForm() {
         email: 'f.anaturdasa@gmail.com',
       };
 
-      const response = await Api.post('/api/auth/login', values);
+      const response = await api.post('/api/auth/login', values);
       const result = await response.json();
 
       if (response.ok) {

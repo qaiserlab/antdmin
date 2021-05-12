@@ -1,56 +1,50 @@
-const BASE_URL = 'http://localhost:3000';
+export class Api {
+  baseUrl: string;
 
-async function get(url: string, data: any) {
-  const urlObject = new URL(BASE_URL + url)
+  constructor(baseUrl?: string) {
+    this.baseUrl = (baseUrl)?baseUrl:'';
+  }
 
-  urlObject.search = new URLSearchParams(data).toString();
+  mkUrlWithQueryParams(url: string, data: any) {
+    const urlObject = new URL(this.baseUrl + url)
+    urlObject.search = new URLSearchParams(data).toString();
+    return urlObject.toString();
+  }
 
-  const response = await fetch(urlObject.toString());
-  return response;
-}
+  async get(url: string, data: any) {
+    return await fetch(this.mkUrlWithQueryParams(url, data));
+  }
 
-async function del(url: string, data: any) {
-  const urlObject = new URL(BASE_URL + url)
+  async del(url: string, data: any) {
+    return await fetch(
+      this.mkUrlWithQueryParams(url, data), {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }
+    );
+  }
+
+  async post(url: string, data: Object) {
+    return await fetch(this.baseUrl + url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(data)
+    });
+  }
   
-  urlObject.search = new URLSearchParams(data).toString();
-
-  const response = await fetch(urlObject.toString(), {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-  });
-
-  return response;
+  async put(url: string, data: Object) {
+    return await fetch(this.baseUrl + url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+  }
 }
 
-async function post(url: string, data: Object) {
-  const response = await fetch(BASE_URL + url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(data)
-  });
-  
-  return response;
-}
-
-async function put(url: string, data: Object) {
-  const response = await fetch(BASE_URL + url, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(data)
-  });
-  
-  return response;
-}
-
-export default {
-  get,
-  del,
-  post,
-  put
-};
+export const api = new Api(process.env.API_HOST);
