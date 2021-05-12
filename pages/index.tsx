@@ -13,7 +13,7 @@ export default function Login() {
       </Head> 
 
       <Link href={'/login'}>
-        <a>GO TO LOGIN PAGE</a>
+        <a>GO TO LOGIN PAGE {process.env.HOST} TEST</a>
       </Link>
     </AppLayout>
   );

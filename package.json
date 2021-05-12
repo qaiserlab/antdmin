@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node ./nextdev",
     "build": "next build",
-    "start": "next start"
+    "start": "node ./nextstart"
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
