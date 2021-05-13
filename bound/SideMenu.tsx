@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router'
 
 import DataMenu from '@components/DataMenu';
-import { menus } from './schema';
+import { menus } from '@stores/SideMenu';
 
 export default function SideMenu() {
   const router = useRouter();

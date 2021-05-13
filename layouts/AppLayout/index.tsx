@@ -7,7 +7,7 @@ import style from './style.module.scss';
 import { AuthStore } from '@stores/AuthStore';
 import UrlBreadcrumb from '@components/UrlBreadcrumb';
 import RootLayout from '@layouts/RootLayout';
-import SideMenu from '@views/SideMenu';
+import SideMenu from '@bound/SideMenu';
 import AlertMessage from '@bound/AlertMessage';
 
 const { Header, Content, Footer, Sider } = Layout;
