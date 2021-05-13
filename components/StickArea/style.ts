@@ -1,5 +1,5 @@
 const position = 'fixed';
-const margin  = '16px';
+const margin  = '64px';
 
 export default {
   lt: {

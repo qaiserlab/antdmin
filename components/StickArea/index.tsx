@@ -26,6 +26,14 @@ export default class StickArea extends React.Component<PropsInterface> {
       rootCurrent.style.marginLeft = -(rootCurrent.offsetWidth / 2) + 'px';
     }
     else if (
+      this.props.align === 'center' && (
+        this.props.valign === 'top' ||
+        this.props.valign === 'bottom'
+      )
+    ) {
+      rootCurrent.style.marginLeft = -(rootCurrent.offsetWidth / 2) + 'px';
+    }
+    else if (
       (this.props.align === 'left' && this.props.valign === 'center') ||
       (this.props.align === 'right' && this.props.valign === 'center')
     ) {
