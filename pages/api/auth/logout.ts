@@ -1,4 +1,4 @@
-export default function Logout(req: any, res: any) {
+export default function logout(req: any, res: any) {
   if (req.method !== 'GET') {
     return res.status(405).json({ message: 'Access denied' });
   }

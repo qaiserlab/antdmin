@@ -1,4 +1,4 @@
-export default function Login(req: any, res: any) {
+export default function login(req: any, res: any) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Access denied' });
   }
