@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import AppLayout from '@layouts/AppLayout';
 
-export default function UserPrivileges() {
+export default function UserPrivilegesRoute() {
   return (
     <AppLayout>
       <Head>

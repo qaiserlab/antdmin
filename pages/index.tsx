@@ -5,11 +5,11 @@ import Link from 'next/link';
 
 import AppLayout from '@layouts/AppLayout';
 
-export default function Login() {
+export default function DashboardRoute() {
   return (
     <AppLayout>
       <Head>
-        <title>Home</title>
+        <title>Dashboard</title>
       </Head> 
 
       <Link href={'/login'}>

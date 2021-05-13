@@ -3,7 +3,7 @@ import Head from 'next/head';
 
 import AppLayout from '@layouts/AppLayout';
 
-export default function UserManagement() {
+export default function AccountRoute() {
   return (
     <AppLayout>
       <Head>
