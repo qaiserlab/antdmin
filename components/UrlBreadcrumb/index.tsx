@@ -1,5 +1,6 @@
-import React from "react";
-import { Breadcrumb } from "antd";
+import React from 'react';
+import Link from 'next/link';
+import { Breadcrumb } from 'antd';
 import { PropsInterface } from './schema'
 
 export default class RouterBreadcrumb extends React.Component<
@@ -54,14 +55,18 @@ export default class RouterBreadcrumb extends React.Component<
     return (
       <React.Fragment>
         <Breadcrumb>
-          <Breadcrumb.Item href="/">
-            {(this.props.icon)?this.props.icon:'Home'}
+          <Breadcrumb.Item>
+            <Link href={'/'}>
+              <a>{(this.props.icon)?this.props.icon:'Home'}</a>
+            </Link>
           </Breadcrumb.Item>
 
           {this.getDataSource().map((item: any, index: number) => {
             return (
               <Breadcrumb.Item key={index}>
-                <a href={item.href}>{this.mkTitleCase(item.title)}</a>
+                <Link href={item.href}>
+                  <a>{this.mkTitleCase(item.title)}</a>
+                </Link>
               </Breadcrumb.Item>
             );
           })}
