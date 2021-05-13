@@ -15,7 +15,7 @@ const { Header, Content, Footer, Sider } = Layout;
 export default function AppLayout({ children }: any) {
   const router = useRouter();
   const { state } = useContext(AuthStore);
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <RootLayout>

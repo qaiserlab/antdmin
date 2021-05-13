@@ -11,5 +11,7 @@ export interface PropsInterface {
   dataSource: Array<ItemInterface>;
   mode?: any;
   theme?: any;
+  defaultOpenKeys?: Array<string>,
+  defaultSelectedKeys?: Array<string>,
   onSelect?: (event: any) => void;
 };

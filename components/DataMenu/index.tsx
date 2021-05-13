@@ -11,6 +11,9 @@ export default class DataMenu extends React.Component<PropsInterface, {}> {
     mode: 'horizontal',
     // light, dark
     theme: 'light',
+    // default keys
+    defaultOpenKeys: [],
+    defaultSelectedKeys: [],
   };
 
   constructor(props: PropsInterface) {
@@ -32,6 +35,8 @@ export default class DataMenu extends React.Component<PropsInterface, {}> {
         mode={this.props.mode} 
         theme={this.props.theme} 
         onSelect={this.handleSelect}
+        defaultOpenKeys={this.props.defaultOpenKeys}
+        defaultSelectedKeys={this.props.defaultSelectedKeys}
       >
         { this.props.dataSource.map((item, itemIndex) => {
           if (!item.hidden) {
