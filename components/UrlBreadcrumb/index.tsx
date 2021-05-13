@@ -58,9 +58,9 @@ export default class RouterBreadcrumb extends React.Component<
             {(this.props.icon)?this.props.icon:'Home'}
           </Breadcrumb.Item>
 
-          {this.getDataSource().map((item: any) => {
+          {this.getDataSource().map((item: any, index: number) => {
             return (
-              <Breadcrumb.Item>
+              <Breadcrumb.Item key={index}>
                 <a href={item.href}>{this.mkTitleCase(item.title)}</a>
               </Breadcrumb.Item>
             );
