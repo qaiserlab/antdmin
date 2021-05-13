@@ -12,7 +12,7 @@ import AlertMessage from '@bound/AlertMessage';
 
 export default function LoginForm() {
   const router = useRouter();
-  const { setErrorMessage, errorMessage } = useContext(ActivityStore);
+  const { setErrorMessage } = useContext(ActivityStore);
   const { dispatch } = useContext(AuthStore);
   const userNameRef = useRef(null);
 

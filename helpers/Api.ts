@@ -5,17 +5,18 @@ export class Api {
     this.baseUrl = (baseUrl)?baseUrl:'';
   }
 
-  mkUrlWithQueryParams(url: string, data: any) {
+  mkUrlWithQueryParams(url: string, data?: any) {
+    if (!data) return url;
     const urlObject = new URL(this.baseUrl + url)
     urlObject.search = new URLSearchParams(data).toString();
     return urlObject.toString();
   }
 
-  async get(url: string, data: any) {
+  async get(url: string, data?: any) {
     return await fetch(this.mkUrlWithQueryParams(url, data));
   }
 
-  async del(url: string, data: any) {
+  async del(url: string, data?: any) {
     return await fetch(
       this.mkUrlWithQueryParams(url, data), {
         method: 'DELETE',
