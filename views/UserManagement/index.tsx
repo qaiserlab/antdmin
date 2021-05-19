@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
-import { Space, Table, Button, notification } from 'antd';
-import { FileTextOutlined } from "@ant-design/icons";
+import { useRouter } from 'next/router';
+import { Space, Table, Button, Modal, notification } from 'antd';
+import { FileTextOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import { api } from '@helpers/Api';
 import StickArea from '@components/StickArea';
+import { ActivityStore } from '@stores/ActivityStore';
+import { UserRecordInterface } from './schema';
 
 export default function UserManagement() {
+  const router = useRouter();
+
+  const { setIsConfirmVisible } = useContext(ActivityStore);
   const [isLoading, setIsLoading] = useState(false);
   const [records, setRecords] = useState([]);
-  
+
   const columns = [
     {
       title: 'Name',
@@ -26,6 +32,19 @@ export default function UserManagement() {
       dataIndex: 'phoneNumber',
       key: 'phoneNumber',
     },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      key: 'action',
+      render: (text: string, record: UserRecordInterface) => {
+        return (
+          <Space>
+            <Button icon={<EditOutlined />} onClick={() => router.push(`/user/edit/${record.id}`)} />
+            <Button icon={<DeleteOutlined />} onClick={() => setIsConfirmVisible(true) } />
+          </Space>
+        );
+      },
+    }
   ];
 
   useEffect(() => {
@@ -60,13 +79,17 @@ export default function UserManagement() {
           loading={isLoading} 
           columns={columns} 
           dataSource={records} 
+          rowKey={(record) => record.id}
         />
 
         <StickArea>
           <Space>
-            <Button type={'primary'} shape={'circle'} size={'large'}>
-              <FileTextOutlined />
-            </Button>
+            <Button 
+              icon={<FileTextOutlined />}
+              type={'primary'} 
+              shape={'circle'} 
+              size={'large'} 
+            />
           </Space>
         </StickArea>
       </section>

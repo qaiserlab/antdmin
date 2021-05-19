@@ -5,19 +5,19 @@ export default function readAll(req: any, res: any) {
 
   res.status(200).json([
     { 
-      id: 1, 
+      id: '7beccbda-e34f-4534-9267-65936b6a6dd9', 
       fullName: 'Steve Jobs',
       email: 'steve@jobs.com',
       phoneNumber: 'xxx-xxxx-xxx',
     },
     { 
-      id: 1, 
+      id: 'e5916851-7575-4187-82e5-bcd54dd04390', 
       fullName: 'Bill Gates',
       email: 'bill@gates.com',
       phoneNumber: 'xxx-xxxx-xxx',
     },
     { 
-      id: 1, 
+      id: '9fb28f2b-acf1-459b-8619-4dcc45e290a7', 
       fullName: 'Linus Torvalds',
       email: 'linus@torvalds.com',
       phoneNumber: 'xxx-xxxx-xxx',
