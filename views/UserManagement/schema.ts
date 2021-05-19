@@ -1,3 +1,7 @@
+export interface PropsInterface {
+  id: string;
+};
+
 export interface UserRecordInterface {
   id: number;
   fullName: string;

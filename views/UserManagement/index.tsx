@@ -48,7 +48,7 @@ export default function UserManagement() {
               icon={<DeleteOutlined />} 
               onClick={
                 () => setConfirmBox({ 
-                  message: 'Delete data record?', 
+                  message: `Delete ${record.fullName} data?`, 
                   isVisible: true,
                   onOk: () => handleDelete(record.id)
                 }) 
