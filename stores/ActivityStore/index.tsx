@@ -6,14 +6,18 @@ const { Provider } = ActivityStore;
 
 function ActivityProvider({ children }: any) {
   const [errorMessage, setErrorMessage] = useState('');
-  const [isConfirmVisible, setIsConfirmVisible] = useState(false);
-
+  const [confirmBox, setConfirmBox] = useState({
+    message: '',
+    isVisible: false,
+    onOk: () => {},
+  });
+  
   return (
     <Provider value={{ 
       errorMessage, 
       setErrorMessage,
-      isConfirmVisible,
-      setIsConfirmVisible,
+      confirmBox,
+      setConfirmBox,
     }}>
       {children}
     </Provider>

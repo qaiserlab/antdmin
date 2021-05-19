@@ -16,7 +16,7 @@ const { Header, Content, Footer, Sider } = Layout;
 export default function AppLayout({ children }: any) {
   const router = useRouter();
 
-  const { isConfirmVisible, setIsConfirmVisible } = useContext(ActivityStore);
+  const { confirmBox, setConfirmBox } = useContext(ActivityStore);
   const { state } = useContext(AuthStore);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -52,8 +52,13 @@ export default function AppLayout({ children }: any) {
         </Layout>
       </Layout>
 
-      <Modal title="Confirm" visible={isConfirmVisible} onCancel={() => setIsConfirmVisible(false)}>
-        <p>CONFIRM DIALOG</p>
+      <Modal 
+        title="Confirm" 
+        visible={confirmBox.isVisible} 
+        onOk={() => { if (confirmBox.onOk) confirmBox.onOk() }} 
+        onCancel={() => setConfirmBox({...confirmBox, isVisible: false })}
+      >
+        <p>{confirmBox.message}</p>
       </Modal>
     </RootLayout>
   )

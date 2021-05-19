@@ -12,9 +12,13 @@ import { UserRecordInterface } from './schema';
 export default function UserManagement() {
   const router = useRouter();
 
-  const { setIsConfirmVisible } = useContext(ActivityStore);
+  const { setConfirmBox } = useContext(ActivityStore);
   const [isLoading, setIsLoading] = useState(false);
   const [records, setRecords] = useState([]);
+
+  const handleDelete = (id: number) => {
+    alert('delete: ' + id);
+  };
 
   const columns = [
     {
@@ -40,7 +44,16 @@ export default function UserManagement() {
         return (
           <Space>
             <Button icon={<EditOutlined />} onClick={() => router.push(`/user/edit/${record.id}`)} />
-            <Button icon={<DeleteOutlined />} onClick={() => setIsConfirmVisible(true) } />
+            <Button 
+              icon={<DeleteOutlined />} 
+              onClick={
+                () => setConfirmBox({ 
+                  message: 'Delete data record?', 
+                  isVisible: true,
+                  onOk: () => handleDelete(record.id)
+                }) 
+              } 
+            />
           </Space>
         );
       },
