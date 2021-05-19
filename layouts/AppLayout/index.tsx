@@ -15,6 +15,9 @@ const { Header, Content, Footer, Sider } = Layout;
 
 export default function AppLayout({ children }: any) {
   const router = useRouter();
+  const pathName = router.pathname;
+  const xPathName = pathName.split('/[');
+  const pathOnly = (xPathName.length >= 1)?xPathName[0]:'/';
 
   const { confirmBox, setConfirmBox } = useContext(ActivityStore);
   const { state } = useContext(AuthStore);
@@ -54,7 +57,7 @@ export default function AppLayout({ children }: any) {
           </Header>
           <Content id={style.content}>
             <header>
-              <UrlBreadcrumb url={router.pathname} icon={<DashboardOutlined />} />
+              <UrlBreadcrumb url={pathOnly} icon={<DashboardOutlined />} />
             </header>
             <section>
               <AlertMessage />
