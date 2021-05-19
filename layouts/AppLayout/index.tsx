@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
-import { Layout, Space, Modal } from 'antd';
-import { DashboardOutlined, UserOutlined } from '@ant-design/icons';
+import { Layout, Space, Modal, Drawer, Button } from 'antd';
+import { DashboardOutlined, UserOutlined, SettingOutlined } from '@ant-design/icons';
 
 import style from './style.module.scss';
 import { ActivityStore } from '@stores/ActivityStore';
@@ -18,7 +18,9 @@ export default function AppLayout({ children }: any) {
 
   const { confirmBox, setConfirmBox } = useContext(ActivityStore);
   const { state } = useContext(AuthStore);
+
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
   return (
     <RootLayout>
@@ -33,6 +35,20 @@ export default function AppLayout({ children }: any) {
               <Space>
                 <UserOutlined />
                 {state.userInfo.userName}
+
+                <Button 
+                  icon={<SettingOutlined />} 
+                  onClick={() => setIsDrawerVisible(true)}
+                  ghost
+                />
+
+                <Drawer
+                  title={'Settings'}
+                  onClose={() => setIsDrawerVisible(false)}
+                  visible={isDrawerVisible}
+                >
+                  MENU HERE
+                </Drawer>
               </Space>
             </figure>
           </Header>
