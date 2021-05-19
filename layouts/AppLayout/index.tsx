@@ -9,6 +9,7 @@ import { AuthStore } from '@stores/AuthStore';
 import UrlBreadcrumb from '@components/UrlBreadcrumb';
 import RootLayout from '@layouts/RootLayout';
 import SideMenu from '@bound/SideMenu';
+import DrawerMenu from '@bound/DrawerMenu';
 import AlertMessage from '@bound/AlertMessage';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -50,7 +51,7 @@ export default function AppLayout({ children }: any) {
                   onClose={() => setIsDrawerVisible(false)}
                   visible={isDrawerVisible}
                 >
-                  MENU HERE
+                  <DrawerMenu />
                 </Drawer>
               </Space>
             </figure>

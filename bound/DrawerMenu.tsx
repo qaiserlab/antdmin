@@ -2,9 +2,9 @@ import React from 'react';
 import { useRouter } from 'next/router'
 
 import DataMenu from '@components/DataMenu';
-import { menus } from '@stores/SideMenu';
+import { menus } from '@stores/DrawerMenu';
 
-export default function SideMenu() {
+export default function DrawerMenu() {
   const router = useRouter();
   const selectedKey = router.pathname;
   const xSelectedKey = selectedKey.split('/');
@@ -25,7 +25,7 @@ export default function SideMenu() {
   return (
     <React.Fragment>
       <DataMenu 
-        theme={'dark'} 
+        theme={'light'} 
         mode={'inline'} 
         dataSource={menus} 
         onSelect={handleSelect} 
