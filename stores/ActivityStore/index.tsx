@@ -5,10 +5,16 @@ const ActivityStore = createContext(null);
 const { Provider } = ActivityStore;
 
 function ActivityProvider({ children }: any) {
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isConfirmVisible, setIsConfirmVisible] = useState(false);
 
   return (
-    <Provider value={{ errorMessage, setErrorMessage }}>
+    <Provider value={{ 
+      errorMessage, 
+      setErrorMessage,
+      isConfirmVisible,
+      setIsConfirmVisible,
+    }}>
       {children}
     </Provider>
   );

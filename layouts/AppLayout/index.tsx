@@ -1,9 +1,10 @@
 import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
-import { Layout, Space } from 'antd';
+import { Layout, Space, Modal } from 'antd';
 import { DashboardOutlined, UserOutlined } from '@ant-design/icons';
 
 import style from './style.module.scss';
+import { ActivityStore } from '@stores/ActivityStore';
 import { AuthStore } from '@stores/AuthStore';
 import UrlBreadcrumb from '@components/UrlBreadcrumb';
 import RootLayout from '@layouts/RootLayout';
@@ -14,6 +15,8 @@ const { Header, Content, Footer, Sider } = Layout;
 
 export default function AppLayout({ children }: any) {
   const router = useRouter();
+
+  const { isConfirmVisible, setIsConfirmVisible } = useContext(ActivityStore);
   const { state } = useContext(AuthStore);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -48,6 +51,10 @@ export default function AppLayout({ children }: any) {
           </Footer>
         </Layout>
       </Layout>
+
+      <Modal title="Confirm" visible={isConfirmVisible} onCancel={() => setIsConfirmVisible(false)}>
+        <p>CONFIRM DIALOG</p>
+      </Modal>
     </RootLayout>
   )
 }
