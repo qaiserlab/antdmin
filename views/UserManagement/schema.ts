@@ -1,9 +1,10 @@
 export interface PropsInterface {
-  id: string;
+  isNew: boolean;
+  id?: string;
 };
 
 export interface UserRecordInterface {
-  id: number;
+  id: string;
   fullName: string;
   email: string;
   phoneNUmber: string;

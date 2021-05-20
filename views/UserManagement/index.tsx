@@ -16,8 +16,12 @@ export default function UserManagement() {
   const [isLoading, setIsLoading] = useState(false);
   const [records, setRecords] = useState([]);
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     alert('delete: ' + id);
+  };
+
+  const handleNew = () => {
+    router.push('/user/new');
   };
 
   const columns = [
@@ -102,6 +106,7 @@ export default function UserManagement() {
               type={'primary'} 
               shape={'circle'} 
               size={'large'} 
+              onClick={handleNew}
             />
           </Space>
         </StickArea>
