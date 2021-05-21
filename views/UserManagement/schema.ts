@@ -6,6 +6,7 @@ export interface PropsInterface {
 export interface UserRecordInterface {
   id: string;
   fullName: string;
+  userName: string;
   email: string;
   phoneNUmber: string;
 }

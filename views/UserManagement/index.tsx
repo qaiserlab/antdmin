@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Space, Table, Button, Modal, notification } from 'antd';
+import { Space, Table, Button, notification } from 'antd';
 import { FileTextOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import { api } from '@helpers/Api';
