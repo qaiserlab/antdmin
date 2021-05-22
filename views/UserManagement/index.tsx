@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Space, Table, Button, notification } from 'antd';
+import { Space, Table, Button, Modal, notification } from 'antd';
 import { FileTextOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import { api } from '@helpers/Api';
 import StickArea from '@components/StickArea';
-import { ActivityStore } from '@stores/ActivityStore';
 import { UserRecordInterface } from './schema';
 
 export default function UserManagement() {
   const router = useRouter();
+  const [modal, contextHolder] = Modal.useModal();
 
-  const { setConfirmBox } = useContext(ActivityStore);
   const [isLoading, setIsLoading] = useState(false);
   const [records, setRecords] = useState([]);
 
@@ -51,11 +50,11 @@ export default function UserManagement() {
             <Button 
               icon={<DeleteOutlined />} 
               onClick={
-                () => setConfirmBox({ 
-                  message: `Delete ${record.fullName} data?`, 
-                  isVisible: true,
-                  onOk: () => handleDelete(record.id)
-                }) 
+                () => modal.confirm({
+                  title: 'Confirm',
+                  content: <p>Delete {record.fullName} data?</p>, 
+                  onOk: () => handleDelete(record.id),
+                })
               } 
             />
           </Space>
@@ -88,6 +87,8 @@ export default function UserManagement() {
 
   return (
     <React.Fragment>
+      {contextHolder}
+
       <Head>
         <title>User Management</title>
       </Head> 

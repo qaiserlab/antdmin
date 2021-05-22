@@ -1,10 +1,9 @@
 import { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
-import { Layout, Space, Modal, Drawer, Button } from 'antd';
+import { Layout, Space, Drawer, Button } from 'antd';
 import { DashboardOutlined, UserOutlined, SettingOutlined } from '@ant-design/icons';
 
 import style from './style.module.scss';
-import { ActivityStore } from '@stores/ActivityStore';
 import { AuthStore } from '@stores/AuthStore';
 import UrlBreadcrumb from '@components/UrlBreadcrumb';
 import RootLayout from '@layouts/RootLayout';
@@ -20,7 +19,6 @@ export default function AppLayout({ children }: any) {
   const xPathName = pathName.split('/[');
   const pathOnly = (xPathName.length >= 1)?xPathName[0]:'/';
 
-  const { confirmBox, setConfirmBox } = useContext(ActivityStore);
   const { state } = useContext(AuthStore);
 
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -71,15 +69,6 @@ export default function AppLayout({ children }: any) {
           </Footer>
         </Layout>
       </Layout>
-
-      <Modal 
-        title="Confirm" 
-        visible={confirmBox.isVisible} 
-        onOk={() => { if (confirmBox.onOk) confirmBox.onOk() }} 
-        onCancel={() => setConfirmBox({...confirmBox, isVisible: false })}
-      >
-        <p>{confirmBox.message}</p>
-      </Modal>
     </RootLayout>
   )
 }
