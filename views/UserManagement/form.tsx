@@ -6,7 +6,7 @@ import { SaveOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import { useFormik } from 'formik';
 
 import StickArea from '@components/StickArea';
-import { PropsInterface, initialValues } from './schema';
+import { PropsInterface, initialValues, validationSchema } from './schema';
 
 export default function UserManagementForm(props: PropsInterface) {
   const isNew = props.isNew;
@@ -17,6 +17,8 @@ export default function UserManagementForm(props: PropsInterface) {
 
   const formik = useFormik({
     initialValues,
+    validationSchema,
+    
     onSubmit: (values: any, { setSubmitting }) => {
       alert(JSON.stringify(values));
       setSubmitting(false);
@@ -41,7 +43,11 @@ export default function UserManagementForm(props: PropsInterface) {
                 value={formik.values.firstName} 
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                disabled={formik.isSubmitting}
               />
+              {formik.errors.firstName && formik.touched.firstName && (
+                <small style={{ color: "#d50000" }}>{formik.errors.firstName}</small>
+              )}
             </Col>
 
             <Col xs={24} lg={3}>
@@ -51,10 +57,13 @@ export default function UserManagementForm(props: PropsInterface) {
               <Input 
                 name={'lastName'}
                 value={formik.values.lastName} 
-                
-onChange={formik.handleChange}
+                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                disabled={formik.isSubmitting}
               />
+              {formik.errors.lastName && formik.touched.lastName && (
+                <small style={{ color: "#d50000" }}>{formik.errors.lastName}</small>
+              )}
             </Col>
 
             <Col xs={24} lg={3}>
@@ -66,7 +75,11 @@ onChange={formik.handleChange}
                 value={formik.values.userName} 
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                disabled={formik.isSubmitting}
               />
+              {formik.errors.userName && formik.touched.userName && (
+                <small style={{ color: "#d50000" }}>{formik.errors.userName}</small>
+              )}
             </Col>
 
             <Col xs={24} lg={3}>
@@ -78,7 +91,11 @@ onChange={formik.handleChange}
                 value={formik.values.email} 
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                disabled={formik.isSubmitting}
               />
+              {formik.errors.email && formik.touched.email && (
+                <small style={{ color: "#d50000" }}>{formik.errors.email}</small>
+              )}
             </Col>
 
             <Col xs={24} lg={3}>
@@ -90,7 +107,11 @@ onChange={formik.handleChange}
                 value={formik.values.phoneNumber} 
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
+                disabled={formik.isSubmitting}
               />
+              {formik.errors.phoneNumber && formik.touched.phoneNumber && (
+                <small style={{ color: "#d50000" }}>{formik.errors.phoneNumber}</small>
+              )}
             </Col>
           </Row>
         </Card>        

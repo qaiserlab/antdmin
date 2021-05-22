@@ -1,3 +1,5 @@
+import * as Yup from 'yup';
+
 export interface PropsInterface {
   isNew: boolean;
   id?: string;
@@ -18,3 +20,15 @@ export const initialValues = {
   email: '',
   phoneNumber: '',
 }
+
+export const validationSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .max(50, "First Name can't more than 50 characters")
+    .required("First Name required"),
+  lastName: Yup.string(),
+  userName: Yup.string()
+    .max(50, "Username can't more than 50 characters")
+    .required("Username required"),
+  email: Yup.string(),
+  phoneNumber: Yup.string(),
+});
