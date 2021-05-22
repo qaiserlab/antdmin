@@ -8,5 +8,13 @@ export interface UserRecordInterface {
   fullName: string;
   userName: string;
   email: string;
-  phoneNUmber: string;
+  phoneNumber: string;
+}
+
+export const initialValues = {
+  firstName: '',
+  lastName: '',
+  userName: '',
+  email: '',
+  phoneNumber: '',
 }
