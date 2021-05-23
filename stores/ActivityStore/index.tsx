@@ -5,12 +5,16 @@ const ActivityStore = createContext(null);
 const { Provider } = ActivityStore;
 
 function ActivityProvider({ children }: any) {
-  const [errorMessage, setErrorMessage] = useState('');
+  const [serverResult, setServerResult] = useState({
+    code: -1,
+    message: '',
+    errors: {},
+  });
   
   return (
     <Provider value={{ 
-      errorMessage, 
-      setErrorMessage,
+      serverResult, 
+      setServerResult,
     }}>
       {children}
     </Provider>
