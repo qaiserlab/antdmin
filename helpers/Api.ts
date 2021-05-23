@@ -31,7 +31,7 @@ export class Api {
     return await fetch(this.baseUrl + url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json;charset=utf-8'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     });
@@ -48,4 +48,4 @@ export class Api {
   }
 }
 
-export const api = new Api(process.env.API_HOST);
+export const api = new Api(`${process.env.HOST}/api`);

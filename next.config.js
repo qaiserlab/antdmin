@@ -5,6 +5,9 @@ module.exports = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   env: {
+    APP_NAME: process.env.APP_NAME,
+    APP_CODE: process.env.APP_CODE,
+    APP_VERSION: process.env.APP_VERSION,
     HOSTNAME: process.env.HOSTNAME,
     PORT: process.env.PORT,
     HOST: process.env.HOST,

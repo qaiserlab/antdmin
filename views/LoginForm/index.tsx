@@ -28,7 +28,7 @@ export default function LoginForm() {
         email: 'f.anaturdasa@gmail.com',
       };
 
-      const response = await api.post('/api/auth/login', values);
+      const response = await api.post('/auth/login', values);
       const result = await response.json();
 
       if (response.ok) {
