@@ -1,6 +1,4 @@
 import React from 'react';
-
-import Head from 'next/head'
 import Link from 'next/link';
 
 import RootLayout from '@layouts/RootLayout';
@@ -11,10 +9,6 @@ export default function LoginRoute() {
   return (
     <RootLayout>
       <StickArea align={'center'} valign={'center'}>
-        <Head>
-          <title>Login</title>
-        </Head>
-        
         <section style={{width: '300px'}}>
           <LoginForm />
         </section>
