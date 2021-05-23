@@ -36,8 +36,14 @@ export default async function forwardApi(req: any, res: any) {
       case 'PUT':
         response = await api.put(action, req.body);
     }
-
-    const result = await response.json();
-    return res.status(result.code).json(result);
+    // return res.status(422).json({ action });
+    
+    if (response.OK) {
+      const result = await response.json();
+      return res.status(result.code).json(result);
+    }
+    else {
+      res.json(response);
+    }
   }
 }

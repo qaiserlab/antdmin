@@ -48,4 +48,4 @@ export class Api {
   }
 }
 
-export const api = new Api(`${process.env.HOST}/api`);
+export const api = new Api(`${process.env.HOST}/api?action=`);
