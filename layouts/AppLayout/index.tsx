@@ -46,6 +46,7 @@ export default function AppLayout({ children }: any) {
 
                 <Drawer
                   title={'Settings'}
+                  bodyStyle={{ padding: 0 }}
                   onClose={() => setIsDrawerVisible(false)}
                   visible={isDrawerVisible}
                 >
