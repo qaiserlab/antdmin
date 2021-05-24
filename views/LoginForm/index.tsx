@@ -6,7 +6,7 @@ import { Row, Col, Space, Input, Button } from 'antd';
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons";
 
 import { initialValues, validationSchema } from './schema';
-import { api } from '@helpers/Api';
+import { api } from '@helpers/Api';1
 import { ActivityStore } from '@stores/ActivityStore';
 import { AuthStore } from '@stores/AuthStore';
 import AlertMessage from '@bound/AlertMessage';
@@ -19,8 +19,8 @@ export default function LoginForm() {
 
   const formik = useFormik({
     initialValues,
-    validationSchema,
-
+    // validationSchema,
+    
     onSubmit: async (values, { setSubmitting }) => {
       const token = '727f3d03-52e3-43d2-af80-1c3912c45194';
       const userInfo = {
