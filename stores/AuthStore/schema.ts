@@ -1,5 +1,6 @@
 export interface AuthInfoInterface {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
   isLogin: boolean;
 }
 

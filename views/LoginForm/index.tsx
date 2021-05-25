@@ -22,10 +22,9 @@ export default function LoginForm() {
     // validationSchema,
     
     onSubmit: async (values, { setSubmitting }) => {
-      const token = '727f3d03-52e3-43d2-af80-1c3912c45194';
       const userInfo = {
         userName: values.userName,
-        email: 'f.anaturdasa@gmail.com',
+        email: '-',
       };
 
       const response = await api.post('/auth/sign-in', values);
@@ -35,7 +34,10 @@ export default function LoginForm() {
         dispatch({
           type: 'login',
           payload: {
-            authInfo: { token },
+            authInfo: {
+              accessToken: result.accessToken,
+              refreshToken: result.refreshToken,
+            },
             userInfo: userInfo,
           }
         })

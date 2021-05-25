@@ -3,7 +3,8 @@ import { AuthStateInterface, AuthActionInterface } from './schema';
 
 const initialState = {
   authInfo: {
-    token: '',
+    accessToken: '',
+    refreshToken: '',
     isLogin: false,
   },
   userInfo: {
@@ -23,18 +24,21 @@ function AuthProvider({ children }: any) {
     switch (action.type) {
       case 'login':
 
-        const token = action.payload.token;
+        const accessToken = action.payload.authInfo.accessToken;
+        const refreshToken = action.payload.authInfo.refreshToken;
         const userInfo = action.payload.userInfo;
 
         const isLogin = true;
-
-        localStorage.token = token;
+        
+        localStorage.accessToken = accessToken;
+        localStorage.refreshToken = refreshToken;
         localStorage.isLogin = isLogin;
 
         return {
           authInfo: {
             ...state.authInfo,
-            token,
+            accessToken,
+            refreshToken,
             isLogin,
           },
           userInfo: {
@@ -43,7 +47,8 @@ function AuthProvider({ children }: any) {
           }
         };
       case 'logout':
-        localStorage.token = '';
+        localStorage.accessToken = '';
+        localStorage.refreshToken = '';
         localStorage.isLogin = '';
 
         return initialState;

@@ -29,6 +29,9 @@ export const validationSchema = Yup.object().shape({
   userName: Yup.string()
     .max(50, "Username can't more than 50 characters")
     .required("Username required"),
-  email: Yup.string(),
+  email: Yup.string()
+    .max(50, "Email can't more than 50 characters")
+    .required("Email required")
+    .email("Invalid Email format"),
   phoneNumber: Yup.string(),
 });
