@@ -19,7 +19,7 @@ export default function LoginForm() {
 
   const formik = useFormik({
     initialValues,
-    // validationSchema,
+    validationSchema,
     
     onSubmit: async (values, { setSubmitting }) => {
       const userInfo = {

@@ -23,6 +23,10 @@ export default async function forwardApi(req: any, res: any) {
       });
     }
 
+    if (req.headers.accessToken) {
+      api.setAccessToken(req.headers.accessToken);
+    }
+
     switch (req.method) {
       case 'GET':
         response = await api.get(action, req.query);

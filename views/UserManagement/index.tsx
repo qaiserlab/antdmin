@@ -67,7 +67,7 @@ export default function UserManagement() {
     (async function componentDidMount() {
       setIsLoading(true);
 
-      const response = await api.get('/api/users');
+      const response = await api.get('/user');
       const result = await response.json();
 
       if (response.ok) {
