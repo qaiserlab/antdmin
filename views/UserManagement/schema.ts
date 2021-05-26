@@ -33,5 +33,11 @@ export const validationSchema = Yup.object().shape({
     .max(50, "Email can't more than 50 characters")
     .required("Email required")
     .email("Invalid Email format"),
+  newPassword: Yup.string()
+    .max(50, "New Password can't more than 50 characters")
+    .required("New Password required"),
+  confirmNewPassword: Yup.string()
+    .max(50, "Confirm New Password can't more than 50 characters")
+    .required("Confirm New Password required"),
   phoneNumber: Yup.string(),
 });

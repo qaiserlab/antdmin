@@ -6,15 +6,17 @@ import { Row, Col, Space, Input, Button } from 'antd';
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons";
 
 import { initialValues, validationSchema } from './schema';
-import { api } from '@helpers/Api';1
+import { api } from '@helpers/Api';
 import { ActivityStore } from '@stores/ActivityStore';
 import { AuthStore } from '@stores/AuthStore';
 import AlertMessage from '@bound/AlertMessage';
 
 export default function LoginForm() {
   const router = useRouter();
+  
   const { setServerResult } = useContext(ActivityStore);
   const { dispatch } = useContext(AuthStore);
+  
   const userNameRef = useRef(null);
 
   const formik = useFormik({

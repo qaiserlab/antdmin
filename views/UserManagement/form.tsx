@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Row, Col, Space, Input, Button, Card } from 'antd';
 import { SaveOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import { useFormik } from 'formik';
 
+import { api } from '@helpers/Api';
 import StickArea from '@components/StickArea';
+import { ActivityStore } from '@stores/ActivityStore';
 import { PropsInterface, initialValues, validationSchema } from './schema';
 
 export default function UserManagementForm(props: PropsInterface) {
@@ -14,13 +16,21 @@ export default function UserManagementForm(props: PropsInterface) {
   const title = (isNew)?'New':'Edit';
 
   const router = useRouter();
+  const { setServerResult } = useContext(ActivityStore);
 
   const formik = useFormik({
     initialValues,
     validationSchema,
     
-    onSubmit: (values: any, { setSubmitting }) => {
-      alert(JSON.stringify(values));
+    onSubmit: async (values: any, { setSubmitting }) => {
+      const response = await api.post('/user', values);
+      const result = await response.json();
+
+      if (response.ok) {
+        router.push('/user');
+      }
+
+      setServerResult(result);
       setSubmitting(false);
     }
   });
@@ -99,6 +109,40 @@ export default function UserManagementForm(props: PropsInterface) {
             </Col>
 
             <Col xs={24} lg={3}>
+              New Password
+            </Col>
+            <Col xs={24} lg={21}>
+              <Input 
+                name={'newPassword'}
+                type={'password'}
+                value={formik.values.newPassword} 
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                disabled={formik.isSubmitting}
+              />
+              {formik.errors.newPassword && formik.touched.newPassword && (
+                <small style={{ color: "#d50000" }}>{formik.errors.newPassword}</small>
+              )}
+            </Col>
+
+            <Col xs={24} lg={3}>
+              Confirm New Password
+            </Col>
+            <Col xs={24} lg={21}>
+              <Input 
+                name={'confirmNewPassword'}
+                type={'password'}
+                value={formik.values.confirmNewPassword} 
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                disabled={formik.isSubmitting}
+              />
+              {formik.errors.confirmNewPassword && formik.touched.confirmNewPassword && (
+                <small style={{ color: "#d50000" }}>{formik.errors.confirmNewPassword}</small>
+              )}
+            </Col>
+
+            <Col xs={24} lg={3}>
               Phone Number
             </Col>
             <Col xs={24} lg={21}>
@@ -131,6 +175,7 @@ export default function UserManagementForm(props: PropsInterface) {
               htmlType={'submit'}
               shape={'circle'} 
               size={'large'}
+              loading={formik.isSubmitting}
             />
           </Space>
         </StickArea>
