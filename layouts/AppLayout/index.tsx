@@ -1,12 +1,12 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { Layout, Space, Drawer, Button } from 'antd';
-import { DashboardOutlined, UserOutlined, SettingOutlined } from '@ant-design/icons';
+import { DashboardOutlined, SettingOutlined } from '@ant-design/icons';
 
 import style from './style.module.scss';
-import { AuthStore } from '@stores/AuthStore';
 import UrlBreadcrumb from '@components/UrlBreadcrumb';
 import RootLayout from '@layouts/RootLayout';
+import UserInfo from '@bound/UserInfo';
 import SideMenu from '@bound/SideMenu';
 import DrawerMenu from '@bound/DrawerMenu';
 import AlertMessage from '@bound/AlertMessage';
@@ -18,8 +18,6 @@ export default function AppLayout({ children }: any) {
   const pathName = router.pathname;
   const xPathName = pathName.split('/[');
   const pathOnly = (xPathName.length >= 1)?xPathName[0]:'/';
-
-  const { state } = useContext(AuthStore);
 
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
@@ -35,8 +33,7 @@ export default function AppLayout({ children }: any) {
           <Header id={style.header}>
             <figure>
               <Space>
-                <UserOutlined />
-                {state.userInfo.userName}
+                <UserInfo />
 
                 <Button 
                   icon={<SettingOutlined />} 

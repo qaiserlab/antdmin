@@ -46,6 +46,20 @@ function AuthProvider({ children }: any) {
             ...userInfo,
           }
         };
+
+      case 'refresh':
+        return {
+          authInfo: {
+            ...state.authInfo,
+            accessToken: localStorage.accessToken,
+            refreshToken: localStorage.refreshToken,
+            isLogin: true,
+          },
+          userInfo: {
+            ...state.userInfo,
+            ...action.payload.userInfo,
+          }
+        };
       case 'logout':
         localStorage.accessToken = '';
         localStorage.refreshToken = '';
