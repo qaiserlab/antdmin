@@ -25,7 +25,10 @@ export default function UserManagementForm(props: PropsInterface) {
     validationSchema,
     
     onSubmit: async (values: any, { setSubmitting }) => {
-      const response = await api.post('/user', values);
+      const response = (isNew)?
+        await api.post('/user', values):
+        await api.put(`/user/${id}`, values);
+      
       const result = await response.json();
 
       if (response.ok) {
