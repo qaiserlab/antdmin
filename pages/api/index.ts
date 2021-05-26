@@ -23,8 +23,8 @@ export default async function forwardApi(req: any, res: any) {
       });
     }
 
-    if (req.headers.accessToken) {
-      api.setAccessToken(req.headers.accessToken);
+    if (req.headers.authorization) {
+      api.setAccessToken(req.headers.authorization);
     }
 
     switch (req.method) {

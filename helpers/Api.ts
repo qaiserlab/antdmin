@@ -11,16 +11,18 @@ export class Api {
       'Content-Type': 'application/json'
     };
 
-    if (localStorage.accessToken) {
-      headers = {
-        ...headers,
-        accessToken: localStorage.accessToken,
+    if (typeof localStorage !== 'undefined') {
+      if (localStorage.accessToken) {
+        headers = {
+          ...headers,
+          authorization: `Bearer ${localStorage.accessToken}`,
+        }
       }
     }
     else if (this.accessToken) {
       headers = {
         ...headers,
-        accessToken: this.accessToken,
+        authorization: this.accessToken,
       }
     }
 

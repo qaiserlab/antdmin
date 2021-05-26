@@ -26,8 +26,8 @@ export default function UserManagement() {
   const columns = [
     {
       title: 'Name',
-      dataIndex: 'fullName',
-      key: 'fullName',
+      dataIndex: 'firstName',
+      key: 'firstName',
     },
     {
       title: 'Email',
@@ -71,7 +71,7 @@ export default function UserManagement() {
       const result = await response.json();
 
       if (response.ok) {
-        setRecords(result);
+        setRecords(result.data);
       }
       else {
         setRecords([]);
