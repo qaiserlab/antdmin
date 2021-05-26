@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Space, Table, Button, Modal, notification } from 'antd';
@@ -6,22 +6,16 @@ import { FileTextOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icon
 
 import { api } from '@helpers/Api';
 import StickArea from '@components/StickArea';
+import { ActivityStore } from '@stores/ActivityStore';
 import { UserRecordInterface } from './schema';
 
 export default function UserManagement() {
   const router = useRouter();
   const [modal, contextHolder] = Modal.useModal();
+  const { setServerResult } = useContext(ActivityStore);
 
   const [isLoading, setIsLoading] = useState(false);
   const [records, setRecords] = useState([]);
-
-  const handleDelete = (id: string) => {
-    alert('delete: ' + id);
-  };
-
-  const handleNew = () => {
-    router.push('/user/new');
-  };
 
   const columns = [
     {
@@ -63,27 +57,44 @@ export default function UserManagement() {
     }
   ];
 
+  const refreshData = async () => {
+    setIsLoading(true);
+
+    const response = await api.get('/user');
+    const result = await response.json();
+
+    if (response.ok) {
+      setRecords(result.data);
+    }
+    else {
+      setRecords([]);
+      notification.error({
+        message: 'Error',
+        description: result.message,
+      });
+    }
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    (async function componentDidMount() {
-      setIsLoading(true);
-
-      const response = await api.get('/user');
-      const result = await response.json();
-
-      if (response.ok) {
-        setRecords(result.data);
-      }
-      else {
-        setRecords([]);
-        notification.error({
-          message: 'Error',
-          description: result.message,
-        });
-      }
-
-      setIsLoading(false);
-    })();
+    (refreshData)();
   }, []);
+
+  const handleDelete = async (id: string) => {
+    const response = await api.del(`/user/force-delete/${id}`);
+    const result = await response.json();
+    
+    if (response.ok) {
+      refreshData();
+    }
+
+    setServerResult(result);
+  };
+
+  const handleNew = () => {
+    router.push('/user/new');
+  };
 
   return (
     <React.Fragment>
