@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Spin, Space } from 'antd';
+import { useRouter } from 'next/router';
+import { Spin, Space, notification } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
 import { api } from '@helpers/Api';
 import { AuthStore } from '@stores/AuthStore';
 
 export default function UserInfo() {
+  const router = useRouter();
   const { state, dispatch } = useContext(AuthStore);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,9 +28,16 @@ export default function UserInfo() {
 
         setIsLoading(false);
       }
+      else {
+        notification.success({ 
+          message: `Error ${result.data.code}`, 
+          description: result.data.message,
+        });
+      }
     }
     else {
-      // force logout here
+      // dispatch({ type: 'logout' });
+      // router.push('/login');
     }
   };
 
