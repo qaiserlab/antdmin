@@ -58,7 +58,7 @@ export class Api {
     );
   }
 
-  async post(url: string, data: Object) {
+  async post(url: string, data?: Object) {
     return await fetch(this.baseUrl + url, {
       method: 'POST',
       headers: this.getHeaders(),
@@ -66,7 +66,7 @@ export class Api {
     });
   }
   
-  async put(url: string, data: Object) {
+  async put(url: string, data?: Object) {
     return await fetch(this.baseUrl + url, {
       method: 'PUT',
       headers: this.getHeaders(),

@@ -5,6 +5,7 @@ export interface AuthInfoInterface {
 }
 
 export interface UserInfoInterface {
+  id: string,
   userName: string;
   fullName: string;
   firstName: string;

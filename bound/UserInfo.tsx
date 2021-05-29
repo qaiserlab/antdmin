@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
-import { Spin, Space, notification } from 'antd';
+import { Spin, Space, Modal, notification } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+// import { CloseCircleOutlined } from '@ant-design/icons';
 
 import { api } from '@helpers/Api';
 import { AuthStore } from '@stores/AuthStore';
+
+// const { confirm } = Modal;
 
 export default function UserInfo() {
   const router = useRouter();
@@ -25,19 +28,50 @@ export default function UserInfo() {
             userInfo: result.data,
           }
         });
-
-        setIsLoading(false);
       }
       else {
-        notification.success({ 
-          message: `Error ${result.data.code}`, 
-          description: result.data.message,
+        notification.error({ 
+          message: 'Error', 
+          description: result.message,
         });
+
+        // confirm({
+        //   title: result.message,
+        //   icon: <CloseCircleOutlined />,
+        //   content: 'Logout from Application?',
+        //   okText: 'Logout',
+        //   cancelText: 'Try Again',
+        //   onOk() {
+        //     console.log('OK');
+        //   },
+        //   onCancel() {
+        //     console.log('Cancel');
+        //   },
+        // });
       }
+
+      setIsLoading(false);
     }
-    else {
-      // dispatch({ type: 'logout' });
-      // router.push('/login');
+    else if (!localStorage.accessToken) {
+      // setIsLoading(true);
+
+      // const response = await api.post('/logout', {
+      //   UserId: state.userInfo.id
+      // });
+      // const result = await response.json();
+
+      // if (response.ok) {
+        dispatch({ type: 'logout' });
+        router.push('/login');
+      // }
+      // else {
+      //   notification.error({ 
+      //     message: 'Error', 
+      //     description: result.message,
+      //   });
+      // }
+
+      // setIsLoading(false);
     }
   };
 

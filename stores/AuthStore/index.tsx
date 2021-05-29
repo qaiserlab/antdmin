@@ -8,6 +8,7 @@ const initialState = {
     isLogin: false,
   },
   userInfo: {
+    id: '',
     userName: '',
     fullName: '',
     firstName: '',
@@ -32,7 +33,6 @@ function AuthProvider({ children }: any) {
         
         localStorage.accessToken = accessToken;
         localStorage.refreshToken = refreshToken;
-        localStorage.isLogin = isLogin;
 
         return {
           authInfo: {
@@ -63,7 +63,6 @@ function AuthProvider({ children }: any) {
       case 'logout':
         localStorage.accessToken = '';
         localStorage.refreshToken = '';
-        localStorage.isLogin = '';
 
         return initialState;
       default:

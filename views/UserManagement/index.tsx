@@ -9,34 +9,23 @@ import StickArea from '@components/StickArea';
 import { ActivityStore } from '@stores/ActivityStore';
 import { UserRecordInterface } from './schema';
 
+const { confirm } = Modal;
+
 export default function UserManagement() {
   const router = useRouter();
-  const [modal, contextHolder] = Modal.useModal();
   const { setServerResult } = useContext(ActivityStore);
 
   const [isLoading, setIsLoading] = useState(false);
   const [records, setRecords] = useState([]);
 
   const columns = [
-    {
-      title: 'Name',
-      dataIndex: 'firstName',
-      key: 'firstName',
-    },
-    {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
-    },
-    {
-      title: 'Phone Number',
-      dataIndex: 'phoneNumber',
-      key: 'phoneNumber',
-    },
+    { title: 'Name', dataIndex: 'firstName' },
+    { title: 'Username', dataIndex: 'userName' },
+    { title: 'Email', dataIndex: 'email' },
+    { title: 'Phone Number', dataIndex: 'phoneNumber' },
     {
       title: 'Action',
       dataIndex: 'action',
-      key: 'action',
       render: (text: string, record: UserRecordInterface) => {
         return (
           <Space>
@@ -44,9 +33,9 @@ export default function UserManagement() {
             <Button 
               icon={<DeleteOutlined />} 
               onClick={
-                () => modal.confirm({
+                () => confirm({
                   title: 'Confirm',
-                  content: <p>Delete {record.fullName} data?</p>, 
+                  content: <p>Delete {record.userName} data?</p>, 
                   onOk: () => handleDelete(record.id),
                 })
               } 
@@ -98,8 +87,6 @@ export default function UserManagement() {
 
   return (
     <React.Fragment>
-      {contextHolder}
-
       <Head>
         <title>User Management</title>
       </Head> 

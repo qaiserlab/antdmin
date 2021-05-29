@@ -24,11 +24,6 @@ export default function LoginForm() {
     validationSchema,
     
     onSubmit: async (values, { setSubmitting }) => {
-      const userInfo = {
-        userName: values.userName,
-        email: '-',
-      };
-
       const response = await api.post('/auth/sign-in', values);
       const result = await response.json();
 
@@ -40,7 +35,7 @@ export default function LoginForm() {
               accessToken: result.accessToken,
               refreshToken: result.refreshToken,
             },
-            userInfo: userInfo,
+            userInfo: result.userInfo,
           }
         })
 
