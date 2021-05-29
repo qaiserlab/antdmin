@@ -5,7 +5,7 @@ import RootLayout from '@layouts/RootLayout';
 import StickArea from '@components/StickArea';
 import LoginForm from '@views/LoginForm';
 
-export default function LoginRoute() {
+export default function LoginPage() {
   return (
     <RootLayout>
       <StickArea align={'center'} valign={'center'}>

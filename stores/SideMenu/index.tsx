@@ -1,4 +1,9 @@
-import { DashboardOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
+import { 
+  DashboardOutlined, 
+  DatabaseOutlined, 
+  StockOutlined,
+  ReadOutlined,
+} from "@ant-design/icons";
 
 export const menus = [
   { 
@@ -7,21 +12,27 @@ export const menus = [
     key: '/',
   },
   { 
-    title: 'User',
-    icon: <TeamOutlined />,
-    key: '/user',
+    title: 'Master',
+    icon: <DatabaseOutlined />,
+    key: '/master',
     children: [
-      { title: 'User Management', key: '/user' },
-      { title: 'User Privileges', key: '/user/privileges' },
+      { title: 'Inventory Data', key: '/master' },
     ]
   },
   { 
-    title: 'Account', 
-    icon: <UserOutlined />,
-    key: '/account',
+    title: 'Transaction', 
+    icon: <StockOutlined />,
+    key: '/transaction',
     children: [
-      { title: 'Profile', key: '/account' },
-      { title: 'Logout', key: '/account/logout' },
+      { title: 'Sales Transaction', key: '/transaction' },
+    ]
+  },
+  { 
+    title: 'Report', 
+    icon: <ReadOutlined />,
+    key: '/report',
+    children: [
+      { title: 'Sales Report', key: '/report' },
     ]
   },
 ];

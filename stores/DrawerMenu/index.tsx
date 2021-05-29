@@ -1,6 +1,15 @@
-import { DashboardOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
+import { 
+  UserOutlined,
+  TeamOutlined, 
+  LogoutOutlined,
+} from "@ant-design/icons";
 
 export const menus = [
+  { 
+    title: 'My Account', 
+    icon: <UserOutlined />,
+    key: '/my-account',
+  },
   { 
     title: 'User',
     icon: <TeamOutlined />,
@@ -11,12 +20,8 @@ export const menus = [
     ]
   },
   { 
-    title: 'Account', 
-    icon: <UserOutlined />,
-    key: '/account',
-    children: [
-      { title: 'Profile', key: '/account' },
-      { title: 'Logout', key: '/account/logout' },
-    ]
+    title: 'Logout', 
+    icon: <LogoutOutlined />,
+    key: '/logout',
   },
 ];

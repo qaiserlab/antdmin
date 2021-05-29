@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import AppLayout from '@layouts/AppLayout';
 
-export default function DashboardRoute() {
+export default function DashboardPage() {
   return (
     <AppLayout>
       <Head>

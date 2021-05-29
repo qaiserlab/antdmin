@@ -3,14 +3,14 @@ import Head from 'next/head';
 
 import AppLayout from '@layouts/AppLayout';
 
-export default function UserPrivilegesPage() {
+export default function ReportPage() {
   return (
     <AppLayout>
       <Head>
-        <title>User Privileges</title>
+        <title>Sales Report</title>
       </Head> 
       <section>
-        USER PRIVILEGES PAGE
+        SALES REPORT PAGE
       </section>
     </AppLayout>
   );

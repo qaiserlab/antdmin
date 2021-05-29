@@ -3,14 +3,14 @@ import Head from 'next/head';
 
 import AppLayout from '@layouts/AppLayout';
 
-export default function AccountRoute() {
+export default function MyAccountPage() {
   return (
     <AppLayout>
       <Head>
-        <title>Profile</title>
+        <title>My Account</title>
       </Head> 
       <section>
-        PROFILE PAGE
+        MY ACCOUNT PAGE
       </section>
     </AppLayout>
   );
