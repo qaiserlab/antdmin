@@ -35,6 +35,18 @@ export class Api {
 
   mkUrlWithQueryParams(url: string, data?: any) {
     if (!data) return this.baseUrl + url;
+
+    let targetUrl = this.baseUrl + url;
+    const xBaseUrl = this.baseUrl.split('?');
+    
+    if (xBaseUrl.length >= 2) {
+      targetUrl = xBaseUrl[1];
+      data = {
+        action: url,
+        ...data,
+      };
+    }
+
     const urlObject = new URL(this.baseUrl + url)
     urlObject.search = new URLSearchParams(data).toString();
     return urlObject.toString();
