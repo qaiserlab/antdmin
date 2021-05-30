@@ -1,22 +1,34 @@
-import React from 'react';
-import { useRouter } from 'next/router'
+import React, { useState, useContext } from 'react';
+import { useRouter } from 'next/router';
+import { Modal } from 'antd';
+import { QuestionOutlined } from '@ant-design/icons';
 
 import DataMenu from '@components/DataMenu';
+import { AuthStore } from '@stores/AuthStore';
 import { menus } from '@stores/DrawerMenu';
+
+const { confirm } = Modal;
 
 export default function DrawerMenu() {
   const router = useRouter();
-  const selectedKey = router.pathname;
-  const xSelectedKey = selectedKey.split('/');
-  const openKey = (xSelectedKey.length >= 2)?`/${xSelectedKey[1]}`:'';
 
+  let selectedKey = router.pathname;
+  const xSelectedKey = selectedKey.split('/');
+  let openKey = (xSelectedKey.length >= 2)?`/${xSelectedKey[1]}`:'';
+
+  const { dispatch } = useContext(AuthStore);
+  
   const handleSelect = ({ key }) => {
-    if (key === '/account/logout') {
-      if (confirm('Logout from Application?')) {
-        // Logout action here...
-      }
-      
-      return;
+    if (key === '/logout') {
+      return confirm({
+        title: 'Confirm',
+        icon: <QuestionOutlined />,
+        content: 'Logout from Application?',
+        onOk: () => {
+          dispatch({ type: 'logout' });
+          router.push('/login');
+        },
+      });
     }
 
     router.push(key);

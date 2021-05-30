@@ -11,14 +11,6 @@ export default function SideMenu() {
   const openKey = (xSelectedKey.length >= 2)?`/${xSelectedKey[1]}`:'';
 
   const handleSelect = ({ key }) => {
-    if (key === '/account/logout') {
-      if (confirm('Logout from Application?')) {
-        // Logout action here...
-      }
-      
-      return;
-    }
-
     router.push(key);
   };
 
