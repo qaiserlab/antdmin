@@ -81,13 +81,15 @@ export default function UserInfo() {
 
   return (
     <Spin spinning={isLoading}>
-      <Space>
+      {state.userInfo.firstName && (
+        <Space>
         <UserOutlined />
-        <span>
-          {state.userInfo.firstName}&nbsp;
-          {state.userInfo.lastName}
-        </span>
-      </Space>
+          <span>
+            {state.userInfo.firstName}&nbsp;
+            {state.userInfo.lastName}
+          </span>
+        </Space>
+      )}
     </Spin>
   )
 }
