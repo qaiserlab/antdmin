@@ -63,7 +63,7 @@ export default function UserManagementForm(props: PropsInterface) {
 
   useEffect(() => {
     (refreshData)();
-  }, []);
+  }, [id]);
 
   return (
     <React.Fragment>
