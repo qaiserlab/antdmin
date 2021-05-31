@@ -1,22 +1,6 @@
 import React, {createContext, useReducer} from 'react';
-import { AuthStateInterface, AuthActionInterface } from './schema';
+import { AuthStateInterface, AuthActionInterface, initialState } from './schema';
 
-const initialState = {
-  authInfo: {
-    accessToken: '',
-    refreshToken: '',
-    isLogin: false,
-  },
-  userInfo: {
-    id: '',
-    userName: '',
-    fullName: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-  },
-};
 const AuthStore = createContext({ state: initialState, dispatch: (payload: any) => {} });
 const { Provider } = AuthStore;
 
