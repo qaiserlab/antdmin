@@ -12,12 +12,6 @@ export default function LoginPage() {
         <section style={{width: '300px'}}>
           <LoginForm />
         </section>
-
-        <footer style={{marginTop: '16px', textAlign: 'center'}}>
-          <Link href={'/'}>
-            <a>BACK TO HOME</a>
-          </Link>
-        </footer>
       </StickArea>
     </RootLayout>
   );
