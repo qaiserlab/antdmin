@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Space, Table, Pagination, Input, Button, Modal, notification } from 'antd';
-import { FileTextOutlined, EditOutlined, DeleteOutlined, SearchOutlined } from "@ant-design/icons";
+import { Space, Table, Pagination, Button, Modal, notification } from 'antd';
+import { FileTextOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons";
 
 import { api } from '@helpers/Api';
+import filterable from '@helpers/filterable';
 import StickArea from '@components/StickArea';
 import { ActivityStore } from '@stores/ActivityStore';
 import { UserRecordInterface } from './schema';
@@ -21,51 +22,15 @@ export default function UserManagement() {
   const [records, setRecords] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const searchInputRef = useRef(null);
-  const handleSearch = () => {
-    alert('search');
+  const handleFilter = (dataIndex: string, keyword: string) => {
+    alert(dataIndex + ' - ' + keyword);
   };
 
-  const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <section style={{ padding: 8 }}>
-        <Input
-          ref={searchInputRef}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={handleSearch}
-          style={{ marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={handleSearch}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button onClick={() => { alert('reset') }} size="small" style={{ width: 90 }}>
-            Reset
-          </Button>
-        </Space>
-      </section>
-    ),
-    filterIcon: (filtered: string) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-    onFilterDropdownVisibleChange: (visible: boolean) => {
-      if (visible) {
-        setTimeout(() => searchInputRef.current.select(), 100);
-      }
-    },
-  });
-
   const columns = [
-    { title: 'Name', dataIndex: 'firstName', ...getColumnSearchProps('firstName') },
-    { title: 'Username', dataIndex: 'userName' },
-    { title: 'Email', dataIndex: 'email' },
-    { title: 'Phone Number', dataIndex: 'phoneNumber' },
+    filterable({ title: 'Name', dataIndex: 'firstName', onFilter: handleFilter }),
+    filterable({ title: 'Username', dataIndex: 'userName', onFilter: handleFilter }),
+    filterable({ title: 'Email', dataIndex: 'email', onFilter: handleFilter }),
+    filterable({ title: 'Phone Number', dataIndex: 'phoneNumber', onFilter: handleFilter }),
     {
       title: 'Action',
       dataIndex: 'action',
@@ -130,6 +95,10 @@ export default function UserManagement() {
     setServerResult(result);
   };
 
+  const handleRefresh = () => {
+    alert('refresh');
+  };
+
   const handleNew = () => {
     router.push('/user/new');
   };
@@ -165,6 +134,13 @@ export default function UserManagement() {
 
         <StickArea>
           <Space>
+            <Button 
+              icon={<ReloadOutlined />}
+              shape={'circle'} 
+              size={'large'} 
+              onClick={handleRefresh}
+            />
+
             <Button 
               icon={<FileTextOutlined />}
               type={'primary'} 
