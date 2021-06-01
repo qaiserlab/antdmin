@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Space, Table, Pagination, Button, Modal, notification } from 'antd';
-import { FileTextOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Space, Table, Pagination, Input, Button, Modal, notification } from 'antd';
+import { FileTextOutlined, EditOutlined, DeleteOutlined, SearchOutlined } from "@ant-design/icons";
 
 import { api } from '@helpers/Api';
 import StickArea from '@components/StickArea';
@@ -21,8 +21,48 @@ export default function UserManagement() {
   const [records, setRecords] = useState([]);
   const [total, setTotal] = useState(0);
 
+  const searchInputRef = useRef(null);
+  const handleSearch = () => {
+    alert('search');
+  };
+
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <section style={{ padding: 8 }}>
+        <Input
+          ref={searchInputRef}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={handleSearch}
+          style={{ marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={handleSearch}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => { alert('reset') }} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </Space>
+      </section>
+    ),
+    filterIcon: (filtered: string) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilterDropdownVisibleChange: (visible: boolean) => {
+      if (visible) {
+        setTimeout(() => searchInputRef.current.select(), 100);
+      }
+    },
+  });
+
   const columns = [
-    { title: 'Name', dataIndex: 'firstName' },
+    { title: 'Name', dataIndex: 'firstName', ...getColumnSearchProps('firstName') },
     { title: 'Username', dataIndex: 'userName' },
     { title: 'Email', dataIndex: 'email' },
     { title: 'Phone Number', dataIndex: 'phoneNumber' },
