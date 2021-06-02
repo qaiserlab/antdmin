@@ -5,7 +5,7 @@ import { Space, Table, Pagination, Button, Modal, notification } from 'antd';
 import { FileTextOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons";
 
 import { api } from '@helpers/Api';
-import filterable from '@helpers/filterable';
+import useFilterable from '@hooks/useFilterable';
 import StickArea from '@components/StickArea';
 import { ActivityStore } from '@stores/ActivityStore';
 import { UserRecordInterface } from './schema';
@@ -27,10 +27,10 @@ export default function UserManagement() {
   };
 
   const columns = [
-    filterable({ title: 'Name', dataIndex: 'firstName', onFilter: handleFilter }),
-    filterable({ title: 'Username', dataIndex: 'userName', onFilter: handleFilter }),
-    filterable({ title: 'Email', dataIndex: 'email', onFilter: handleFilter }),
-    filterable({ title: 'Phone Number', dataIndex: 'phoneNumber', onFilter: handleFilter }),
+    useFilterable({ title: 'Name', dataIndex: 'firstName', onFilter: handleFilter }),
+    useFilterable({ title: 'Username', dataIndex: 'userName', onFilter: handleFilter }),
+    useFilterable({ title: 'Email', dataIndex: 'email', onFilter: handleFilter }),
+    useFilterable({ title: 'Phone Number', dataIndex: 'phoneNumber', onFilter: handleFilter }),
     {
       title: 'Action',
       dataIndex: 'action',

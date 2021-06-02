@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { Space, Input, Button } from 'antd';
 import { SearchOutlined, FilterOutlined, ReloadOutlined } from "@ant-design/icons";
 
-export default function filterable(props: any) {
+export default function useFilterable(props: any) {
   const searchInputRef = useRef(null);
   
   const formik = useFormik({

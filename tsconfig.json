@@ -21,13 +21,14 @@
     "paths": {
       "@config/*": ["config/*"],
       "@helpers/*": ["helpers/*"],
-      "@stores/*": ["stores/*"],
+      "@hooks/*": ["hooks/*"],
       "@components/*": ["components/*"],
+      "@stores/*": ["stores/*"],
       "@bound/*": ["bound/*"],
       "@styles/*": ["styles/*"],
       "@pages/*": ["pages/*"],
-      "@views/*": ["views/*"],
-      "@layouts/*": ["layouts/*"]
+      "@layouts/*": ["layouts/*"],
+      "@views/*": ["views/*"]
     }
   },
   "include": [
