@@ -10,11 +10,7 @@ export default function DashboardPage() {
     <AppLayout>
       <Head>
         <title>Dashboard</title>
-      </Head> 
-
-      <Link href={'/login'}>
-        <a>GO TO LOGIN PAGE</a>
-      </Link>
+      </Head>
     </AppLayout>
   );
 }

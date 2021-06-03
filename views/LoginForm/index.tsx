@@ -7,6 +7,7 @@ import { LoginOutlined, UndoOutlined } from "@ant-design/icons";
 
 import { initialValues, validationSchema } from './schema';
 import { api } from '@helpers/Api';
+import StickArea from '@components/StickArea';
 import { ActivityStore } from '@stores/ActivityStore';
 import { AuthStore } from '@stores/AuthStore';
 import AlertMessage from '@bound/AlertMessage';
@@ -62,66 +63,71 @@ export default function LoginForm() {
         <title>Login</title>
       </Head>
 
-      <form onSubmit={formik.handleSubmit}>
-        <AlertMessage />
+      <StickArea align={'center'} valign={'center'}>
+        <form 
+          onSubmit={formik.handleSubmit}
+          style={{width: '300px'}}
+        >
+          <AlertMessage />
 
-        <Row gutter={[8, 16]}>
-          <Col span={6}>Username</Col>
-          <Col span={18}>
-            <Input
-              ref={userNameRef}
-              id={'userName'}
-              name={'userName'}
-              placeholder={'Username'}
-              value={formik.values.userName}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              disabled={formik.isSubmitting}
-            />
-            {formik.errors.userName && formik.touched.userName && (
-              <small style={{ color: "#d50000" }}>{formik.errors.userName}</small>
-            )}
-          </Col>
-        
-          <Col span={6}>Password</Col>
-          <Col span={18}>
-            <Input
-              id="password"
-              name="password"
-              placeholder="Password"
-              type="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              disabled={formik.isSubmitting}
-            />
-            {formik.errors.password && formik.touched.password && (
-              <small style={{ color: "#d50000" }}>{formik.errors.password}</small>
-            )}
-          </Col>
-
-          <Col span={6} />
-          <Col span={18}>
-            <Space>
-              <Button 
-                htmlType={'submit'} 
-                type={'primary'}
-                loading={formik.isSubmitting}
-              >
-                <LoginOutlined />
-                Login
-              </Button>
-              <Button 
-                onClick={handleReset}
+          <Row gutter={[8, 16]}>
+            <Col span={6}>Username</Col>
+            <Col span={18}>
+              <Input
+                ref={userNameRef}
+                id={'userName'}
+                name={'userName'}
+                placeholder={'Username'}
+                value={formik.values.userName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 disabled={formik.isSubmitting}
-              >
-                <UndoOutlined />
-                Reset
-              </Button>
-            </Space>
-          </Col>
-        </Row>
-      </form>
+              />
+              {formik.errors.userName && formik.touched.userName && (
+                <small style={{ color: "#d50000" }}>{formik.errors.userName}</small>
+              )}
+            </Col>
+          
+            <Col span={6}>Password</Col>
+            <Col span={18}>
+              <Input
+                id="password"
+                name="password"
+                placeholder="Password"
+                type="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                disabled={formik.isSubmitting}
+              />
+              {formik.errors.password && formik.touched.password && (
+                <small style={{ color: "#d50000" }}>{formik.errors.password}</small>
+              )}
+            </Col>
+
+            <Col span={6} />
+            <Col span={18}>
+              <Space>
+                <Button 
+                  htmlType={'submit'} 
+                  type={'primary'}
+                  loading={formik.isSubmitting}
+                >
+                  <LoginOutlined />
+                  Login
+                </Button>
+                <Button 
+                  onClick={handleReset}
+                  disabled={formik.isSubmitting}
+                >
+                  <UndoOutlined />
+                  Reset
+                </Button>
+              </Space>
+            </Col>
+          </Row>
+        </form>
+      </StickArea>
     </React.Fragment>
   )
 }
