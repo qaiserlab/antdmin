@@ -21,6 +21,7 @@ export default function UserManagement() {
   const [isLoading, setIsLoading] = useState(false);
   const [records, setRecords] = useState([]);
   const [total, setTotal] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleFilter = (dataIndex: string, keyword: string) => {
     alert(dataIndex + ' - ' + keyword);
@@ -54,11 +55,17 @@ export default function UserManagement() {
     }
   ];
 
-  const refreshData = async (page?: number) => {
+  useEffect(() => {
+    (handleRefresh)();
+  }, []);
+
+  const handleRefresh = async (page?: number) => {
     setIsLoading(true);
 
+    page = (page)?page:1;
+
     const response = await api.get('/user', {
-      page: (page)?page:1,
+      page,
       pageSize,
     });
     const result = await response.json();
@@ -77,34 +84,23 @@ export default function UserManagement() {
       });
     }
 
+    setCurrentPage(page);
     setIsLoading(false);
   };
-
-  useEffect(() => {
-    (refreshData)();
-  }, []);
 
   const handleDelete = async (id: string) => {
     const response = await api.del(`/user/force-delete/${id}`);
     const result = await response.json();
     
     if (response.ok) {
-      refreshData();
+      handleRefresh();
     }
 
     setServerResult(result);
   };
 
-  const handleRefresh = () => {
-    alert('refresh');
-  };
-
   const handleNew = () => {
     router.push('/user/new');
-  };
-
-  const handlePageChange = (page: number) => {
-    refreshData(page);
   };
 
   return (
@@ -125,9 +121,10 @@ export default function UserManagement() {
 
           { (total > pageSize) &&
             <Pagination 
-              onChange={handlePageChange}
+              onChange={(page: number) => handleRefresh(page)}
               pageSize={pageSize} 
               total={total} 
+              current={currentPage}
             />
           }
         </Space>
@@ -138,7 +135,7 @@ export default function UserManagement() {
               icon={<ReloadOutlined />}
               shape={'circle'} 
               size={'large'} 
-              onClick={handleRefresh}
+              onClick={() => handleRefresh()}
             />
 
             <Button 
