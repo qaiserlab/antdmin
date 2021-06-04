@@ -46,7 +46,6 @@ export default function AppLayout({ children }: any) {
           breakpoint={'sm'}
           onBreakpoint={handleBreakpoint}
           collapsedWidth={collapsedWidth}
-          collapsible 
         >
           <SideMenu />
         </Sider>
