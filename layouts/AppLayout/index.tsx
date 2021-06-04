@@ -18,14 +18,36 @@ export default function AppLayout({ children }: any) {
   const pathName = router.pathname;
   const xPathName = pathName.split('/[');
   const pathOnly = (xPathName.length >= 1)?xPathName[0]:'/';
+  const defaultCollapsedWidth = 240;
 
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [collapsedWidth, setCollapsedWidth] = useState(defaultCollapsedWidth);
+  const [breadcrumbAlign, setBreadcrumbAlign] = useState('left' as 'left' | 'right');
+
+  const handleBreakpoint = (broken: boolean) => {
+    if (!broken) {
+      setBreadcrumbAlign('left');
+      setCollapsedWidth(defaultCollapsedWidth);
+    }
+    else {
+      setBreadcrumbAlign('right');
+      setCollapsedWidth(0);
+    }
+  };
 
   return (
     <RootLayout>
       <Layout id={style.root}>
-        <Sider collapsible collapsed={isCollapsed} onCollapse={() => setIsCollapsed(!isCollapsed)}>
+        <Sider
+          id={style.sider} 
+          collapsed={isCollapsed} 
+          onCollapse={() => setIsCollapsed(!isCollapsed)}
+          breakpoint={'sm'}
+          onBreakpoint={handleBreakpoint}
+          collapsedWidth={collapsedWidth}
+          collapsible 
+        >
           <SideMenu />
         </Sider>
 
@@ -53,7 +75,7 @@ export default function AppLayout({ children }: any) {
             </figure>
           </Header>
           <Content id={style.content}>
-            <header>
+            <header style={{textAlign: breadcrumbAlign}}>
               <UrlBreadcrumb url={pathOnly} icon={<DashboardOutlined />} />
             </header>
             <section>
