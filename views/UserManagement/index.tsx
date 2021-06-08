@@ -22,9 +22,12 @@ export default function UserManagement() {
   const [records, setRecords] = useState([]);
   const [total, setTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-
+  
   const handleFilter = (dataIndex: string, keyword: string) => {
-    alert(dataIndex + ' - ' + keyword);
+    handleRefresh(1, [{
+      id: dataIndex, 
+      value: keyword,
+    }]);
   };
 
   const columns = [
@@ -59,14 +62,18 @@ export default function UserManagement() {
     (handleRefresh)();
   }, []);
 
-  const handleRefresh = async (page?: number) => {
+  const handleRefresh = async (page?: number, filter?: Array<any>) => {
     setIsLoading(true);
 
     page = (page)?page:1;
+    filter = (filter)?filter:[];
+
+    const filtered = JSON.stringify(filter);
 
     const response = await api.get('/user', {
       page,
       pageSize,
+      filtered,
     });
     const result = await response.json();
 
