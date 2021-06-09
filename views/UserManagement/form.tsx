@@ -157,7 +157,7 @@ export default function UserManagementForm(props: PropsInterface) {
               </Col>
 
               <Col xs={24} lg={3}>
-                Confirm New Password
+                Retype Password
               </Col>
               <Col xs={24} lg={21}>
                 <Input 
