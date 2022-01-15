@@ -5,7 +5,7 @@ import { Alert, notification } from 'antd'
 
 import { ActivityStore } from '@stores/ActivityStore'
 
-export default function AlertMessage({ children }: any) {
+export default function ServerAlert({ children }: any) {
   const { serverSaid, setServerSaid } = useContext(ActivityStore)
   const message = 'Please correct following errors'
 

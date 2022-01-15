@@ -9,7 +9,7 @@ import RootLayout from '@layouts/RootLayout'
 import UserInfo from 'widgets/UserInfo'
 import SideMenu from 'widgets/SideMenu'
 import DrawerMenu from 'widgets/DrawerMenu'
-import AlertMessage from 'widgets/AlertMessage'
+import ServerAlert from '@bound/ServerAlert'
 
 const { Header, Content, Footer, Sider } = Layout
 
@@ -78,7 +78,7 @@ export default function AppLayout({ children }: any) {
               <UrlBreadcrumb url={pathOnly} icon={<DashboardOutlined />} />
             </header>
             <section>
-              <AlertMessage />
+              <ServerAlert />
               {children}
             </section>
           </Content>

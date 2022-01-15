@@ -10,7 +10,7 @@ import { api } from '@helpers/Api';
 import StickArea from '@components/StickArea';
 import { ActivityStore } from '@stores/ActivityStore';
 import { AuthStore } from '@stores/AuthStore';
-import AlertMessage from 'widgets/AlertMessage';
+import ServerAlert from '@bound/ServerAlert';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -68,7 +68,7 @@ export default function LoginForm() {
           onSubmit={formik.handleSubmit}
           style={{width: '300px'}}
         >
-          <AlertMessage />
+          <ServerAlert />
 
           <Row gutter={[8, 16]}>
             <Col span={6}>Username</Col>
