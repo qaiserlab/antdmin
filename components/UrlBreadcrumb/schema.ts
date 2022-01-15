@@ -1,4 +1,4 @@
 export interface PropsInterface {
-  url: string;
-  icon?: any;
-};
+  url: string
+  icon?: any
+}

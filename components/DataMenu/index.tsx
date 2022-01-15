@@ -1,8 +1,8 @@
-import React from 'react';
-import { Menu } from 'antd';
+import React from 'react'
+import { Menu } from 'antd'
 import { PropsInterface } from './schema'
 
-const { SubMenu } = Menu;
+const { SubMenu } = Menu
 
 export default class DataMenu extends React.Component<PropsInterface, {}> {
   public static defaultProps: Partial<PropsInterface> = {
@@ -14,18 +14,18 @@ export default class DataMenu extends React.Component<PropsInterface, {}> {
     // default keys
     defaultOpenKeys: [],
     defaultSelectedKeys: [],
-  };
+  }
 
   constructor(props: PropsInterface) {
-    super(props);
+    super(props)
 
-    // this.state = {test: true};
-    this.handleSelect = this.handleSelect.bind(this);
+    // this.state = {test: true}
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
   handleSelect({ item, key, keyPath, selectedKeys, domEvent }) {
     if (this.props.onSelect) {
-      this.props.onSelect({ item, key, keyPath, selectedKeys, domEvent });
+      this.props.onSelect({ item, key, keyPath, selectedKeys, domEvent })
     }
   }
 
@@ -49,7 +49,7 @@ export default class DataMenu extends React.Component<PropsInterface, {}> {
                 >
                   {item.title}
                 </Menu.Item>
-              );
+              )
             }
             else {
               return (
@@ -71,15 +71,15 @@ export default class DataMenu extends React.Component<PropsInterface, {}> {
                         >
                           {subItem.title}
                         </Menu.Item>
-                      );
+                      )
                     }
                   })}
                 </SubMenu>
-              );
+              )
             }
           }
         })}
       </Menu>
-    );
+    )
   }
 }

@@ -1,25 +1,25 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useRouter } from 'next/router';
-import { Spin, Space, Modal, notification } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
-// import { CloseCircleOutlined } from '@ant-design/icons';
+import React, { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/router'
+import { Spin, Space, Modal, notification } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
+// import { CloseCircleOutlined } from '@ant-design/icons'
 
-import { api } from '@helpers/Api';
-import { AuthStore } from '@stores/AuthStore';
+import { api } from '@helpers/Api'
+import { AuthStore } from '@stores/AuthStore'
 
-// const { confirm } = Modal;
+// const { confirm } = Modal
 
 export default function UserInfo() {
-  const router = useRouter();
-  const { state, dispatch } = useContext(AuthStore);
-  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter()
+  const { state, dispatch } = useContext(AuthStore)
+  const [isLoading, setIsLoading] = useState(false)
 
   const refreshData = async () => {
     if (!state.authInfo.isLogin && localStorage.accessToken) {
-      setIsLoading(true);
+      setIsLoading(true)
   
-      const response = await api.get('/profile');
-      const result = await response.json();
+      const response = await api.get('/profile')
+      const result = await response.json()
       
       if (response.ok) {
         dispatch({
@@ -27,13 +27,13 @@ export default function UserInfo() {
           payload: {
             userInfo: result.data,
           }
-        });
+        })
       }
       else {
         notification.error({ 
           message: 'Error', 
           description: result.message,
-        });
+        })
 
         // confirm({
         //   title: result.message,
@@ -42,42 +42,42 @@ export default function UserInfo() {
         //   okText: 'Logout',
         //   cancelText: 'Try Again',
         //   onOk() {
-        //     console.log('OK');
+        //     console.log('OK')
         //   },
         //   onCancel() {
-        //     console.log('Cancel');
+        //     console.log('Cancel')
         //   },
-        // });
+        // })
       }
 
-      setIsLoading(false);
+      setIsLoading(false)
     }
     else if (!localStorage.accessToken) {
-      // setIsLoading(true);
+      // setIsLoading(true)
 
       // const response = await api.post('/logout', {
       //   UserId: state.userInfo.id
-      // });
-      // const result = await response.json();
+      // })
+      // const result = await response.json()
 
       // if (response.ok) {
-        dispatch({ type: 'logout' });
-        router.push('/login');
+        dispatch({ type: 'logout' })
+        router.push('/login')
       // }
       // else {
       //   notification.error({ 
       //     message: 'Error', 
       //     description: result.message,
-      //   });
+      //   })
       // }
 
-      // setIsLoading(false);
+      // setIsLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    (refreshData)();
-  }, []);
+    (refreshData)()
+  }, [])
 
   return (
     <Spin spinning={isLoading}>
@@ -85,7 +85,7 @@ export default function UserInfo() {
         <Space>
         <UserOutlined />
           <span>
-            {state.userInfo.firstName}&nbsp;
+            {state.userInfo.firstName}&nbsp
             {state.userInfo.lastName}
           </span>
         </Space>

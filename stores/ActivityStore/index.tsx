@@ -1,24 +1,24 @@
-import React, {createContext, useState} from 'react';
-// import { AuthStateInterface, AuthActionInterface } from './schema';
+import React, {createContext, useState} from 'react'
+// import { AuthStateInterface, AuthActionInterface } from './schema'
 
-const ActivityStore = createContext(null);
-const { Provider } = ActivityStore;
+const ActivityStore = createContext(null)
+const { Provider } = ActivityStore
 
 function ActivityProvider({ children }: any) {
-  const [serverResult, setServerResult] = useState({
+  const [serverSaid, setServerSaid] = useState({
     code: -1,
     message: '',
     errors: {},
-  });
+  })
   
   return (
     <Provider value={{ 
-      serverResult, 
-      setServerResult,
+      serverSaid, 
+      setServerSaid,
     }}>
       {children}
     </Provider>
-  );
+  )
 }
 
 export { ActivityStore, ActivityProvider }

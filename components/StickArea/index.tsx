@@ -1,7 +1,7 @@
-import React from "react";
-import style from './style';
+import React from "react"
+import style from './style'
 
-import { PropsInterface } from "./schema";
+import { PropsInterface } from "./schema"
 
 export default class StickArea extends React.Component<PropsInterface> {
 
@@ -10,20 +10,20 @@ export default class StickArea extends React.Component<PropsInterface> {
     align: 'right',
     // top, bottom, center
     valign: 'bottom',
-  };
-  rootRef: React.RefObject<HTMLDivElement>;
+  }
+  rootRef: React.RefObject<HTMLDivElement>
   
   constructor(props: PropsInterface) {
-    super(props);
-    this.rootRef = React.createRef();
+    super(props)
+    this.rootRef = React.createRef()
   }
 
   componentDidMount() {
-    const rootCurrent = Object(this.rootRef.current);
+    const rootCurrent = Object(this.rootRef.current)
     
     if (this.props.align === 'center' && this.props.valign === 'center') {
-      rootCurrent.style.marginTop = -(rootCurrent.offsetHeight / 2) + 'px';
-      rootCurrent.style.marginLeft = -(rootCurrent.offsetWidth / 2) + 'px';
+      rootCurrent.style.marginTop = -(rootCurrent.offsetHeight / 2) + 'px'
+      rootCurrent.style.marginLeft = -(rootCurrent.offsetWidth / 2) + 'px'
     }
     else if (
       this.props.align === 'center' && (
@@ -31,51 +31,51 @@ export default class StickArea extends React.Component<PropsInterface> {
         this.props.valign === 'bottom'
       )
     ) {
-      rootCurrent.style.marginLeft = -(rootCurrent.offsetWidth / 2) + 'px';
+      rootCurrent.style.marginLeft = -(rootCurrent.offsetWidth / 2) + 'px'
     }
     else if (
       (this.props.align === 'left' && this.props.valign === 'center') ||
       (this.props.align === 'right' && this.props.valign === 'center')
     ) {
-      rootCurrent.style.marginTop = -(rootCurrent.offsetHeight / 2) + 'px';
+      rootCurrent.style.marginTop = -(rootCurrent.offsetHeight / 2) + 'px'
     }
   }
 
   render() {
-    let sectionStyle;
+    let sectionStyle
 
     if (this.props.align === 'left' && this.props.valign === 'top') {
-      sectionStyle = style.lt;
+      sectionStyle = style.lt
     }
     else if (this.props.align === 'right' && this.props.valign === 'top') {
-      sectionStyle = style.rt;
+      sectionStyle = style.rt
     }
     else if (this.props.align === 'center' && this.props.valign === 'top') {
-      sectionStyle = style.ct;
+      sectionStyle = style.ct
     }
     else if (this.props.align === 'left' && this.props.valign === 'center') {
-      sectionStyle = style.lc;
+      sectionStyle = style.lc
     }
     else if (this.props.align === 'right' && this.props.valign === 'center') {
-      sectionStyle = style.rc;
+      sectionStyle = style.rc
     }
     else if (this.props.align === 'center' && this.props.valign === 'center') {
-      sectionStyle = style.cc;
+      sectionStyle = style.cc
     }
     else if (this.props.align === 'left' && this.props.valign === 'bottom') {
-      sectionStyle = style.lb;
+      sectionStyle = style.lb
     }
     else if (this.props.align === 'right' && this.props.valign === 'bottom') {
-      sectionStyle = style.rb;
+      sectionStyle = style.rb
     }
     else if (this.props.align === 'center' && this.props.valign === 'bottom') {
-      sectionStyle = style.cb;
+      sectionStyle = style.cb
     }
 
     return (
       <section ref={this.rootRef} style={sectionStyle}>
         {this.props.children}
       </section>
-    );
+    )
   }
 }

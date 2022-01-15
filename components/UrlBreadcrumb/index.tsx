@@ -1,6 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
-import { Breadcrumb } from 'antd';
+import React from 'react'
+import Link from 'next/link'
+import { Breadcrumb } from 'antd'
 import { PropsInterface } from './schema'
 
 export default class RouterBreadcrumb extends React.Component<
@@ -8,47 +8,47 @@ export default class RouterBreadcrumb extends React.Component<
 > {
   
   constructor(props: PropsInterface) {
-    super(props);
+    super(props)
   }
 
   getDataSource() {
-    const urlArray = this.props.url.split("/");
+    const urlArray = this.props.url.split("/")
 
     if (this.props.url.substr(0, 1) === '/') {
-      urlArray.shift();
+      urlArray.shift()
     }
     else if (this.props.url.substr(0, 4) === 'http') {
-      urlArray.shift();
-      urlArray.shift();
-      urlArray.shift();
+      urlArray.shift()
+      urlArray.shift()
+      urlArray.shift()
     }
 
     return urlArray.map((item: any, index: number) => {
-      const title = item;
-      let href = "";
+      const title = item
+      let href = ""
 
       for (let i = 0; i <= index; i++) {
-        href += `/${urlArray[i]}`;
+        href += `/${urlArray[i]}`
       }
 
       return {
         index,
         title,
         href,
-      };
-    });
+      }
+    })
   }
 
   mkTitleCase(text: string) {
-    const sentence = text.toLowerCase().split(' ');
+    const sentence = text.toLowerCase().split(' ')
 
-    for(let i = 0; i < sentence.length; i++){
+    for(let i = 0; i < sentence.length; i++) {
       if (sentence[i].length > 0) {
-        sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
+        sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1)
       }
     }
     
-    return sentence.join(' ');
+    return sentence.join(' ')
   }
 
   render() {
@@ -68,10 +68,10 @@ export default class RouterBreadcrumb extends React.Component<
                   <a>{this.mkTitleCase(item.title)}</a>
                 </Link>
               </Breadcrumb.Item>
-            );
+            )
           })}
         </Breadcrumb>
       </React.Fragment>
-    );
+    )
   }
 }

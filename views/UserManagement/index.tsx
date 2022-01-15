@@ -1,34 +1,34 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { Space, Table, Pagination, Button, Modal, notification } from 'antd';
-import { FileTextOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons";
+import React, { useState, useEffect, useContext } from 'react'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { Space, Table, Pagination, Button, Modal, notification } from 'antd'
+import { FileTextOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons"
 
-import { api } from '@helpers/Api';
-import useFilterable from '@hooks/useFilterable';
-import StickArea from '@components/StickArea';
-import { ActivityStore } from '@stores/ActivityStore';
-import { UserRecordInterface } from './schema';
+import { api } from '@helpers/Api'
+import useFilterable from '@hooks/useFilterable'
+import StickArea from '@components/StickArea'
+import { ActivityStore } from '@stores/ActivityStore'
+import { UserRecordInterface } from './schema'
 
-const { confirm } = Modal;
+const { confirm } = Modal
 
 export default function UserManagement() {
-  const router = useRouter();
-  const pageSize = 5;
+  const router = useRouter()
+  const pageSize = 5
 
-  const { setServerResult } = useContext(ActivityStore);
+  const { setServerSaid } = useContext(ActivityStore)
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [records, setRecords] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false)
+  const [records, setRecords] = useState([])
+  const [total, setTotal] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
   
   const handleFilter = (dataIndex: string, keyword: string) => {
     handleRefresh(1, [{
       id: dataIndex, 
       value: keyword,
-    }]);
-  };
+    }])
+  }
 
   const columns = [
     useFilterable({ title: 'Name', dataIndex: 'firstName', onFilter: handleFilter }),
@@ -53,62 +53,62 @@ export default function UserManagement() {
               } 
             />
           </Space>
-        );
+        )
       },
     }
-  ];
+  ]
 
   useEffect(() => {
-    (handleRefresh)();
-  }, []);
+    (handleRefresh)()
+  }, [])
 
   const handleRefresh = async (page?: number, filter?: Array<any>) => {
-    setIsLoading(true);
+    setIsLoading(true)
 
-    page = (page)?page:1;
-    filter = (filter)?filter:[];
+    page = (page)?page:1
+    filter = (filter)?filter:[]
 
-    const filtered = JSON.stringify(filter);
+    const filtered = JSON.stringify(filter)
 
     const response = await api.get('/user', {
       page,
       pageSize,
       filtered,
-    });
-    const result = await response.json();
+    })
+    const result = await response.json()
 
     if (response.ok) {
-      setRecords(result.data);
-      setTotal(result.total);
+      setRecords(result.data)
+      setTotal(result.total)
     }
     else {
-      setRecords([]);
-      setTotal(0);
+      setRecords([])
+      setTotal(0)
 
       notification.error({
         message: 'Error',
         description: result.message,
-      });
+      })
     }
 
-    setCurrentPage(page);
-    setIsLoading(false);
-  };
+    setCurrentPage(page)
+    setIsLoading(false)
+  }
 
   const handleDelete = async (id: string) => {
-    const response = await api.del(`/user/force-delete/${id}`);
-    const result = await response.json();
+    const response = await api.del(`/user/force-delete/${id}`)
+    const result = await response.json()
     
     if (response.ok) {
-      handleRefresh();
+      handleRefresh()
     }
 
-    setServerResult(result);
-  };
+    setServerSaid(result)
+  }
 
   const handleNew = () => {
-    router.push('/user/new');
-  };
+    router.push('/user/new')
+  }
 
   return (
     <React.Fragment>
@@ -156,5 +156,5 @@ export default function UserManagement() {
         </StickArea>
       </section>
     </React.Fragment>
-  );
+  )
 }

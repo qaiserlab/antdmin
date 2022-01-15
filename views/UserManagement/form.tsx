@@ -1,24 +1,24 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { Row, Col, Space, Input, Button, Card, Spin } from 'antd';
-import { SaveOutlined, ArrowLeftOutlined } from "@ant-design/icons";
-import { useFormik } from 'formik';
+import React, { useState, useEffect, useContext } from 'react'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { Row, Col, Space, Input, Button, Card, Spin } from 'antd'
+import { SaveOutlined, ArrowLeftOutlined } from "@ant-design/icons"
+import { useFormik } from 'formik'
 
-import { api } from '@helpers/Api';
-import StickArea from '@components/StickArea';
-import { ActivityStore } from '@stores/ActivityStore';
-import { PropsInterface, initialValues, validationSchema } from './schema';
+import { api } from '@helpers/Api'
+import StickArea from '@components/StickArea'
+import { ActivityStore } from '@stores/ActivityStore'
+import { PropsInterface, initialValues, validationSchema } from './schema'
 
 export default function UserManagementForm(props: PropsInterface) {
-  const isNew = props.isNew;
-  const id = props.id;
-  const title = (isNew)?'New':'Edit';
+  const isNew = props.isNew
+  const id = props.id
+  const title = (isNew)?'New':'Edit'
 
-  const router = useRouter();
-  const { setServerResult } = useContext(ActivityStore);
+  const router = useRouter()
+  const { setServerSaid } = useContext(ActivityStore)
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const formik = useFormik({
     initialValues,
@@ -27,43 +27,43 @@ export default function UserManagementForm(props: PropsInterface) {
     onSubmit: async (values: any, { setSubmitting }) => {
       const response = (isNew)?
         await api.post('/user', values):
-        await api.put(`/user/${id}`, values);
+        await api.put(`/user/${id}`, values)
       
-      const result = await response.json();
+      const result = await response.json()
 
       if (response.ok) {
-        router.push('/user');
+        router.push('/user')
       }
 
-      setServerResult(result);
-      setSubmitting(false);
+      setServerSaid(result)
+      setSubmitting(false)
     }
-  });
+  })
 
   const refreshData = async () => {
     if (!isNew) {
-      setIsLoading(true);
+      setIsLoading(true)
 
-      const response = await api.get(`/user/${id}`);
-      const result = await response.json();
+      const response = await api.get(`/user/${id}`)
+      const result = await response.json()
       
       if (response.ok) {
-        formik.setFieldValue('firstName', result.data.firstName);
-        formik.setFieldValue('lastName', result.data.lastName);
-        formik.setFieldValue('userName', result.data.userName);
-        formik.setFieldValue('email', result.data.email);
-        // formik.setFieldValue('newPassword', result.data.newPassword);
-        // formik.setFieldValue('confirmNewPassword', result.data.confirmNewPassword);
-        formik.setFieldValue('phoneNumber', result.data.phoneNumber);
+        formik.setFieldValue('firstName', result.data.firstName)
+        formik.setFieldValue('lastName', result.data.lastName)
+        formik.setFieldValue('userName', result.data.userName)
+        formik.setFieldValue('email', result.data.email)
+        // formik.setFieldValue('newPassword', result.data.newPassword)
+        // formik.setFieldValue('confirmNewPassword', result.data.confirmNewPassword)
+        formik.setFieldValue('phoneNumber', result.data.phoneNumber)
         
-        setIsLoading(false);
+        setIsLoading(false)
       }
     }
-  };
+  }
 
   useEffect(() => {
-    (refreshData)();
-  }, [id]);
+    (refreshData)()
+  }, [id])
 
   return (
     <React.Fragment>

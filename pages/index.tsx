@@ -1,9 +1,7 @@
-import React from 'react';
-
+import React from 'react'
 import Head from 'next/head'
-import Link from 'next/link';
 
-import AppLayout from '@layouts/AppLayout';
+import AppLayout from '@layouts/AppLayout'
 
 export default function DashboardPage() {
   return (
@@ -12,5 +10,5 @@ export default function DashboardPage() {
         <title>Dashboard</title>
       </Head>
     </AppLayout>
-  );
+  )
 }

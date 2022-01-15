@@ -10,12 +10,12 @@ import { api } from '@helpers/Api';
 import StickArea from '@components/StickArea';
 import { ActivityStore } from '@stores/ActivityStore';
 import { AuthStore } from '@stores/AuthStore';
-import AlertMessage from '@bound/AlertMessage';
+import AlertMessage from 'widgets/AlertMessage';
 
 export default function LoginForm() {
   const router = useRouter();
   
-  const { setServerResult } = useContext(ActivityStore);
+  const { setServerSaid } = useContext(ActivityStore);
   const { dispatch } = useContext(AuthStore);
   
   const userNameRef = useRef(null);
@@ -43,7 +43,7 @@ export default function LoginForm() {
         router.push('/');
       }
 
-      setServerResult(result);
+      setServerSaid(result);
       setSubmitting(false);
     }
   });

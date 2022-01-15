@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react'
 import { useRouter } from 'next/router'
 
-import DataMenu from '@components/DataMenu';
-import { menus } from '@stores/SideMenu';
+import DataMenu from '@components/DataMenu'
+import { menus } from '@stores/SideMenu'
 
 export default function SideMenu() {
-  const router = useRouter();
-  const selectedKey = router.pathname;
-  const xSelectedKey = selectedKey.split('/');
-  const openKey = (xSelectedKey.length >= 2)?`/${xSelectedKey[1]}`:'';
+  const router = useRouter()
+  const selectedKey = router.pathname
+  const xSelectedKey = selectedKey.split('/')
+  const openKey = (xSelectedKey.length >= 2)?`/${xSelectedKey[1]}`:''
 
   const handleSelect = ({ key }) => {
-    router.push(key);
-  };
+    router.push(key)
+  }
 
   return (
     <React.Fragment>
@@ -25,5 +25,5 @@ export default function SideMenu() {
         defaultSelectedKeys={[selectedKey]}
       />
     </React.Fragment>
-  );
+  )
 }

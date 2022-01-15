@@ -1,16 +1,16 @@
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 
 export interface PropsInterface {
-  isNew: boolean;
-  id?: string;
-};
+  isNew: boolean
+  id?: string
+}
 
 export interface UserRecordInterface {
-  id: string;
-  fullName: string;
-  userName: string;
-  email: string;
-  phoneNumber: string;
+  id: string
+  fullName: string
+  userName: string
+  email: string
+  phoneNumber: string
 }
 
 export const initialValues = {
@@ -40,4 +40,4 @@ export const validationSchema = Yup.object().shape({
     .max(50, "Confirm New Password can't more than 50 characters")
     .required("Confirm New Password required"),
   phoneNumber: Yup.string(),
-});
+})

@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-import AppLayout from '@layouts/AppLayout';
-import UserManagementForm from '@views/UserManagement/form';
+import AppLayout from '@layouts/AppLayout'
+import UserManagementForm from '@views/UserManagement/form'
 
 export default function UserNewPage() {
-  const isNew = true;
+  const isNew = true
 
   return (
     <AppLayout>
@@ -12,5 +12,5 @@ export default function UserNewPage() {
         isNew={isNew} 
       />
     </AppLayout>
-  );
+  )
 }
