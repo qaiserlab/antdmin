@@ -1,34 +1,42 @@
-import React, { useEffect, useContext, useRef } from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useFormik } from 'formik';
-import { Row, Col, Space, Input, Button } from 'antd';
-import { LoginOutlined, UndoOutlined } from "@ant-design/icons";
+import React, { useEffect, useContext, useRef } from 'react'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useFormik } from 'formik'
+import { Row, Col, Space, Input, Button } from 'antd'
+import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
 
-import { initialValues, validationSchema } from './schema';
-import { api } from '@helpers/Api';
-import StickArea from '@components/StickArea';
-import { ActivityStore } from '@stores/ActivityStore';
-import { AuthStore } from '@stores/AuthStore';
-import ServerAlert from '@bound/ServerAlert';
+import { initialValues, validationSchema } from './schema'
+import axios from '@helpers/axiosInstance'
+import StickArea from '@components/StickArea'
+import { ActivityStore } from '@stores/ActivityStore'
+import { AuthStore } from '@stores/AuthStore'
+import ServerAlert from '@bound/ServerAlert'
 
 export default function LoginForm() {
-  const router = useRouter();
+  const router = useRouter()
   
-  const { setServerSaid } = useContext(ActivityStore);
-  const { dispatch } = useContext(AuthStore);
+  const { setServerSaid } = useContext(ActivityStore)
+  const { dispatch } = useContext(AuthStore)
   
-  const userNameRef = useRef(null);
+  const userNameRef = useRef(null)
 
   const formik = useFormik({
     initialValues,
     validationSchema,
     
     onSubmit: async (values, { setSubmitting }) => {
-      const response = await api.post('/auth/sign-in', values);
-      const result = await response.json();
 
-      if (response.ok) {
+      try {
+        const data = {
+          email: values.userName,
+          password: values.password,
+        }
+        const response = await axios.post(
+          '/auth/sign-in',
+          data
+        )
+        const result = response.data
+  
         dispatch({
           type: 'login',
           payload: {
@@ -40,22 +48,27 @@ export default function LoginForm() {
           }
         })
 
-        router.push('/');
+        router.push('/')
+      }
+      catch (error) {
+        const result = error.response.data
+        setServerSaid(result)
+      }
+      finally {
+        setSubmitting(false)
       }
 
-      setServerSaid(result);
-      setSubmitting(false);
     }
-  });
+  })
 
   useEffect(() => {
-    // userNameRef.current.focus();
-  }, []); // Second param empty, mean only execute once time
+    // userNameRef.current.focus()
+  }, [])
 
   const handleReset = () => {
-    formik.resetForm();
-    userNameRef.current.focus();
-  };
+    formik.resetForm()
+    userNameRef.current.focus()
+  }
 
   return (
     <React.Fragment>

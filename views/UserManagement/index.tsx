@@ -5,6 +5,7 @@ import { Space, Table, Pagination, Button, Modal, notification } from 'antd'
 import { FileTextOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons"
 
 import { api } from '@helpers/Api'
+import axios from '@helpers/axiosInstance'
 import useFilterable from '@hooks/useFilterable'
 import StickArea from '@components/StickArea'
 import { ActivityStore } from '@stores/ActivityStore'
@@ -63,36 +64,42 @@ export default function UserManagement() {
   }, [])
 
   const handleRefresh = async (page?: number, filter?: Array<any>) => {
-    setIsLoading(true)
-
-    page = (page)?page:1
-    filter = (filter)?filter:[]
-
-    const filtered = JSON.stringify(filter)
-
-    const response = await api.get('/user', {
-      page,
-      pageSize,
-      filtered,
-    })
-    const result = await response.json()
-
-    if (response.ok) {
+    try {
+      setIsLoading(true)
+  
+      page = (page)?page:1
+      filter = (filter)?filter:[]
+  
+      const filtered = JSON.stringify(filter)
+  
+      const response = await axios.get('/user', {
+        data: {
+          page,
+          pageSize,
+          filtered,
+        }
+      })
+      const result = response.data
+  
       setRecords(result.data)
       setTotal(result.total)
+      setCurrentPage(page)
     }
-    else {
+    catch (error) {
       setRecords([])
       setTotal(0)
+
+      const result = error.response.data
 
       notification.error({
         message: 'Error',
         description: result.message,
       })
+      // setServerSaid(result)
     }
-
-    setCurrentPage(page)
-    setIsLoading(false)
+    finally {
+      setIsLoading(false)
+    }
   }
 
   const handleDelete = async (id: string) => {
