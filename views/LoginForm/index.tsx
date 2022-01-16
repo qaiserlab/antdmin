@@ -42,7 +42,7 @@ export default function LoginForm() {
           payload: {
             authInfo: {
               accessToken: result.accessToken,
-              refreshToken: result.refreshToken,
+              // refreshToken: result.refreshToken,
             },
             userInfo: result.userInfo,
           }

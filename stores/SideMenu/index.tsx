@@ -3,7 +3,7 @@ import {
   DatabaseOutlined, 
   StockOutlined,
   ReadOutlined,
-} from "@ant-design/icons";
+} from "@ant-design/icons"
 
 export const menus = [
   { 
@@ -35,4 +35,4 @@ export const menus = [
       { title: 'Sales Report', key: '/report' },
     ]
   },
-];
+]

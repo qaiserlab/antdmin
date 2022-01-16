@@ -1,64 +1,64 @@
-import React, {createContext, useReducer} from 'react';
-import { AuthStateInterface, AuthActionInterface, initialState } from './schema';
+import React, {createContext, useReducer} from 'react'
+import { AuthStateInterface, AuthActionInterface, initialState } from './schema'
 
-const AuthStore = createContext({ state: initialState, dispatch: (payload: any) => {} });
-const { Provider } = AuthStore;
+const AuthStore = createContext({ state: initialState, dispatch: (payload: any) => {} })
+const { Provider } = AuthStore
 
 function AuthProvider({ children }: any) {
   const [state, dispatch] = useReducer((state: AuthStateInterface, action: AuthActionInterface) => {
     switch (action.type) {
       case 'login':
 
-        const accessToken = action.payload.authInfo.accessToken;
-        const refreshToken = action.payload.authInfo.refreshToken;
-        const userInfo = action.payload.userInfo;
+        const accessToken = action.payload.authInfo.accessToken
+        // const refreshToken = action.payload.authInfo.refreshToken
+        const userInfo = action.payload.userInfo
 
-        const isLogin = true;
+        const isLogin = true
         
-        localStorage.accessToken = accessToken;
-        localStorage.refreshToken = refreshToken;
+        sessionStorage.setItem('accessToken', accessToken)
+        // sessionStorage.setItem('refreshToken', refreshToken)
 
         return {
           authInfo: {
             ...state.authInfo,
             accessToken,
-            refreshToken,
+            // refreshToken,
             isLogin,
           },
           userInfo: {
             ...state.userInfo,
             ...userInfo,
           }
-        };
+        }
 
       case 'refresh':
         return {
           authInfo: {
             ...state.authInfo,
-            accessToken: localStorage.accessToken,
-            refreshToken: localStorage.refreshToken,
+            accessToken: sessionStorage.accessToken,
+            // refreshToken: sessionStorage.refreshToken,
             isLogin: true,
           },
           userInfo: {
             ...state.userInfo,
             ...action.payload.userInfo,
           }
-        };
+        }
       case 'logout':
-        localStorage.accessToken = '';
-        localStorage.refreshToken = '';
-
-        return initialState;
+        sessionStorage.setItem('accessToken', '')
+        // sessionStorage.setItem('refreshToken', '')
+        
+        return initialState
       default:
-        throw new Error();
+        throw new Error()
     }
-  }, initialState);
+  }, initialState)
 
   return (
     <Provider value={{ state, dispatch }}>
       {children}
     </Provider>
-  );
+  )
 }
 
 export { AuthStore, AuthProvider }

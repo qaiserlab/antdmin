@@ -2,7 +2,7 @@ import {
   UserOutlined,
   TeamOutlined, 
   LogoutOutlined,
-} from "@ant-design/icons";
+} from "@ant-design/icons"
 
 export const menus = [
   { 
@@ -24,4 +24,4 @@ export const menus = [
     icon: <LogoutOutlined />,
     key: '/logout',
   },
-];
+]

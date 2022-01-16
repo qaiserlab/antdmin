@@ -15,7 +15,7 @@ export default function UserInfo() {
   const [isLoading, setIsLoading] = useState(false)
 
   const refreshData = async () => {
-    if (!state.authInfo.isLogin && localStorage.accessToken) {
+    if (!state.authInfo.isLogin && sessionStorage.accessToken) {
       setIsLoading(true)
   
       const response = await api.get('/profile')
@@ -52,7 +52,7 @@ export default function UserInfo() {
 
       setIsLoading(false)
     }
-    else if (!localStorage.accessToken) {
+    else if (!sessionStorage.accessToken) {
       // setIsLoading(true)
 
       // const response = await api.post('/logout', {
