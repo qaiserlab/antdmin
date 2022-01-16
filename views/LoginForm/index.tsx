@@ -15,7 +15,7 @@ import ServerAlert from '@bound/ServerAlert'
 export default function LoginForm() {
   const router = useRouter()
   
-  const { setServerSaid } = useContext(ActivityStore)
+  const { setServerSaid, clearServerSaid } = useContext(ActivityStore)
   const { dispatch } = useContext(AuthStore)
   
   const userNameRef = useRef(null)
@@ -48,6 +48,7 @@ export default function LoginForm() {
           }
         })
 
+        clearServerSaid()
         router.push('/')
       }
       catch (error) {
