@@ -1,7 +1,7 @@
 const cli = require('next/dist/cli/next-dev');
 
 const readline = require('readline').createInterface({
-  input: require('fs').createReadStream('.env.development.local'),
+  input: require('fs').createReadStream('.env'),
 });
 
 readline.on('line', (line) => {
