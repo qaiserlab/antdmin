@@ -10,7 +10,7 @@ import axios from '@helpers/axiosInstance'
 import StickArea from '@components/StickArea'
 import { ActivityStore } from '@stores/ActivityStore'
 import { AuthStore } from '@stores/AuthStore'
-import ServerAlert from '@bound/ServerAlert'
+import ServerAlert from '@widgets/ServerAlert'
 
 export default function LoginForm() {
   const router = useRouter()

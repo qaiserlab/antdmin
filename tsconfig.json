@@ -24,7 +24,7 @@
       "@hooks/*": ["hooks/*"],
       "@components/*": ["components/*"],
       "@stores/*": ["stores/*"],
-      "@bound/*": ["widgets/*"],
+      "@widgets/*": ["widgets/*"],
       "@styles/*": ["styles/*"],
       "@pages/*": ["pages/*"],
       "@layouts/*": ["layouts/*"],

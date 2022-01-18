@@ -6,10 +6,10 @@ import { DashboardOutlined, SettingOutlined } from '@ant-design/icons'
 import style from './style.module.scss'
 import UrlBreadcrumb from '@components/UrlBreadcrumb'
 import RootLayout from '@layouts/RootLayout'
-import UserInfo from 'widgets/UserInfo'
-import SideMenu from 'widgets/SideMenu'
-import DrawerMenu from 'widgets/DrawerMenu'
-import ServerAlert from '@bound/ServerAlert'
+import UserInfo from '@widgets/UserInfo'
+import SideMenu from '@widgets/SideMenu'
+import DrawerMenu from '@widgets/DrawerMenu'
+import ServerAlert from '@widgets/ServerAlert'
 
 const { Header, Content, Footer, Sider } = Layout
 
