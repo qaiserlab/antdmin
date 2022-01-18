@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { Space, Table, Pagination, Button, Modal, notification } from 'antd'
 import { FileTextOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons"
 
-import { api } from '@helpers/Api'
 import axios from '@helpers/axiosInstance'
 import useFilterable from '@hooks/useFilterable'
 import StickArea from '@components/StickArea'
@@ -85,7 +84,7 @@ export default function UserManagement() {
       setTotal(result.total)
       setCurrentPage(page)
     }
-    catch (error) {
+    catch (error: any) {
       setRecords([])
       setTotal(0)
 
@@ -103,14 +102,14 @@ export default function UserManagement() {
   }
 
   const handleDelete = async (id: string) => {
-    const response = await api.del(`/user/force-delete/${id}`)
-    const result = await response.json()
-    
-    if (response.ok) {
+    try {
+      await axios.delete(`/user/force-delete/${id}`)
       handleRefresh()
     }
-
-    setServerSaid(result)
+    catch (error: any) {
+      const result = error.response.data
+      setServerSaid(result)
+    }
   }
 
   const handleNew = () => {

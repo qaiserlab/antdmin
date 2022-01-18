@@ -5,7 +5,7 @@ import { Row, Col, Space, Input, Button, Card, Spin } from 'antd'
 import { SaveOutlined, ArrowLeftOutlined } from "@ant-design/icons"
 import { useFormik } from 'formik'
 
-import { api } from '@helpers/Api'
+import axios from '@helpers/axiosInstance'
 import StickArea from '@components/StickArea'
 import { ActivityStore } from '@stores/ActivityStore'
 import { PropsInterface, initialValues, validationSchema } from './schema'
@@ -16,7 +16,7 @@ export default function UserManagementForm(props: PropsInterface) {
   const title = (isNew)?'New':'Edit'
 
   const router = useRouter()
-  const { setServerSaid } = useContext(ActivityStore)
+  const { setServerSaid, clearServerSaid } = useContext(ActivityStore)
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -25,29 +25,40 @@ export default function UserManagementForm(props: PropsInterface) {
     validationSchema,
     
     onSubmit: async (values: any, { setSubmitting }) => {
-      const response = (isNew)?
-        await api.post('/user', values):
-        await api.put(`/user/${id}`, values)
-      
-      const result = await response.json()
+      try {
+        const data = {
+          ...values,
+          RoleId: '4bae9535-df47-46fe-b395-7be379d01f31',
+        }
 
-      if (response.ok) {
+        if (isNew) {
+          await axios.post('/user', data)
+        }
+        else {
+          await axios.put(`/user/${id}`, data)
+        }
+      
+        clearServerSaid()
         router.push('/user')
       }
-
-      setServerSaid(result)
-      setSubmitting(false)
-    }
+      catch (error: any) {
+        const result = error.response.data
+        setServerSaid(result)
+      }
+      finally {
+        setSubmitting(false)
+      }
+    },
   })
 
   const refreshData = async () => {
     if (!isNew) {
-      setIsLoading(true)
-
-      const response = await api.get(`/user/${id}`)
-      const result = await response.json()
-      
-      if (response.ok) {
+      try {
+        setIsLoading(true)
+  
+        const response = await axios.get(`/user/${id}`)
+        const result = response.data
+        
         formik.setFieldValue('firstName', result.data.firstName)
         formik.setFieldValue('lastName', result.data.lastName)
         formik.setFieldValue('userName', result.data.userName)
@@ -55,7 +66,12 @@ export default function UserManagementForm(props: PropsInterface) {
         // formik.setFieldValue('newPassword', result.data.newPassword)
         // formik.setFieldValue('confirmNewPassword', result.data.confirmNewPassword)
         formik.setFieldValue('phoneNumber', result.data.phoneNumber)
-        
+      }
+      catch (error: any) {
+        const result = error.response.data
+        setServerSaid(result)
+      }
+      finally {
         setIsLoading(false)
       }
     }

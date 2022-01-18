@@ -51,7 +51,7 @@ export default function LoginForm() {
         clearServerSaid()
         router.push('/')
       }
-      catch (error) {
+      catch (error: any) {
         const result = error.response.data
         setServerSaid(result)
       }

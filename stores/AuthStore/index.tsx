@@ -32,6 +32,18 @@ function AuthProvider({ children }: any) {
         }
 
       case 'refresh':
+        console.log({
+          authInfo: {
+            ...state.authInfo,
+            accessToken: sessionStorage.accessToken,
+            // refreshToken: sessionStorage.refreshToken,
+            isLogin: true,
+          },
+          userInfo: {
+            ...state.userInfo,
+            ...action.payload.userInfo,
+          }
+        })
         return {
           authInfo: {
             ...state.authInfo,

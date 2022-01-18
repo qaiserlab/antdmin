@@ -4,7 +4,7 @@ import { Spin, Space, Modal, notification } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 // import { CloseCircleOutlined } from '@ant-design/icons'
 
-import { api } from '@helpers/Api'
+import axios from '@helpers/axiosInstance'
 import { AuthStore } from '@stores/AuthStore'
 
 // const { confirm } = Modal
@@ -16,20 +16,21 @@ export default function UserInfo() {
 
   const refreshData = async () => {
     if (!state.authInfo.isLogin && sessionStorage.accessToken) {
-      setIsLoading(true)
-  
-      const response = await api.get('/profile')
-      const result = await response.json()
-      
-      if (response.ok) {
+      try {
+        setIsLoading(true)
+    
+        const response = await axios.get('/session')
+        const result = response.data
+
         dispatch({
           type: 'refresh',
           payload: {
-            userInfo: result.data,
+            userInfo: result.data[0].User,
           }
         })
       }
-      else {
+      catch (error) {
+        const result = error.response.data 
         notification.error({ 
           message: 'Error', 
           description: result.message,
@@ -49,8 +50,9 @@ export default function UserInfo() {
         //   },
         // })
       }
-
-      setIsLoading(false)
+      finally {
+        setIsLoading(false)
+      }
     }
     else if (!sessionStorage.accessToken) {
       // setIsLoading(true)
@@ -85,7 +87,7 @@ export default function UserInfo() {
         <Space>
         <UserOutlined />
           <span>
-            {state.userInfo.firstName}&nbsp
+            {state.userInfo.firstName}&nbsp;
             {state.userInfo.lastName}
           </span>
         </Space>
