@@ -19,16 +19,16 @@
     "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
-      "@config/*": ["config/*"],
-      "@helpers/*": ["helpers/*"],
-      "@hooks/*": ["hooks/*"],
-      "@components/*": ["components/*"],
-      "@stores/*": ["stores/*"],
-      "@widgets/*": ["widgets/*"],
-      "@styles/*": ["styles/*"],
-      "@pages/*": ["pages/*"],
-      "@layouts/*": ["layouts/*"],
-      "@views/*": ["views/*"]
+      "@config/*": ["src/config/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@components/*": ["src/components/*"],
+      "@stores/*": ["src/stores/*"],
+      "@widgets/*": ["src/widgets/*"],
+      "@styles/*": ["src/styles/*"],
+      "@pages/*": ["src/pages/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@views/*": ["src/views/*"]
     }
   },
   "include": [
