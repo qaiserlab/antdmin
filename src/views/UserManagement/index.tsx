@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Space, Table, Pagination, Button, Modal, notification } from 'antd'
 import { FileTextOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons"
+import { AxiosError } from 'axios'
 
 import axios from '@helpers/axiosInstance'
 import useFilterable from '@hooks/useFilterable'
@@ -84,17 +85,14 @@ export default function UserManagement() {
       setTotal(result.total)
       setCurrentPage(page)
     }
-    catch (error: any) {
+    catch (error: AxiosError | any) {
       setRecords([])
       setTotal(0)
 
-      const result = error.response.data
-
-      notification.error({
-        message: 'Error',
-        description: result.message,
-      })
-      // setServerSaid(result)
+      if (error.response) {
+        const result = error.response.data
+        setServerSaid(result)
+      }
     }
     finally {
       setIsLoading(false)
@@ -106,9 +104,11 @@ export default function UserManagement() {
       await axios.delete(`/user/force-delete/${id}`)
       handleRefresh()
     }
-    catch (error: any) {
-      const result = error.response.data
-      setServerSaid(result)
+    catch (error: AxiosError | any) {
+      if (error.response) {
+        const result = error.response.data
+        setServerSaid(result)
+      }
     }
   }
 

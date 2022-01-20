@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { Row, Col, Space, Input, Button, Card, Spin } from 'antd'
 import { SaveOutlined, ArrowLeftOutlined } from "@ant-design/icons"
 import { useFormik } from 'formik'
+import { AxiosError } from 'axios'
 
 import axios from '@helpers/axiosInstance'
 import StickArea from '@components/StickArea'
@@ -41,9 +42,11 @@ export default function UserManagementForm(props: PropsInterface) {
         clearServerSaid()
         router.push('/user')
       }
-      catch (error: any) {
-        const result = error.response.data
-        setServerSaid(result)
+      catch (error: AxiosError | any) {
+        if (error.response) {
+          const result = error.response.data
+          setServerSaid(result)
+        }
       }
       finally {
         setSubmitting(false)
@@ -67,9 +70,11 @@ export default function UserManagementForm(props: PropsInterface) {
         // formik.setFieldValue('confirmNewPassword', result.data.confirmNewPassword)
         formik.setFieldValue('phoneNumber', result.data.phoneNumber)
       }
-      catch (error: any) {
-        const result = error.response.data
-        setServerSaid(result)
+      catch (error: AxiosError | any) {
+        if (error.response) {
+          const result = error.response.data
+          setServerSaid(result)
+        }
       }
       finally {
         setIsLoading(false)
