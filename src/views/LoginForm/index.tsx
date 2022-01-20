@@ -4,9 +4,10 @@ import { useRouter } from 'next/router'
 import { useFormik } from 'formik'
 import { Row, Col, Space, Input, Button } from 'antd'
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
+import { AxiosError } from 'axios'
 
-import { initialValues, validationSchema } from './schema'
 import axios from '@helpers/axiosInstance'
+import { initialValues, validationSchema } from './schema'
 import StickArea from '@components/StickArea'
 import { ActivityStore } from '@stores/ActivityStore'
 import { AuthStore } from '@stores/AuthStore'
@@ -51,19 +52,25 @@ export default function LoginForm() {
         clearServerSaid()
         router.push('/')
       }
-      catch (error: any) {
-        const result = error.response.data
-        setServerSaid(result)
+      catch (error: AxiosError | any) {
+        if (error.response) {
+          const result = error.response.data
+          setServerSaid(result)
+        }
       }
       finally {
         setSubmitting(false)
       }
 
-    }
+    },
+    
   })
 
   useEffect(() => {
-    // userNameRef.current.focus()
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (!isMobile) {
+      userNameRef.current.focus()
+    }
   }, [])
 
   const handleReset = () => {
