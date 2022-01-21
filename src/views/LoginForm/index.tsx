@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useRef } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useFormik } from 'formik'
-import { Row, Col, Space, Input, Button } from 'antd'
+import { Row, Col, Space, Input, Button, Typography } from 'antd'
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
 import { AxiosError } from 'axios'
 
@@ -12,6 +12,8 @@ import StickArea from '@components/StickArea'
 import { ActivityStore } from '@stores/ActivityStore'
 import { AuthStore } from '@stores/AuthStore'
 import ServerAlert from '@widgets/ServerAlert'
+
+const { Text } = Typography
 
 export default function LoginForm() {
   const router = useRouter()
@@ -96,7 +98,6 @@ export default function LoginForm() {
             <Col span={18}>
               <Input
                 ref={userNameRef}
-                id={'userName'}
                 name={'userName'}
                 placeholder={'Username'}
                 value={formik.values.userName}
@@ -105,14 +106,13 @@ export default function LoginForm() {
                 disabled={formik.isSubmitting}
               />
               {formik.errors.userName && formik.touched.userName && (
-                <small style={{ color: "#d50000" }}>{formik.errors.userName}</small>
+                <Text type={'danger'}>{formik.errors.userName}</Text>
               )}
             </Col>
           
             <Col span={6}>Password</Col>
             <Col span={18}>
               <Input
-                id="password"
                 name="password"
                 placeholder="Password"
                 type="password"
@@ -122,7 +122,7 @@ export default function LoginForm() {
                 disabled={formik.isSubmitting}
               />
               {formik.errors.password && formik.touched.password && (
-                <small style={{ color: "#d50000" }}>{formik.errors.password}</small>
+                <Text type={'danger'}>{formik.errors.password}</Text>
               )}
             </Col>
 

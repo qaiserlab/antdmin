@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { Row, Col, Space, Input, Button, Card, Spin } from 'antd'
+import { Row, Col, Space, Input, Button, Card, Spin, Typography } from 'antd'
 import { SaveOutlined, ArrowLeftOutlined } from "@ant-design/icons"
 import { useFormik } from 'formik'
 import { AxiosError } from 'axios'
@@ -10,6 +10,8 @@ import axios from '@helpers/axiosInstance'
 import StickArea from '@components/StickArea'
 import { ActivityStore } from '@stores/ActivityStore'
 import { PropsInterface, initialValues, validationSchema } from './schema'
+
+const { Text } = Typography
 
 export default function UserManagementForm(props: PropsInterface) {
   const isNew = props.isNew
@@ -54,36 +56,34 @@ export default function UserManagementForm(props: PropsInterface) {
     },
   })
 
-  const refreshData = async () => {
-    if (!isNew) {
-      try {
-        setIsLoading(true)
-  
-        const response = await axios.get(`/user/${id}`)
-        const result = response.data
-        
-        formik.setFieldValue('firstName', result.data.firstName)
-        formik.setFieldValue('lastName', result.data.lastName)
-        formik.setFieldValue('userName', result.data.userName)
-        formik.setFieldValue('email', result.data.email)
-        // formik.setFieldValue('newPassword', result.data.newPassword)
-        // formik.setFieldValue('confirmNewPassword', result.data.confirmNewPassword)
-        formik.setFieldValue('phoneNumber', result.data.phoneNumber)
-      }
-      catch (error: AxiosError | any) {
-        if (error.response) {
-          const result = error.response.data
-          setServerSaid(result)
-        }
-      }
-      finally {
-        setIsLoading(false)
-      }
-    }
-  }
-
   useEffect(() => {
-    (refreshData)()
+    (async function() {
+      if (!isNew) {
+        try {
+          setIsLoading(true)
+    
+          const response = await axios.get(`/user/${id}`)
+          const result = response.data
+          
+          formik.setFieldValue('firstName', result.data.firstName)
+          formik.setFieldValue('lastName', result.data.lastName)
+          formik.setFieldValue('userName', result.data.userName)
+          formik.setFieldValue('email', result.data.email)
+          // formik.setFieldValue('newPassword', result.data.newPassword)
+          // formik.setFieldValue('confirmNewPassword', result.data.confirmNewPassword)
+          formik.setFieldValue('phoneNumber', result.data.phoneNumber)
+        }
+        catch (error: AxiosError | any) {
+          if (error.response) {
+            const result = error.response.data
+            setServerSaid(result)
+          }
+        }
+        finally {
+          setIsLoading(false)
+        }
+      }  
+    })()
   }, [id])
 
   return (
@@ -108,7 +108,7 @@ export default function UserManagementForm(props: PropsInterface) {
                   disabled={formik.isSubmitting}
                 />
                 {formik.errors.firstName && formik.touched.firstName && (
-                  <small style={{ color: "#d50000" }}>{formik.errors.firstName}</small>
+                  <Text type={'danger'}>{formik.errors.firstName}</Text>
                 )}
               </Col>
 
@@ -124,7 +124,7 @@ export default function UserManagementForm(props: PropsInterface) {
                   disabled={formik.isSubmitting}
                 />
                 {formik.errors.lastName && formik.touched.lastName && (
-                  <small style={{ color: "#d50000" }}>{formik.errors.lastName}</small>
+                  <Text type={'danger'}>{formik.errors.lastName}</Text>
                 )}
               </Col>
 
@@ -140,7 +140,7 @@ export default function UserManagementForm(props: PropsInterface) {
                   disabled={formik.isSubmitting}
                 />
                 {formik.errors.userName && formik.touched.userName && (
-                  <small style={{ color: "#d50000" }}>{formik.errors.userName}</small>
+                  <Text type={'danger'}>{formik.errors.userName}</Text>
                 )}
               </Col>
 
@@ -156,7 +156,7 @@ export default function UserManagementForm(props: PropsInterface) {
                   disabled={formik.isSubmitting}
                 />
                 {formik.errors.email && formik.touched.email && (
-                  <small style={{ color: "#d50000" }}>{formik.errors.email}</small>
+                  <Text type={'danger'}>{formik.errors.email}</Text>
                 )}
               </Col>
 
@@ -173,7 +173,7 @@ export default function UserManagementForm(props: PropsInterface) {
                   disabled={formik.isSubmitting}
                 />
                 {formik.errors.newPassword && formik.touched.newPassword && (
-                  <small style={{ color: "#d50000" }}>{formik.errors.newPassword}</small>
+                  <Text type={'danger'}>{formik.errors.newPassword}</Text>
                 )}
               </Col>
 
@@ -190,7 +190,7 @@ export default function UserManagementForm(props: PropsInterface) {
                   disabled={formik.isSubmitting}
                 />
                 {formik.errors.confirmNewPassword && formik.touched.confirmNewPassword && (
-                  <small style={{ color: "#d50000" }}>{formik.errors.confirmNewPassword}</small>
+                  <Text type={'danger'}>{formik.errors.confirmNewPassword}</Text>
                 )}
               </Col>
 
@@ -206,7 +206,7 @@ export default function UserManagementForm(props: PropsInterface) {
                   disabled={formik.isSubmitting}
                 />
                 {formik.errors.phoneNumber && formik.touched.phoneNumber && (
-                  <small style={{ color: "#d50000" }}>{formik.errors.phoneNumber}</small>
+                  <Text type={'danger'}>{formik.errors.phoneNumber}</Text>
                 )}
               </Col>
             </Row>

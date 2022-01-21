@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { Space, Table, Pagination, Button, Modal, notification } from 'antd'
+import { Space, Table, Pagination, Button, Modal } from 'antd'
 import { FileTextOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons"
 import { AxiosError } from 'axios'
 
@@ -23,6 +23,10 @@ export default function UserManagement() {
   const [records, setRecords] = useState([])
   const [total, setTotal] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
+
+  useEffect(() => {
+    (handleRefresh)()
+  }, [])
   
   const handleFilter = (dataIndex: string, keyword: string) => {
     handleRefresh(1, [{
@@ -31,37 +35,20 @@ export default function UserManagement() {
     }])
   }
 
-  const columns = [
-    useFilterable({ title: 'Name', dataIndex: 'firstName', onFilter: handleFilter }),
-    useFilterable({ title: 'Username', dataIndex: 'userName', onFilter: handleFilter }),
-    useFilterable({ title: 'Email', dataIndex: 'email', onFilter: handleFilter }),
-    useFilterable({ title: 'Phone Number', dataIndex: 'phoneNumber', onFilter: handleFilter }),
-    {
-      title: 'Action',
-      dataIndex: 'action',
-      render: (text: string, record: UserRecordInterface) => {
-        return (
-          <Space>
-            <Button icon={<EditOutlined />} onClick={() => router.push(`/user/edit/${record.id}`)} />
-            <Button 
-              icon={<DeleteOutlined />} 
-              onClick={
-                () => confirm({
-                  title: 'Confirm',
-                  content: <p>Delete {record.userName} data?</p>, 
-                  onOk: () => handleDelete(record.id),
-                })
-              } 
-            />
-          </Space>
-        )
-      },
-    }
-  ]
+  const handleEdit = (id: string) => router.push(`/user/edit/${id}`)
 
-  useEffect(() => {
-    (handleRefresh)()
-  }, [])
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete(`/user/force-delete/${id}`)
+      handleRefresh()
+    }
+    catch (error: AxiosError | any) {
+      if (error.response) {
+        const result = error.response.data
+        setServerSaid(result)
+      }
+    }
+  }
 
   const handleRefresh = async (page?: number, filter?: Array<any>) => {
     try {
@@ -99,22 +86,35 @@ export default function UserManagement() {
     }
   }
 
-  const handleDelete = async (id: string) => {
-    try {
-      await axios.delete(`/user/force-delete/${id}`)
-      handleRefresh()
-    }
-    catch (error: AxiosError | any) {
-      if (error.response) {
-        const result = error.response.data
-        setServerSaid(result)
-      }
-    }
-  }
+  const handleNew = () => router.push('/user/new')
 
-  const handleNew = () => {
-    router.push('/user/new')
-  }
+  const columns = [
+    useFilterable({ title: 'Name', dataIndex: 'firstName', onFilter: handleFilter }),
+    useFilterable({ title: 'Username', dataIndex: 'userName', onFilter: handleFilter }),
+    useFilterable({ title: 'Email', dataIndex: 'email', onFilter: handleFilter }),
+    useFilterable({ title: 'Phone Number', dataIndex: 'phoneNumber', onFilter: handleFilter }),
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      render: (text: string, record: UserRecordInterface) => {
+        return (
+          <Space>
+            <Button icon={<EditOutlined />} onClick={() => handleEdit(record.id)} />
+            <Button 
+              icon={<DeleteOutlined />} 
+              onClick={
+                () => confirm({
+                  title: 'Confirm',
+                  content: <p>Delete {record.userName} data?</p>, 
+                  onOk: () => handleDelete(record.id),
+                })
+              } 
+            />
+          </Space>
+        )
+      },
+    }
+  ]
 
   return (
     <React.Fragment>
