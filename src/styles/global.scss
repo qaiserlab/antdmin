@@ -1,9 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import './overrides.scss';
+@import './fonts.scss';
 
 body {
   font-family: Lato, Ubuntu, Tahoma;
 }
 
-.ant-typography.ant-typography-danger {
-  font-size: 11px;
-}
