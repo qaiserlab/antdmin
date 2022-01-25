@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { Layout, Space, Drawer, Button } from 'antd'
 import { DashboardOutlined, SettingOutlined } from '@ant-design/icons'
 
-import style from './style.module.scss'
 import UrlBreadcrumb from '@components/UrlBreadcrumb'
 import RootLayout from '@layouts/RootLayout'
 import UserInfo from '@widgets/UserInfo'
@@ -38,9 +37,9 @@ export default function AppLayout({ children }: any) {
 
   return (
     <RootLayout>
-      <Layout id={style.root}>
+      <Layout id={'root'}>
         <Sider
-          id={style.sider} 
+          id={'sider'} 
           collapsed={isCollapsed} 
           onCollapse={() => setIsCollapsed(!isCollapsed)}
           breakpoint={'sm'}
@@ -51,7 +50,7 @@ export default function AppLayout({ children }: any) {
         </Sider>
 
         <Layout>
-          <Header id={style.header}>
+          <Header id={'header'}>
             <figure>
               <Space>
                 <UserInfo />
@@ -73,7 +72,7 @@ export default function AppLayout({ children }: any) {
               </Space>
             </figure>
           </Header>
-          <Content id={style.content}>
+          <Content id={'content'}>
             <header style={{textAlign: breadcrumbAlign}}>
               <UrlBreadcrumb url={pathOnly} icon={<DashboardOutlined />} />
             </header>
@@ -83,7 +82,7 @@ export default function AppLayout({ children }: any) {
             </section>
           </Content>
 
-          <Footer id={style.footer}>
+          <Footer id={'footer'}>
             Next.js Admin ©2021 Created by QaiserLab/Fadlun Anaturdasa Wibawa
           </Footer>
         </Layout>
