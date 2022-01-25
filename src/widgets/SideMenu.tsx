@@ -1,8 +1,8 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
+import sideMenus from '@config/sideMenus'
 import DataMenu from '@components/DataMenu'
-import { menus } from '@stores/SideMenu'
 
 export default function SideMenu() {
   const router = useRouter()
@@ -19,7 +19,7 @@ export default function SideMenu() {
       <DataMenu 
         theme={'dark'} 
         mode={'inline'} 
-        dataSource={menus} 
+        dataSource={sideMenus} 
         onSelect={handleSelect} 
         defaultOpenKeys={[openKey]}
         defaultSelectedKeys={[selectedKey]}

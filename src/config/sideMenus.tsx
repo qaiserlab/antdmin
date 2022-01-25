@@ -5,7 +5,7 @@ import {
   ReadOutlined,
 } from "@ant-design/icons"
 
-export const menus = [
+export default [
   { 
     title: 'Dashboard',
     icon: <DashboardOutlined />,

@@ -4,7 +4,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons"
 
-export const menus = [
+export default [
   { 
     title: 'My Account', 
     icon: <UserOutlined />,

@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 import { Modal } from 'antd'
 import { QuestionOutlined } from '@ant-design/icons'
 
+import drawerMenus from '@config/drawerMenus'
 import DataMenu from '@components/DataMenu'
 import { AuthStore } from '@stores/AuthStore'
-import { menus } from '@stores/DrawerMenu'
 
 const { confirm } = Modal
 
@@ -39,7 +39,7 @@ export default function DrawerMenu() {
       <DataMenu 
         theme={'light'} 
         mode={'inline'} 
-        dataSource={menus} 
+        dataSource={drawerMenus} 
         onSelect={handleSelect} 
         defaultOpenKeys={[openKey]}
         defaultSelectedKeys={[selectedKey]}
