@@ -1,16 +1,8 @@
 import * as Yup from 'yup'
 
-export interface PropsInterface {
+export interface TProps {
   isNew: boolean
   id?: string
-}
-
-export interface UserRecordInterface {
-  id: string
-  fullName: string
-  userName: string
-  email: string
-  phoneNumber: string
 }
 
 export const initialValues = {

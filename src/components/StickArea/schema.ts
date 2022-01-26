@@ -1,4 +1,4 @@
-export interface PropsInterface {
+export interface TProps {
   align?: string
   valign?: string
 }

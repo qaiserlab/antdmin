@@ -9,7 +9,7 @@ import axios from '@helpers/axiosInstance'
 import useFilterable from '@hooks/useFilterable'
 import StickArea from '@components/StickArea'
 import { ActivityStore } from '@stores/ActivityStore'
-import { UserRecordInterface } from './schema'
+import TUserRecord from '@types/TUserRecord'
 
 const { confirm } = Modal
 
@@ -96,7 +96,7 @@ export default function UserManagement() {
     {
       title: 'Action',
       dataIndex: 'action',
-      render: (text: string, record: UserRecordInterface) => {
+      render: (text: string, record: TUserRecord) => {
         return (
           <Space>
             <Button icon={<EditOutlined />} onClick={() => handleEdit(record.id)} />

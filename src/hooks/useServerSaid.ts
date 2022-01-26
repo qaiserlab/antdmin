@@ -2,7 +2,7 @@ import TServerSaid from "@types/TServerSaid"
 import { useState } from "react"
 
 export default function useServerSaid() {
-  const SAID_NOTHING:TServerSaid = {
+  const SAID_NOTHING = <TServerSaid>{
     code: -1,
     message: '',
     errors: {},

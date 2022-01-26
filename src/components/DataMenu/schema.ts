@@ -7,7 +7,7 @@ export interface ItemInterface {
   children?: Array<ItemInterface>
 }
 
-export interface PropsInterface {
+export interface TProps {
   dataSource: Array<ItemInterface>
   mode?: any
   theme?: any

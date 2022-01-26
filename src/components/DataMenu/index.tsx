@@ -1,11 +1,11 @@
 import React from 'react'
 import { Menu } from 'antd'
-import { PropsInterface } from './schema'
+import { TProps } from './schema'
 
 const { SubMenu } = Menu
 
-export default class DataMenu extends React.Component<PropsInterface, {}> {
-  public static defaultProps: Partial<PropsInterface> = {
+export default class DataMenu extends React.Component<TProps, {}> {
+  public static defaultProps: Partial<TProps> = {
     dataSource: [],
     // horizontal, vertical, inline
     mode: 'horizontal',
@@ -16,7 +16,7 @@ export default class DataMenu extends React.Component<PropsInterface, {}> {
     defaultSelectedKeys: [],
   }
 
-  constructor(props: PropsInterface) {
+  constructor(props: TProps) {
     super(props)
 
     // this.state = {test: true}

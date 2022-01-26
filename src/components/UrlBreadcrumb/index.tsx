@@ -1,13 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 import { Breadcrumb } from 'antd'
-import { PropsInterface } from './schema'
+import { TProps } from './schema'
 
 export default class RouterBreadcrumb extends React.Component<
-  PropsInterface
+  TProps
 > {
   
-  constructor(props: PropsInterface) {
+  constructor(props: TProps) {
     super(props)
   }
 

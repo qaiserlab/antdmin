@@ -1,11 +1,11 @@
 import React from "react"
 import style from './style'
 
-import { PropsInterface } from "./schema"
+import { TProps } from "./schema"
 
-export default class StickArea extends React.Component<PropsInterface> {
+export default class StickArea extends React.Component<TProps> {
 
-  public static defaultProps: Partial<PropsInterface> = {
+  public static defaultProps: Partial<TProps> = {
     // left, right, center
     align: 'right',
     // top, bottom, center
@@ -13,7 +13,7 @@ export default class StickArea extends React.Component<PropsInterface> {
   }
   rootRef: React.RefObject<HTMLDivElement>
   
-  constructor(props: PropsInterface) {
+  constructor(props: TProps) {
     super(props)
     this.rootRef = React.createRef()
   }
