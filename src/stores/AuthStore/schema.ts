@@ -1,10 +1,10 @@
-export interface AuthInfoInterface {
+export interface TAuthInfo {
   accessToken: string
   // refreshToken: string
   isLogin: boolean
 }
 
-export interface UserInfoInterface {
+export interface TUserInfo {
   id: string,
   userName: string
   fullName: string
@@ -14,12 +14,12 @@ export interface UserInfoInterface {
   phoneNumber: string
 }
 
-export interface AuthStateInterface {
-  authInfo: AuthInfoInterface
-  userInfo: UserInfoInterface
+export interface TAuthState {
+  authInfo: TAuthInfo
+  userInfo: TUserInfo
 }
 
-export interface AuthActionInterface {
+export interface TAuthAction {
   type: string
   payload?: any
 }

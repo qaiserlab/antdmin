@@ -1,14 +1,14 @@
-export interface ItemInterface {
+export interface TItem {
   key?: string
   title: string
   icon?: Object
   disabled?: boolean
   hidden?: boolean
-  children?: Array<ItemInterface>
+  children?: Array<TItem>
 }
 
 export interface TProps {
-  dataSource: Array<ItemInterface>
+  dataSource: Array<TItem>
   mode?: any
   theme?: any
   defaultOpenKeys?: Array<string>,
