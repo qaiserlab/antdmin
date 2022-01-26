@@ -37,7 +37,7 @@ export default function AppLayout({ children }: any) {
 
   return (
     <RootLayout>
-      <Layout id={'root'}>
+      <Layout id={'app'}>
         <Sider
           id={'sider'} 
           collapsed={isCollapsed} 
