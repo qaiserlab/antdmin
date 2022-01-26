@@ -7,11 +7,11 @@ const readline = require('readline').createInterface({
 readline.on('line', (line) => {
   const envline = line.split('=');
 
-  if (envline.length === 2 && envline[0] === 'PORT') {
-    const PORT = envline[1];
+  if (envline.length === 2 && envline[0] === 'APP_PORT') {
+    const APP_PORT = envline[1];
   
     cli.nextStart([
-      '-p', PORT || 8000,
+      '-p', APP_PORT || 8000,
       // '-H', process.env.HOSTNAME || '0.0.0.0',
     ]);
   }
