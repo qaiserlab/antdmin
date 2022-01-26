@@ -1,11 +1,13 @@
 import React, {createContext, useReducer} from 'react'
-import { TAuthState, TAuthAction, initialState } from './schema'
+import TAction from '@types/TAction'
+import { TAuthState } from '@types/TAuthState'
+import { initialState } from './schema'
 
 const AuthStore = createContext({ state: initialState, dispatch: (payload: any) => {} })
 const { Provider } = AuthStore
 
 function AuthProvider({ children }: any) {
-  const [state, dispatch] = useReducer((state: TAuthState, action: TAuthAction) => {
+  const [state, dispatch] = useReducer((state: TAuthState, action: TAction) => {
     switch (action.type) {
       case 'login':
 

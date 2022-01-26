@@ -1,7 +1,9 @@
 export default interface TUserRecord {
-  id: string
-  fullName: string
+  id: string,
   userName: string
+  fullName: string
+  firstName: string
+  lastName: string
   email: string
   phoneNumber: string
 }
