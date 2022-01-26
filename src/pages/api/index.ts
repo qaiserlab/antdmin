@@ -8,7 +8,7 @@ export default async function forwardApi(req: any, res: any) {
       APP_NAME: process.env.APP_NAME,
       APP_CODE: process.env.APP_CODE,
       APP_VERSION: process.env.APP_VERSION,
-      HOST: process.env.HOST,
+      APP_HOST: process.env.APP_HOST,
       API_HOST: process.env.API_HOST,
     })
   }

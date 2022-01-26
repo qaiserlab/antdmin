@@ -87,4 +87,4 @@ export class Api {
   }
 }
 
-export const api = new Api(`${process.env.HOST}/api?action=`)
+export const api = new Api(`${process.env.APP_HOST}/api?action=`)

@@ -9,10 +9,7 @@ module.exports = {
     APP_CODE: process.env.APP_CODE,
     APP_VERSION: process.env.APP_VERSION,
     APP_PORT: process.env.APP_PORT,
-    HOSTNAME: process.env.HOSTNAME,
-    HOST: process.env.HOST,
-    API_HOSTNAME: process.env.API_HOSTNAME,
-    API_PORT: process.env.API_PORT,
+    APP_HOST: process.env.APP_HOST,
     API_HOST: process.env.API_HOST,
   },
 }

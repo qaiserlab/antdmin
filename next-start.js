@@ -12,7 +12,6 @@ readline.on('line', (line) => {
   
     cli.nextStart([
       '-p', APP_PORT || 8000,
-      // '-H', process.env.HOSTNAME || '0.0.0.0',
     ]);
   }
 });
