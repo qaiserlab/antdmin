@@ -6,8 +6,8 @@ import { DashboardOutlined, SettingOutlined } from '@ant-design/icons'
 import UrlBreadcrumb from '@components/UrlBreadcrumb'
 import RootLayout from '@layouts/RootLayout'
 import UserInfo from '@widgets/UserInfo'
-import SideMenu from '@widgets/SideMenu'
-import DrawerMenu from '@widgets/DrawerMenu'
+import MainMenu from '@widgets/MainMenu'
+import SettingMenu from '@widgets/SettingMenu'
 import ServerAlert from '@widgets/ServerAlert'
 
 const { Header, Content, Footer, Sider } = Layout
@@ -46,7 +46,7 @@ export default function AppLayout({ children }: any) {
           onBreakpoint={handleBreakpoint}
           collapsedWidth={collapsedWidth}
         >
-          <SideMenu />
+          <MainMenu />
         </Sider>
 
         <Layout>
@@ -67,7 +67,7 @@ export default function AppLayout({ children }: any) {
                   onClose={() => setIsDrawerVisible(false)}
                   visible={isDrawerVisible}
                 >
-                  <DrawerMenu />
+                  <SettingMenu />
                 </Drawer>
               </Space>
             </figure>
