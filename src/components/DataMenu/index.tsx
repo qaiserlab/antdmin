@@ -43,7 +43,7 @@ export default class DataMenu extends React.Component<TProps, {}> {
             if (!item.children) {
               return (
                 <Menu.Item 
-                  key={(item.key)?item.key:(itemIndex + '.' + itemIndex)}
+                  key={(item.url)?item.url:item.id}
                   icon={item.icon}
                   disabled={item.disabled}
                 >
@@ -54,7 +54,7 @@ export default class DataMenu extends React.Component<TProps, {}> {
             else {
               return (
                 <SubMenu 
-                  key={(item.key)?item.key:itemIndex} 
+                  key={(item.url)?item.url:item.id} 
                   title={item.title}
                   icon={item.icon}
                   disabled={item.disabled}
@@ -64,7 +64,7 @@ export default class DataMenu extends React.Component<TProps, {}> {
                       return (
                         <Menu.Item 
                           key={
-                            (subItem.key)?subItem.key:(itemIndex + '.' + subItemIndex)
+                            (subItem.url)?subItem.url:subItem.id
                           }
                           icon={subItem.icon}
                           disabled={subItem.disabled}

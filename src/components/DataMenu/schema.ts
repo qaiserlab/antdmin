@@ -1,5 +1,6 @@
 export interface TItem {
-  key?: string
+  id: string
+  url?: string
   title: string
   icon?: Object
   disabled?: boolean
