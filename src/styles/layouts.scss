@@ -9,6 +9,15 @@
     
     #header {
       padding: 0;
+
+      .toggler {
+        margin-left: 16px;
+        display: none;
+
+        @media only screen and (max-width: $mobile) {
+          display: inline-block;
+        }
+      }
     
       figure {
         color: white;

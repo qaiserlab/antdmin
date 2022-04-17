@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Layout, Space, Drawer, Button } from 'antd'
-import { DashboardOutlined, SettingOutlined } from '@ant-design/icons'
+import { DashboardOutlined, MenuOutlined, CloseOutlined, SettingOutlined } from '@ant-design/icons'
 
 import UrlBreadcrumb from '@components/UrlBreadcrumb'
 import RootLayout from '@layouts/RootLayout'
@@ -45,12 +45,20 @@ export default function AppLayout({ children }: any) {
           breakpoint={'sm'}
           onBreakpoint={handleBreakpoint}
           collapsedWidth={collapsedWidth}
+          trigger={null}
         >
           <MainMenu />
         </Sider>
 
         <Layout>
           <Header id={'header'}>
+            <Button 
+              className={'toggler'}
+              icon={isCollapsed?<MenuOutlined />:<CloseOutlined />} 
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              ghost
+            />
+
             <figure>
               <Space>
                 <UserInfo />

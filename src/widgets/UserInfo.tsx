@@ -85,7 +85,7 @@ export default function UserInfo() {
     <Spin spinning={isLoading}>
       {state.userInfo.firstName && (
         <Space>
-        <UserOutlined />
+          <UserOutlined />
           <span>
             {state.userInfo.firstName}&nbsp;
             {state.userInfo.lastName}
