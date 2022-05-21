@@ -1,4 +1,4 @@
-export default interface TUserRecord {
+interface TUserRecord {
   id: string,
   userName: string
   fullName: string

@@ -1,12 +1,12 @@
 import * as Yup from 'yup'
 
 export const initialValues = {
-  userName: '',
+  username: '',
   password: '',
 }
 
 export const validationSchema = Yup.object().shape({
-  userName: Yup.string()
+  username: Yup.string()
     .max(50, "Username can't more than 50 characters")
     .required("Username required"),
   password: Yup.string()

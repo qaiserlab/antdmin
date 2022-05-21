@@ -1,17 +1,17 @@
 import React, { useEffect, useContext, useRef } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { AxiosError } from 'axios'
 import { useFormik } from 'formik'
 import { Row, Col, Space, Input, Button, Typography } from 'antd'
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
-import { AxiosError } from 'axios'
 
 import axios from '@helpers/axiosInstance'
-import { initialValues, validationSchema } from './schema'
 import StickArea from '@components/StickArea'
 import { ActivityStore } from '@stores/ActivityStore'
 import { AuthStore } from '@stores/AuthStore'
 import ServerAlert from '@widgets/ServerAlert'
+import { initialValues, validationSchema } from './schema'
 
 const { Text } = Typography
 
@@ -21,7 +21,7 @@ export default function LoginForm() {
   const { setServerSaid, clearServerSaid } = useContext(ActivityStore)
   const { dispatch } = useContext(AuthStore)
   
-  const userNameRef = useRef(null)
+  const usernameRef = useRef(null)
 
   const formik = useFormik({
     initialValues,
@@ -30,35 +30,32 @@ export default function LoginForm() {
     onSubmit: async (values, { setSubmitting }) => {
 
       try {
-        const data = {
-          email: values.userName,
+        const formData = {
+          username: values.username,
           password: values.password,
         }
         const response = await axios.post(
-          '/auth/sign-in',
-          data
+          '/auth/login',
+          formData
         )
-        const result = response.data
-  
+        const data = response.data
+        const authInfo = {
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken,
+        }
+
         dispatch({
           type: 'login',
-          payload: {
-            authInfo: {
-              accessToken: result.accessToken,
-              // refreshToken: result.refreshToken,
-            },
-            userInfo: result.userInfo,
-          }
+          payload: { authInfo }
         })
 
         clearServerSaid()
         router.push('/')
       }
       catch (error: AxiosError | any) {
-        if (error.response) {
-          const result = error.response.data
-          setServerSaid(result)
-        }
+        const status = error?.response?.status
+        const message = error?.response?.data?.error
+        setServerSaid({ status, message })
       }
       finally {
         setSubmitting(false)
@@ -71,13 +68,13 @@ export default function LoginForm() {
   useEffect(() => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (!isMobile) {
-      userNameRef.current.focus()
+      usernameRef.current.focus()
     }
   }, [])
 
   const handleReset = () => {
     formik.resetForm()
-    userNameRef.current.focus()
+    usernameRef.current.focus()
   }
 
   return (
@@ -97,16 +94,16 @@ export default function LoginForm() {
             <Col span={6}>Username</Col>
             <Col span={18}>
               <Input
-                ref={userNameRef}
-                name={'userName'}
+                ref={usernameRef}
+                name={'username'}
                 placeholder={'Username'}
-                value={formik.values.userName}
+                value={formik.values.username}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 disabled={formik.isSubmitting}
               />
-              {formik.errors.userName && formik.touched.userName && (
-                <Text type={'danger'}>{formik.errors.userName}</Text>
+              {formik.errors.username && formik.touched.username && (
+                <Text type={'danger'}>{formik.errors.username}</Text>
               )}
             </Col>
           

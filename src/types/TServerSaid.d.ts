@@ -1,4 +1,4 @@
-export default interface TServerSaid {
+interface TServerSaid {
   code: number 
   message: string 
   errors: Object | any

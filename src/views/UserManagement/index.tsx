@@ -9,7 +9,6 @@ import axios from '@helpers/axiosInstance'
 import useFilterable from '@hooks/useFilterable'
 import StickArea from '@components/StickArea'
 import { ActivityStore } from '@stores/ActivityStore'
-import TUserRecord from '@types/TUserRecord'
 
 const { confirm } = Modal
 

@@ -21,7 +21,7 @@ export default [
       { 
         id: '9869f599-4709-4734-9c4e-636844698c3b',
         title: 'Inventory Data', 
-        url: '/master', 
+        url: '/master/inventory-data', 
       },
     ]
   },
@@ -34,7 +34,7 @@ export default [
       { 
         id: '876e91c4-2380-4db2-8b61-f292fe520d77',
         title: 'Sales Transaction', 
-        url: '/transaction', 
+        url: '/transaction/sales-transation', 
       },
     ]
   },
@@ -47,7 +47,7 @@ export default [
       { 
         id: 'f8c05393-e067-47db-a3eb-2f20be527532',
         title: 'Sales Report', 
-        url: '/report', 
+        url: '/report/sales-report', 
       },
     ]
   },

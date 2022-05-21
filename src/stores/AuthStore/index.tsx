@@ -1,6 +1,6 @@
 import React, {createContext, useReducer} from 'react'
-import TAction from '@types/TAction'
-import { TAuthState } from '@types/TAuthState'
+import jwt from 'jsonwebtoken'
+
 import { initialState } from './schema'
 
 const AuthStore = createContext({ state: initialState, dispatch: (payload: any) => {} })
@@ -8,23 +8,25 @@ const { Provider } = AuthStore
 
 function AuthProvider({ children }: any) {
   const [state, dispatch] = useReducer((state: TAuthState, action: TAction) => {
+    const JWT_KEY = process.env.JWT_KEY 
+
     switch (action.type) {
       case 'login':
 
         const accessToken = action.payload.authInfo.accessToken
-        // const refreshToken = action.payload.authInfo.refreshToken
-        const userInfo = action.payload.userInfo
+        const refreshToken = action.payload.authInfo.refreshToken
+        const userInfo = jwt.verify(accessToken, JWT_KEY)
 
         const isLogin = true
         
         localStorage.setItem('accessToken', accessToken)
-        // localStorage.setItem('refreshToken', refreshToken)
+        localStorage.setItem('refreshToken', refreshToken)
 
         return {
           authInfo: {
             ...state.authInfo,
             accessToken,
-            // refreshToken,
+            refreshToken,
             isLogin,
           },
           userInfo: {
@@ -38,7 +40,7 @@ function AuthProvider({ children }: any) {
           authInfo: {
             ...state.authInfo,
             accessToken: localStorage.accessToken,
-            // refreshToken: localStorage.refreshToken,
+            refreshToken: localStorage.refreshToken,
             isLogin: true,
           },
           userInfo: {
@@ -48,7 +50,7 @@ function AuthProvider({ children }: any) {
         }
       case 'logout':
         localStorage.setItem('accessToken', '')
-        // localStorage.setItem('refreshToken', '')
+        localStorage.setItem('refreshToken', '')
         
         return initialState
       default:

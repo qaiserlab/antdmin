@@ -13,7 +13,7 @@ export default function ServerAlert({ children }: any) {
   let type:any = ''
   let description:any = serverSaid.message
 
-  switch (serverSaid.code) {
+  switch (serverSaid.status) {
     case 422:
       isError = true
       type = 'warning'
@@ -28,6 +28,7 @@ export default function ServerAlert({ children }: any) {
    
       break
     case 404:
+    case 401:
     case 400:
     case 500:
       isError = true 
@@ -36,14 +37,14 @@ export default function ServerAlert({ children }: any) {
   }
 
   useEffect(() => {
-    if (serverSaid.code === 200) {
+    if (serverSaid.status === 200) {
       notification.success({ 
         message: 'Success', 
         description: serverSaid.message,
       })
-      setServerSaid({ code: -1, message: '', errors: {} })
+      setServerSaid({ status: -1, message: '', errors: {} })
     }
-  }, [serverSaid.code])
+  }, [serverSaid.status])
     
   return (
     <React.Fragment>
@@ -52,7 +53,7 @@ export default function ServerAlert({ children }: any) {
           message={message}
           description={description}
           type={type} // success, info, warning, error
-          onClose={() => setServerSaid({ code: -1, message: '', errors: {} })}
+          onClose={() => setServerSaid({ status: -1, message: '', errors: {} })}
           style={{marginBottom: '16px'}}
           closable
         />
