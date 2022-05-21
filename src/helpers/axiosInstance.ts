@@ -22,6 +22,7 @@ axiosInstance.interceptors.request.use(function (config) {
 
 axiosInstance.interceptors.response.use(function (response) {
   // Do something with response data
+  response.data = (response.data).data
   return response
 }, function (error) {
   // Do something with response error
