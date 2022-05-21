@@ -17,8 +17,8 @@ function AuthProvider({ children }: any) {
 
         const isLogin = true
         
-        sessionStorage.setItem('accessToken', accessToken)
-        // sessionStorage.setItem('refreshToken', refreshToken)
+        localStorage.setItem('accessToken', accessToken)
+        // localStorage.setItem('refreshToken', refreshToken)
 
         return {
           authInfo: {
@@ -37,8 +37,8 @@ function AuthProvider({ children }: any) {
         return {
           authInfo: {
             ...state.authInfo,
-            accessToken: sessionStorage.accessToken,
-            // refreshToken: sessionStorage.refreshToken,
+            accessToken: localStorage.accessToken,
+            // refreshToken: localStorage.refreshToken,
             isLogin: true,
           },
           userInfo: {
@@ -47,8 +47,8 @@ function AuthProvider({ children }: any) {
           }
         }
       case 'logout':
-        sessionStorage.setItem('accessToken', '')
-        // sessionStorage.setItem('refreshToken', '')
+        localStorage.setItem('accessToken', '')
+        // localStorage.setItem('refreshToken', '')
         
         return initialState
       default:

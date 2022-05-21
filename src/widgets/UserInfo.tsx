@@ -15,7 +15,7 @@ export default function UserInfo() {
   const [isLoading, setIsLoading] = useState(false)
 
   const refreshData = async () => {
-    if (!state.authInfo.isLogin && sessionStorage.accessToken) {
+    if (!state.authInfo.isLogin && localStorage.accessToken) {
       try {
         setIsLoading(true)
     
@@ -54,7 +54,7 @@ export default function UserInfo() {
         setIsLoading(false)
       }
     }
-    else if (!sessionStorage.accessToken) {
+    else if (!localStorage.accessToken) {
       // setIsLoading(true)
 
       // const response = await api.post('/logout', {

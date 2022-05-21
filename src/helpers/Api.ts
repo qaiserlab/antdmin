@@ -11,11 +11,11 @@ export class Api {
       'Content-Type': 'application/json'
     }
 
-    if (typeof sessionStorage !== 'undefined') {
-      if (sessionStorage.accessToken) {
+    if (typeof localStorage !== 'undefined') {
+      if (localStorage.accessToken) {
         headers = {
           ...headers,
-          authorization: `Bearer ${sessionStorage.accessToken}`,
+          authorization: `Bearer ${localStorage.accessToken}`,
         }
       }
     }
