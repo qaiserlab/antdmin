@@ -35,10 +35,10 @@ export default function UserManagementForm(props: TProps) {
         }
 
         if (isNew) {
-          await axios.post('/user', data)
+          await axios.post('/users', data)
         }
         else {
-          await axios.put(`/user/${id}`, data)
+          await axios.put(`/users/${id}`, data)
         }
       
         clearServerSaid()

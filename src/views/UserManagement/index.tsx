@@ -58,7 +58,7 @@ export default function UserManagement() {
   
       const filtered = JSON.stringify(filter)
   
-      const response = await axios.get('/user', {
+      const response = await axios.get('/users', {
         data: {
           page,
           pageSize,
