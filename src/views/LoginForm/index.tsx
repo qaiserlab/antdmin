@@ -3,10 +3,12 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { AxiosError } from 'axios'
 import { useFormik } from 'formik'
-import { Row, Col, Space, Input, Button, Typography } from 'antd'
+import { Row, Col, Space, Typography } from 'antd'
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
 
 import axios from '@helpers/axiosInstance'
+import Input from '@components/Input'
+import Button from '@components/Button'
 import StickArea from '@components/StickArea'
 import { ActivityStore } from '@stores/ActivityStore'
 import { AuthStore } from '@stores/AuthStore'
