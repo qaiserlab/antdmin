@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Button as AntdButton, ButtonProps} from 'antd'
 
 import { TProps } from "./schema"

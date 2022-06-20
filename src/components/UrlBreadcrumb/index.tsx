@@ -1,23 +1,21 @@
-import React from 'react'
-import Link from 'next/link'
-import { Breadcrumb } from 'antd'
-import { TProps } from './schema'
+import React from "react"
+import Link from "next/link"
+import { Breadcrumb as AntdBreadcrumb, BreadcrumbProps} from 'antd'
 
-export default class RouterBreadcrumb extends React.Component<
-  TProps
-> {
-  
-  constructor(props: TProps) {
-    super(props)
-  }
+import { Textman } from "@helpers/Textman"
+import { TProps } from "./schema"
 
-  getDataSource() {
-    const urlArray = this.props.url.split("/")
+type TBreadcrumbProps = BreadcrumbProps & TProps
 
-    if (this.props.url.substr(0, 1) === '/') {
+export default React.forwardRef((props: TBreadcrumbProps, ref) => {
+
+  const getDataSource = () => {
+    const urlArray = props.url.split("/")
+
+    if (props.url.substr(0, 1) === '/') {
       urlArray.shift()
     }
-    else if (this.props.url.substr(0, 4) === 'http') {
+    else if (props.url.substr(0, 4) === 'http') {
       urlArray.shift()
       urlArray.shift()
       urlArray.shift()
@@ -38,40 +36,31 @@ export default class RouterBreadcrumb extends React.Component<
       }
     })
   }
+  
+  return (
+    <React.Fragment>
+      <AntdBreadcrumb
+        ref={ref}
+        {...props}
+      >
+        <AntdBreadcrumb.Item>
+          <Link href={'/'}>
+            <a>{(props.icon)?props.icon:'Home'}</a>
+          </Link>
+        </AntdBreadcrumb.Item>
 
-  mkTitleCase(text: string) {
-    const sentence = text.toLowerCase().split(' ')
+        {getDataSource().map((item: any, index: number) => {
+          return (
+            <AntdBreadcrumb.Item key={index}>
+              <Link href={item.href}>
+                <a>{Textman.toTitleCase(item.title)}</a>
+              </Link>
+            </AntdBreadcrumb.Item>
+          )
+        })}
+      </AntdBreadcrumb>
+    </React.Fragment>
+  )
 
-    for(let i = 0; i < sentence.length; i++) {
-      if (sentence[i].length > 0) {
-        sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1)
-      }
-    }
-    
-    return sentence.join(' ')
-  }
+})
 
-  render() {
-    return (
-      <React.Fragment>
-        <Breadcrumb>
-          <Breadcrumb.Item>
-            <Link href={'/'}>
-              <a>{(this.props.icon)?this.props.icon:'Home'}</a>
-            </Link>
-          </Breadcrumb.Item>
-
-          {this.getDataSource().map((item: any, index: number) => {
-            return (
-              <Breadcrumb.Item key={index}>
-                <Link href={item.href}>
-                  <a>{this.mkTitleCase(item.title)}</a>
-                </Link>
-              </Breadcrumb.Item>
-            )
-          })}
-        </Breadcrumb>
-      </React.Fragment>
-    )
-  }
-}

@@ -1,81 +1,78 @@
-import React from "react"
-import style from './style'
+import React, { useState, useEffect, useRef } from "react"
 
+import style from './style'
 import { TProps } from "./schema"
 
-export default class StickArea extends React.Component<TProps> {
+const StickArea = (props: TProps) => {
+  const rootRef = useRef()
 
-  public static defaultProps: Partial<TProps> = {
-    // left, right, center
-    align: 'right',
-    // top, bottom, center
-    valign: 'bottom',
-  }
-  rootRef: React.RefObject<HTMLDivElement>
-  
-  constructor(props: TProps) {
-    super(props)
-    this.rootRef = React.createRef()
-  }
+  let [sectionStyle, setSectionStyle] = useState<any>({ visibility: 'hidden' })
 
-  componentDidMount() {
-    const rootCurrent = Object(this.rootRef.current)
+  useEffect(() => {
+    if (props.align === 'left' && props.valign === 'top') {
+      setSectionStyle(style.lt)
+    }
+    else if (props.align === 'right' && props.valign === 'top') {
+      setSectionStyle(style.rt)
+    }
+    else if (props.align === 'center' && props.valign === 'top') {
+      setSectionStyle(style.ct)
+    }
+    else if (props.align === 'left' && props.valign === 'center') {
+      setSectionStyle(style.lc)
+    }
+    else if (props.align === 'right' && props.valign === 'center') {
+      setSectionStyle(style.rc)
+    }
+    else if (props.align === 'center' && props.valign === 'center') {
+      setSectionStyle(style.cc)
+    }
+    else if (props.align === 'left' && props.valign === 'bottom') {
+      setSectionStyle(style.lb)
+    }
+    else if (props.align === 'right' && props.valign === 'bottom') {
+      setSectionStyle(style.rb)
+    }
+    else if (props.align === 'center' && props.valign === 'bottom') {
+      setSectionStyle(style.cb)
+    }
+  }, [props])
+
+  useEffect(() => {
+    const rootCurrent = Object(rootRef.current)
     
-    if (this.props.align === 'center' && this.props.valign === 'center') {
+    if (props.align === 'center' && props.valign === 'center') {
       rootCurrent.style.marginTop = -(rootCurrent.offsetHeight / 2) + 'px'
       rootCurrent.style.marginLeft = -(rootCurrent.offsetWidth / 2) + 'px'
     }
     else if (
-      this.props.align === 'center' && (
-        this.props.valign === 'top' ||
-        this.props.valign === 'bottom'
+      props.align === 'center' && (
+        props.valign === 'top' ||
+        props.valign === 'bottom'
       )
     ) {
       rootCurrent.style.marginLeft = -(rootCurrent.offsetWidth / 2) + 'px'
     }
     else if (
-      (this.props.align === 'left' && this.props.valign === 'center') ||
-      (this.props.align === 'right' && this.props.valign === 'center')
+      (props.align === 'left' && props.valign === 'center') ||
+      (props.align === 'right' && props.valign === 'center')
     ) {
       rootCurrent.style.marginTop = -(rootCurrent.offsetHeight / 2) + 'px'
     }
-  }
+  }, [sectionStyle])
 
-  render() {
-    let sectionStyle
-
-    if (this.props.align === 'left' && this.props.valign === 'top') {
-      sectionStyle = style.lt
-    }
-    else if (this.props.align === 'right' && this.props.valign === 'top') {
-      sectionStyle = style.rt
-    }
-    else if (this.props.align === 'center' && this.props.valign === 'top') {
-      sectionStyle = style.ct
-    }
-    else if (this.props.align === 'left' && this.props.valign === 'center') {
-      sectionStyle = style.lc
-    }
-    else if (this.props.align === 'right' && this.props.valign === 'center') {
-      sectionStyle = style.rc
-    }
-    else if (this.props.align === 'center' && this.props.valign === 'center') {
-      sectionStyle = style.cc
-    }
-    else if (this.props.align === 'left' && this.props.valign === 'bottom') {
-      sectionStyle = style.lb
-    }
-    else if (this.props.align === 'right' && this.props.valign === 'bottom') {
-      sectionStyle = style.rb
-    }
-    else if (this.props.align === 'center' && this.props.valign === 'bottom') {
-      sectionStyle = style.cb
-    }
-
-    return (
-      <section ref={this.rootRef} style={sectionStyle}>
-        {this.props.children}
-      </section>
-    )
-  }
+  return (
+    <section ref={rootRef} style={sectionStyle}>
+      {props.children}
+    </section>
+  )
 }
+
+StickArea.defaultProps = {
+  // left, right, center
+  align: 'right',
+  // top, bottom, center
+  valign: 'bottom',
+}
+
+export default StickArea
