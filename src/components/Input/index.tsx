@@ -4,7 +4,7 @@ import { Input as AntdInput, InputProps} from 'antd'
 import { TProps } from "./schema"
 type TInputProps = InputProps & TProps
 
-export default React.forwardRef((props: TInputProps, ref) => {
+export default React.forwardRef((props: TInputProps, ref: any) => {
   const stylePassive = { backgroundColor: '#fff' }
   const styleActive = { backgroundColor: '#e6f7ff' }
   

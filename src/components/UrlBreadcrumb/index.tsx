@@ -7,7 +7,7 @@ import { TProps } from "./schema"
 
 type TBreadcrumbProps = BreadcrumbProps & TProps
 
-export default React.forwardRef((props: TBreadcrumbProps, ref) => {
+export default React.forwardRef((props: TBreadcrumbProps, ref: any) => {
 
   const getDataSource = () => {
     const urlArray = props.url.split("/")

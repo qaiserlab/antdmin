@@ -9,10 +9,6 @@ export interface TItem {
 }
 
 export interface TProps {
+  ref?: any
   dataSource: Array<TItem>
-  mode?: any
-  theme?: any
-  defaultOpenKeys?: Array<string>,
-  defaultSelectedKeys?: Array<string>,
-  onSelect?: (event: any) => void
 }
