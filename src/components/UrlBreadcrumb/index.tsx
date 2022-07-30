@@ -1,4 +1,4 @@
-import React from "react"
+import React, { RefObject } from "react"
 import Link from "next/link"
 import { Breadcrumb as AntdBreadcrumb, BreadcrumbProps} from 'antd'
 
@@ -7,7 +7,7 @@ import { TProps } from "./schema"
 
 type TBreadcrumbProps = BreadcrumbProps & TProps
 
-export default React.forwardRef((props: TBreadcrumbProps, ref: any) => {
+export default React.forwardRef((props: TBreadcrumbProps, ref: RefObject<HTMLInputElement>) => {
 
   const getDataSource = () => {
     const urlArray = props.url.split("/")
