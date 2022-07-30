@@ -1,4 +1,5 @@
 import { RefObject } from "react"
+import { Menu as AntdMenu} from "antd"
 
 export interface TItem {
   id: string
@@ -11,6 +12,6 @@ export interface TItem {
 }
 
 export interface TProps {
-  ref?: RefObject<HTMLInputElement>
+  ref?: RefObject<AntdMenu>
   dataSource: Array<TItem>
 }

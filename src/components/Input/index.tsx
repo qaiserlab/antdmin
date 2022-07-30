@@ -1,10 +1,10 @@
 import React, { RefObject, useState } from "react"
-import { Input as AntdInput, InputProps} from 'antd'
+import { Input as AntdInput, InputProps, InputRef} from 'antd'
 
 import { TProps } from "./schema"
 type TInputProps = InputProps & TProps
 
-export default React.forwardRef((props: TInputProps, ref: RefObject<HTMLInputElement>) => {
+export default React.forwardRef((props: TInputProps, ref: RefObject<InputRef>) => {
   const stylePassive = { backgroundColor: '#fff' }
   const styleActive = { backgroundColor: '#e6f7ff' }
   

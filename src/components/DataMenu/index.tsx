@@ -1,12 +1,12 @@
 import React, { RefObject } from "react"
-import { Menu as AntdMenu, MenuProps} from 'antd'
+import { InputRef, Menu as AntdMenu, MenuProps} from 'antd'
 
 import { TProps } from "./schema"
 
 const { SubMenu } = AntdMenu
 type TMenuProps = MenuProps & TProps
 
-const DataMenu = React.forwardRef((props: TMenuProps, ref: RefObject<HTMLInputElement>) => {
+const DataMenu = React.forwardRef((props: TMenuProps, ref: RefObject<AntdMenu>) => {
   return (
     <AntdMenu 
       ref={ref}

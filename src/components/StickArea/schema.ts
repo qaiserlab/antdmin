@@ -1,5 +1,5 @@
 export interface TProps {
-  children?: any
+  children?: JSX.Element
   align?: string
   valign?: string
 }
