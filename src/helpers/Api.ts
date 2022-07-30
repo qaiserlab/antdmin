@@ -7,7 +7,7 @@ export class Api {
   }
 
   getHeaders() {
-    let headers: any = {
+    let headers: HeadersInit = {
       'Content-Type': 'application/json'
     }
 
@@ -33,7 +33,7 @@ export class Api {
     this.accessToken = accessToken
   }
 
-  mkUrlWithQueryParams(url: string, data?: any) {
+  mkUrlWithQueryParams(url: string, data?: Record<string, string>) {
     if (!data) return this.baseUrl + url
 
     let targetUrl = this.baseUrl + url
@@ -52,7 +52,7 @@ export class Api {
     return urlObject.toString()
   }
 
-  async get(url: string, data?: any) {
+  async get(url: string, data?: Record<string, string>) {
     return await fetch(
       this.mkUrlWithQueryParams(url, data), {
         method: 'GET',
@@ -61,7 +61,7 @@ export class Api {
     )
   }
 
-  async del(url: string, data?: any) {
+  async del(url: string, data?: Record<string, string>) {
     return await fetch(
       this.mkUrlWithQueryParams(url, data), {
         method: 'DELETE',

@@ -1,4 +1,4 @@
-import React, { RefObject, useState } from "react"
+import React, { useState, RefObject, FocusEvent } from "react"
 import { Input as AntdInput, InputProps, InputRef} from 'antd'
 
 import { TProps } from "./schema"
@@ -22,7 +22,7 @@ export default React.forwardRef((props: TInputProps, ref: RefObject<InputRef>) =
     <AntdInput 
       ref={ref}
       {...newProps} 
-      onFocus={(event: any) => {
+      onFocus={(event: FocusEvent<HTMLInputElement>) => {
         setStyle({
           ...props.style, 
           ...styleActive, 
@@ -30,7 +30,7 @@ export default React.forwardRef((props: TInputProps, ref: RefObject<InputRef>) =
 
         if (props.onFocus) props.onFocus(event)
       }}
-      onBlur={(event: any) => {
+      onBlur={(event: FocusEvent<HTMLInputElement>) => {
         setStyle({
           ...props.style, 
           ...stylePassive,

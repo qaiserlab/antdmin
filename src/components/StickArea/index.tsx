@@ -6,7 +6,7 @@ import { TProps } from "./schema"
 const StickArea = (props: TProps) => {
   const rootRef = useRef()
 
-  let [sectionStyle, setSectionStyle] = useState<any>({ visibility: 'hidden' })
+  let [sectionStyle, setSectionStyle] = useState<Object>({ visibility: 'hidden' })
 
   useEffect(() => {
     if (props.align === 'left' && props.valign === 'top') {

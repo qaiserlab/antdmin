@@ -6,6 +6,10 @@ import { Textman } from "@helpers/Textman"
 import { TProps } from "./schema"
 
 type TBreadcrumbProps = BreadcrumbProps & TProps
+interface DataSourceItem {
+  title: string
+  href: string 
+}
 
 export default React.forwardRef((props: TBreadcrumbProps, ref: RefObject<HTMLInputElement>) => {
 
@@ -21,7 +25,7 @@ export default React.forwardRef((props: TBreadcrumbProps, ref: RefObject<HTMLInp
       urlArray.shift()
     }
 
-    return urlArray.map((item: any, index: number) => {
+    return urlArray.map((item: string, index: number) => {
       const title = item
       let href = ""
 
@@ -49,7 +53,7 @@ export default React.forwardRef((props: TBreadcrumbProps, ref: RefObject<HTMLInp
           </Link>
         </AntdBreadcrumb.Item>
 
-        {getDataSource().map((item: any, index: number) => {
+        {getDataSource().map((item: DataSourceItem, index: number) => {
           return (
             <AntdBreadcrumb.Item key={index}>
               <Link href={item.href}>
