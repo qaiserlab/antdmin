@@ -1,3 +1,5 @@
+import { RefObject } from "react"
+
 export interface TItem {
   id: string
   url?: string
@@ -9,6 +11,6 @@ export interface TItem {
 }
 
 export interface TProps {
-  ref?: any
+  ref?: RefObject<HTMLInputElement>
   dataSource: Array<TItem>
 }

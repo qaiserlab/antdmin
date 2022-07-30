@@ -1,5 +1,5 @@
-import { Input as AntdInput, InputProps} from 'antd'
+import { RefObject } from 'react'
 
 export interface TProps {
-  ref?: any
+  ref?: RefObject<HTMLInputElement>
 }

@@ -1,5 +1,7 @@
+import { RefObject } from "react"
+
 export interface TProps {
-  ref?: any
+  ref?: RefObject<HTMLInputElement>
   url: string
-  icon?: any
+  icon?: JSX.Element
 }
