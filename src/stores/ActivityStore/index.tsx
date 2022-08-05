@@ -4,7 +4,11 @@ import useServerSaid from '@hooks/useServerSaid'
 const ActivityStore = createContext(null)
 const { Provider } = ActivityStore
 
-function ActivityProvider({ children }: any) {
+interface TProps {
+  children: JSX.Element
+}
+
+function ActivityProvider({ children }: TProps) {
   const { serverSaid, setServerSaid, clearServerSaid } = useServerSaid()
   
   return (

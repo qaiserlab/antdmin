@@ -12,7 +12,7 @@ import ServerAlert from '@widgets/ServerAlert'
 
 const { Header, Content, Footer, Sider } = Layout
 
-export default function AppLayout({ children }: any) {
+export default function AppLayout({ children }: TWrapperProps) {
   const router = useRouter()
   const pathName = router.pathname
   const xPathName = pathName.split('/[')

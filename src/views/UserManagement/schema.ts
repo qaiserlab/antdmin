@@ -11,6 +11,8 @@ export const initialValues = {
   userName: '',
   email: '',
   phoneNumber: '',
+  newPassword: '',
+  confirmNewPassword: '',
 }
 
 export const validationSchema = Yup.object().shape({

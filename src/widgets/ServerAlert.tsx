@@ -5,13 +5,13 @@ import { Alert, notification } from 'antd'
 
 import { ActivityStore } from '@stores/ActivityStore'
 
-export default function ServerAlert({ children }: any) {
+export default function ServerAlert({ children }: TWrapperProps) {
   const { serverSaid, setServerSaid } = useContext(ActivityStore)
   const message = 'Please correct following errors'
 
   let isError = false
   let type:any = ''
-  let description:any = serverSaid.message
+  let description = serverSaid.message
 
   switch (serverSaid.status) {
     case 422:
@@ -21,7 +21,7 @@ export default function ServerAlert({ children }: any) {
       description = (
         <ul>
           {Object.keys(serverSaid.errors).map(
-            (key: any) => serverSaid.errors[key] && <li>{serverSaid.errors[key]}</li>
+            (key: string) => serverSaid.errors[key] && <li>{serverSaid.errors[key]}</li>
           )}
         </ul>
       )

@@ -49,7 +49,10 @@ export default function UserManagement() {
     }
   }
 
-  const handleRefresh = async (page?: number, filter?: Array<any>) => {
+  const handleRefresh = async (
+    page?: number, 
+    filter?: Array<{ id: string, value: string }>
+  ) => {
     try {
       setIsLoading(true)
   

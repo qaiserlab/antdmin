@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-export default function RootLayout({ children }: any) {
+export default function RootLayout({ children }: TWrapperProps) {
   return (
     <section id={'root'}>
       <Head>

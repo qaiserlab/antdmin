@@ -1,9 +1,15 @@
-import { useRef } from 'react'
+import { ChangeEvent, useRef } from 'react'
 import { useFormik } from 'formik'
 import { Space, Input, Button } from 'antd'
 import { SearchOutlined, FilterOutlined, ReloadOutlined } from "@ant-design/icons"
 
-export default function useFilterable(props: any) {
+interface TProps {
+  title: string 
+  dataIndex: string
+  onFilter: (dataIndex: string, keyword: string) => any  
+}
+
+export default function useFilterable(props: TProps) {
   const searchInputRef = useRef(null)
   
   const formik = useFormik({
@@ -30,7 +36,10 @@ export default function useFilterable(props: any) {
           ref={searchInputRef}
           placeholder={`Search ${props.title}`}
           value={formik.values.keyword}
-          onChange={(event: any) => formik.setFieldValue('keyword', event.target.value)}
+          onChange={
+            (event: ChangeEvent<HTMLInputElement>) => 
+            formik.setFieldValue('keyword', event.target.value)
+          }
           // onBlur={formik.handleBlur}
           autoComplete={'off'}
           style={{ marginBottom: 8, display: 'block' }}

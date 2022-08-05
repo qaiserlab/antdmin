@@ -6,7 +6,7 @@ import { initialState } from './schema'
 const AuthStore = createContext({ state: initialState, dispatch: (payload: any) => {} })
 const { Provider } = AuthStore
 
-function AuthProvider({ children }: any) {
+function AuthProvider({ children }: TWrapperProps) {
   const [state, dispatch] = useReducer((state: TAuthState, action: TAction) => {
     const JWT_KEY = process.env.JWT_KEY 
 

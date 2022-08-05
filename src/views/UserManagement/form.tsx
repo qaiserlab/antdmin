@@ -27,7 +27,7 @@ export default function UserManagementForm(props: TProps) {
     initialValues,
     validationSchema,
     
-    onSubmit: async (values: any, { setSubmitting }) => {
+    onSubmit: async (values: TUserForm, { setSubmitting }) => {
       try {
         const data = {
           ...values,
@@ -96,6 +96,7 @@ export default function UserManagementForm(props: TProps) {
         <Spin spinning={isLoading}>
           <Card title={title}>
             <Row gutter={[8, 8]}>
+
               <Col xs={24} lg={3}>
                 First Name
               </Col>
@@ -161,6 +162,22 @@ export default function UserManagementForm(props: TProps) {
               </Col>
 
               <Col xs={24} lg={3}>
+                Phone Number
+              </Col>
+              <Col xs={24} lg={21}>
+                <Input 
+                  name={'phoneNumber'}
+                  value={formik.values.phoneNumber} 
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  disabled={formik.isSubmitting}
+                />
+                {formik.errors.phoneNumber && formik.touched.phoneNumber && (
+                  <Text type={'danger'}>{formik.errors.phoneNumber}</Text>
+                )}
+              </Col>
+
+              <Col xs={24} lg={3}>
                 New Password
               </Col>
               <Col xs={24} lg={21}>
@@ -194,21 +211,6 @@ export default function UserManagementForm(props: TProps) {
                 )}
               </Col>
 
-              <Col xs={24} lg={3}>
-                Phone Number
-              </Col>
-              <Col xs={24} lg={21}>
-                <Input 
-                  name={'phoneNumber'}
-                  value={formik.values.phoneNumber} 
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  disabled={formik.isSubmitting}
-                />
-                {formik.errors.phoneNumber && formik.touched.phoneNumber && (
-                  <Text type={'danger'}>{formik.errors.phoneNumber}</Text>
-                )}
-              </Col>
             </Row>
           </Card>
         </Spin>
