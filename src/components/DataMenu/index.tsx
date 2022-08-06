@@ -1,5 +1,5 @@
 import React, { RefObject } from "react"
-import { InputRef, Menu as AntdMenu, MenuProps} from 'antd'
+import { Menu as AntdMenu, MenuProps} from 'antd'
 
 import { TProps } from "./schema"
 
@@ -7,10 +7,13 @@ const { SubMenu } = AntdMenu
 type TMenuProps = MenuProps & TProps
 
 const DataMenu = React.forwardRef((props: TMenuProps, ref: RefObject<AntdMenu>) => {
+  const filteredProps = { ...props }
+  delete filteredProps.dataSource
+
   return (
     <AntdMenu 
       ref={ref}
-      {...props}
+      {...filteredProps}
     >
       { props.dataSource.map((item) => {
         if (!item.hidden) {
