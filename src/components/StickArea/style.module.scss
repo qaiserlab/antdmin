@@ -1,0 +1,60 @@
+$position: fixed;
+$margin: 32px;
+
+.init {
+  visibility: hidden;
+}
+
+.lt {
+  position: $position;
+  left: $margin;
+  top: $margin;
+}
+
+.rt {
+  position: $position;
+  right: $margin;
+  top: $margin;
+}
+
+.ct {
+  position: $position;
+  right: 50%;
+  top: $margin;
+}
+
+.lc {
+  position: $position;
+  left: $margin;
+  top: 50%;
+}
+
+.rc {
+  position: $position;
+  right: $margin;
+  top: 50%;
+}
+
+.cc {
+  position: $position;
+  left: 50%;
+  top: 50%;
+}
+
+.lb {
+  position: $position;
+  left: $margin;
+  bottom: $margin;
+}
+
+.rb {
+  position: $position;
+  right: $margin;
+  bottom: $margin;
+}
+
+.rb {
+  position: $position;
+  left: 50%;
+  bottom: $margin;
+}

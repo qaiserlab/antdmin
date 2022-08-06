@@ -1,40 +1,40 @@
 import React, { useState, useEffect, useRef } from "react"
 
-import style from './style'
+import style from './style.module.scss'
 import { TProps } from "./schema"
 
 const StickArea = (props: TProps) => {
   const rootRef = useRef()
 
-  let [sectionStyle, setSectionStyle] = useState<Object>({ visibility: 'hidden' })
+  let [sectionClassName, setSectionClassName] = useState(style.init)
 
   useEffect(() => {
     if (props.align === 'left' && props.valign === 'top') {
-      setSectionStyle(style.lt)
+      setSectionClassName(style.lt)
     }
     else if (props.align === 'right' && props.valign === 'top') {
-      setSectionStyle(style.rt)
+      setSectionClassName(style.rt)
     }
     else if (props.align === 'center' && props.valign === 'top') {
-      setSectionStyle(style.ct)
+      setSectionClassName(style.ct)
     }
     else if (props.align === 'left' && props.valign === 'center') {
-      setSectionStyle(style.lc)
+      setSectionClassName(style.lc)
     }
     else if (props.align === 'right' && props.valign === 'center') {
-      setSectionStyle(style.rc)
+      setSectionClassName(style.rc)
     }
     else if (props.align === 'center' && props.valign === 'center') {
-      setSectionStyle(style.cc)
+      setSectionClassName(style.cc)
     }
     else if (props.align === 'left' && props.valign === 'bottom') {
-      setSectionStyle(style.lb)
+      setSectionClassName(style.lb)
     }
     else if (props.align === 'right' && props.valign === 'bottom') {
-      setSectionStyle(style.rb)
+      setSectionClassName(style.rb)
     }
     else if (props.align === 'center' && props.valign === 'bottom') {
-      setSectionStyle(style.cb)
+      setSectionClassName(style.cb)
     }
   }, [props])
 
@@ -59,10 +59,10 @@ const StickArea = (props: TProps) => {
     ) {
       rootCurrent.style.marginTop = -(rootCurrent.offsetHeight / 2) + 'px'
     }
-  }, [sectionStyle])
+  }, [sectionClassName])
 
   return (
-    <section ref={rootRef} style={sectionStyle}>
+    <section ref={rootRef} className={sectionClassName}>
       {props.children}
     </section>
   )
