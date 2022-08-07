@@ -103,6 +103,7 @@ export default function LoginForm() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 disabled={formik.isSubmitting}
+                status={(formik.errors.username)?'error':null}
               />
               {formik.errors.username && formik.touched.username && (
                 <Text type={'danger'}>{formik.errors.username}</Text>
@@ -119,6 +120,7 @@ export default function LoginForm() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 disabled={formik.isSubmitting}
+                status={(formik.errors.password)?'error':null}
               />
               {formik.errors.password && formik.touched.password && (
                 <Text type={'danger'}>{formik.errors.password}</Text>

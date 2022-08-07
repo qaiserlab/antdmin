@@ -107,6 +107,7 @@ export default function UserManagementForm(props: TProps) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   disabled={formik.isSubmitting}
+                  status={(formik.errors.firstName)?'error':null}
                 />
                 {formik.errors.firstName && formik.touched.firstName && (
                   <Text type={'danger'}>{formik.errors.firstName}</Text>
@@ -123,6 +124,7 @@ export default function UserManagementForm(props: TProps) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   disabled={formik.isSubmitting}
+                  status={(formik.errors.lastName)?'error':null}
                 />
                 {formik.errors.lastName && formik.touched.lastName && (
                   <Text type={'danger'}>{formik.errors.lastName}</Text>
@@ -139,6 +141,7 @@ export default function UserManagementForm(props: TProps) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   disabled={formik.isSubmitting}
+                  status={(formik.errors.userName)?'error':null}
                 />
                 {formik.errors.userName && formik.touched.userName && (
                   <Text type={'danger'}>{formik.errors.userName}</Text>
@@ -155,6 +158,7 @@ export default function UserManagementForm(props: TProps) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   disabled={formik.isSubmitting}
+                  status={(formik.errors.email)?'error':null}
                 />
                 {formik.errors.email && formik.touched.email && (
                   <Text type={'danger'}>{formik.errors.email}</Text>
@@ -171,6 +175,7 @@ export default function UserManagementForm(props: TProps) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   disabled={formik.isSubmitting}
+                  status={(formik.errors.phoneNumber)?'error':null}
                 />
                 {formik.errors.phoneNumber && formik.touched.phoneNumber && (
                   <Text type={'danger'}>{formik.errors.phoneNumber}</Text>
@@ -188,6 +193,7 @@ export default function UserManagementForm(props: TProps) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   disabled={formik.isSubmitting}
+                  status={(formik.errors.newPassword)?'error':null}
                 />
                 {formik.errors.newPassword && formik.touched.newPassword && (
                   <Text type={'danger'}>{formik.errors.newPassword}</Text>
@@ -205,6 +211,7 @@ export default function UserManagementForm(props: TProps) {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   disabled={formik.isSubmitting}
+                  status={(formik.errors.confirmNewPassword)?'error':null}
                 />
                 {formik.errors.confirmNewPassword && formik.touched.confirmNewPassword && (
                   <Text type={'danger'}>{formik.errors.confirmNewPassword}</Text>

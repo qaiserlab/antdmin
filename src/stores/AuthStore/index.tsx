@@ -8,14 +8,14 @@ const { Provider } = AuthStore
 
 function AuthProvider({ children }: TWrapperProps) {
   const [state, dispatch] = useReducer((state: TAuthState, action: TAction) => {
-    const JWT_KEY = process.env.JWT_KEY 
+    const API_ACCESS_KEY = process.env.API_ACCESS_KEY 
 
     switch (action.type) {
       case 'login':
 
         const accessToken = action.payload.authInfo.accessToken
         const refreshToken = action.payload.authInfo.refreshToken
-        const userInfo = jwt.verify(accessToken, JWT_KEY)
+        const userInfo = jwt.verify(accessToken, API_ACCESS_KEY)
 
         const isLogin = true
         
