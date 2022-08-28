@@ -6,10 +6,10 @@ import { useFormik } from 'formik'
 import { Row, Col, Space, Typography } from 'antd'
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
 
-import axios from '@helpers/axiosInstance'
-import Input from '@components/Input'
-import Button from '@components/Button'
-import StickArea from '@components/StickArea'
+import apiV1 from '@helpers/apiV1'
+import StickArea from '@components/CStickArea/CStickArea'
+import CInput from '@components/CInput/CInput'
+import CButton from '@components/CButton/CButton'
 import { ActivityStore } from '@stores/ActivityStore'
 import { AuthStore } from '@stores/AuthStore'
 import ServerAlert from '@widgets/ServerAlert'
@@ -36,7 +36,7 @@ export default function LoginForm() {
           username: values.username,
           password: values.password,
         }
-        const response = await axios.post(
+        const response = await apiV1.post(
           '/auth/login',
           formData
         )
@@ -95,7 +95,7 @@ export default function LoginForm() {
           <Row gutter={[8, 16]}>
             <Col span={6}>Username</Col>
             <Col span={18}>
-              <Input
+              <CInput
                 ref={usernameRef}
                 name={'username'}
                 placeholder={'Username'}
@@ -112,7 +112,7 @@ export default function LoginForm() {
           
             <Col span={6}>Password</Col>
             <Col span={18}>
-              <Input
+              <CInput
                 name="password"
                 placeholder="Password"
                 type="password"
@@ -130,21 +130,21 @@ export default function LoginForm() {
             <Col span={6} />
             <Col span={18}>
               <Space>
-                <Button 
+                <CButton 
                   htmlType={'submit'} 
                   type={'primary'}
                   loading={formik.isSubmitting}
                 >
                   <LoginOutlined />
                   Login
-                </Button>
-                <Button 
+                </CButton>
+                <CButton 
                   onClick={handleReset}
                   disabled={formik.isSubmitting}
                 >
                   <UndoOutlined />
                   Reset
-                </Button>
+                </CButton>
               </Space>
             </Col>
           </Row>

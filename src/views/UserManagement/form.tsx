@@ -6,8 +6,8 @@ import { SaveOutlined, ArrowLeftOutlined } from "@ant-design/icons"
 import { useFormik } from 'formik'
 import { AxiosError } from 'axios'
 
-import axios from '@helpers/axiosInstance'
-import StickArea from '@components/StickArea'
+import apiV1 from '@helpers/apiV1'
+import StickArea from '@components/CStickArea/CStickArea'
 import { ActivityStore } from '@stores/ActivityStore'
 import { TProps, initialValues, validationSchema } from './schema'
 
@@ -35,10 +35,10 @@ export default function UserManagementForm(props: TProps) {
         }
 
         if (isNew) {
-          await axios.post('/users', data)
+          await apiV1.post('/users', data)
         }
         else {
-          await axios.put(`/users/${id}`, data)
+          await apiV1.put(`/users/${id}`, data)
         }
       
         clearServerSaid()
@@ -62,7 +62,7 @@ export default function UserManagementForm(props: TProps) {
         try {
           setIsLoading(true)
     
-          const response = await axios.get(`/user/${id}`)
+          const response = await apiV1.get(`/user/${id}`)
           const result = response.data
           
           formik.setFieldValue('firstName', result.data.firstName)

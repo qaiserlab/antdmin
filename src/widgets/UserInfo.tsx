@@ -4,7 +4,7 @@ import { Spin, Space, Modal, notification } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 // import { CloseCircleOutlined } from '@ant-design/icons'
 
-import axios from '@helpers/axiosInstance'
+import apiV1 from '@helpers/apiV1'
 import { AuthStore } from '@stores/AuthStore'
 
 // const { confirm } = Modal
@@ -19,7 +19,7 @@ export default function UserInfo() {
       try {
         setIsLoading(true)
     
-        const response = await axios.get('/session')
+        const response = await apiV1.get('/session')
         const result = response.data
 
         dispatch({

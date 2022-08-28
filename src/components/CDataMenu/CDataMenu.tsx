@@ -6,7 +6,7 @@ import { TProps } from "./schema"
 const { SubMenu } = AntdMenu
 type TMenuProps = MenuProps & TProps
 
-const DataMenu = React.forwardRef((props: TMenuProps, ref: RefObject<AntdMenu>) => {
+const CDataMenu = React.forwardRef((props: TMenuProps, ref: RefObject<AntdMenu>) => {
   const filteredProps = { ...props }
   delete filteredProps.dataSource
 
@@ -60,7 +60,7 @@ const DataMenu = React.forwardRef((props: TMenuProps, ref: RefObject<AntdMenu>) 
   )
 })
 
-DataMenu.defaultProps = {
+CDataMenu.defaultProps = {
   dataSource: [],
   // horizontal, vertical, inline
   mode: 'horizontal',
@@ -71,4 +71,4 @@ DataMenu.defaultProps = {
   defaultSelectedKeys: [],
 }
 
-export default DataMenu
+export default CDataMenu

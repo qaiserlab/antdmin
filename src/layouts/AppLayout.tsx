@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Layout, Space, Drawer, Button } from 'antd'
 import { DashboardOutlined, MenuOutlined, CloseOutlined, SettingOutlined } from '@ant-design/icons'
 
-import UrlBreadcrumb from '@components/UrlBreadcrumb'
+import UrlBreadcrumb from '@components/CUrlBreadcrumb/CUrlBreadcrumb'
 import RootLayout from '@layouts/RootLayout'
 import UserInfo from '@widgets/UserInfo'
 import MainMenu from '@widgets/MainMenu'

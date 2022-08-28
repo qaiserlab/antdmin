@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-const axiosInstance = axios.create({ 
-  baseURL: process.env.API_HOST 
+const apiV1 = axios.create({ 
+  baseURL: `${process.env.API_HOST}/v1` 
 })
 
-axiosInstance.interceptors.request.use(function (config) {
+apiV1.interceptors.request.use(function (config) {
   // Do something before request is sent
 
   if (localStorage.accessToken) {
@@ -20,7 +20,7 @@ axiosInstance.interceptors.request.use(function (config) {
   return Promise.reject(error)
 })
 
-axiosInstance.interceptors.response.use(function (response) {
+apiV1.interceptors.response.use(function (response) {
   // Do something with response data
   response.data = (response.data).data
   return response
@@ -29,4 +29,4 @@ axiosInstance.interceptors.response.use(function (response) {
   return Promise.reject(error)
 })
 
-export default axiosInstance
+export default apiV1

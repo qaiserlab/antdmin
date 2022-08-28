@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { Space, Table, Pagination, Button, Modal } from 'antd'
+import { Space, Table, Pagination, Modal } from 'antd'
 import { FileTextOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons"
 import { AxiosError } from 'axios'
 
-import axios from '@helpers/axiosInstance'
+import apiV1 from '@helpers/apiV1'
 import useFilterable from '@hooks/useFilterable'
-import StickArea from '@components/StickArea'
+import StickArea from '@components/CStickArea/CStickArea'
+import CButton from '@components/CButton/CButton'
 import { ActivityStore } from '@stores/ActivityStore'
 
 const { confirm } = Modal
@@ -38,7 +39,7 @@ export default function UserManagement() {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`/user/force-delete/${id}`)
+      await apiV1.delete(`/user/force-delete/${id}`)
       handleRefresh()
     }
     catch (error: AxiosError | any) {
@@ -61,7 +62,7 @@ export default function UserManagement() {
   
       const filtered = JSON.stringify(filter)
   
-      const response = await axios.get('/users', {
+      const response = await apiV1.get('/users', {
         data: {
           page,
           pageSize,
@@ -101,8 +102,8 @@ export default function UserManagement() {
       render: (text: string, record: TUserRecord) => {
         return (
           <Space>
-            <Button icon={<EditOutlined />} onClick={() => handleEdit(record.id)} />
-            <Button 
+            <CButton icon={<EditOutlined />} onClick={() => handleEdit(record.id)} />
+            <CButton 
               icon={<DeleteOutlined />} 
               onClick={
                 () => confirm({
@@ -146,14 +147,14 @@ export default function UserManagement() {
 
         <StickArea>
           <Space>
-            <Button 
+            <CButton 
               icon={<ReloadOutlined />}
               shape={'circle'} 
               size={'large'} 
               onClick={() => handleRefresh()}
             />
 
-            <Button 
+            <CButton 
               icon={<FileTextOutlined />}
               type={'primary'} 
               shape={'circle'} 
