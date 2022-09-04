@@ -1,5 +1,5 @@
 interface TUserRecord {
-  id: string,
+  id: string
   userName: string
   fullName: string
   firstName: string

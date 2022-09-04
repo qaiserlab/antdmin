@@ -7,9 +7,9 @@ import { Row, Col, Space, Typography } from 'antd'
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
 
 import apiV1 from '@helpers/apiV1'
-import StickArea from '@components/CStickArea/CStickArea'
-import CInput from '@components/CInput/CInput'
-import CButton from '@components/CButton/CButton'
+import StickArea from '@components/StickArea/UiStickArea'
+import CInput from '@components/Input/UiInput'
+import UiButton from '@components/Button/UiButton'
 import { ActivityStore } from '@stores/ActivityStore'
 import { AuthStore } from '@stores/AuthStore'
 import ServerAlert from '@widgets/ServerAlert'
@@ -130,21 +130,21 @@ export default function LoginForm() {
             <Col span={6} />
             <Col span={18}>
               <Space>
-                <CButton 
+                <UiButton 
                   htmlType={'submit'} 
                   type={'primary'}
                   loading={formik.isSubmitting}
                 >
                   <LoginOutlined />
                   Login
-                </CButton>
-                <CButton 
+                </UiButton>
+                <UiButton 
                   onClick={handleReset}
                   disabled={formik.isSubmitting}
                 >
                   <UndoOutlined />
                   Reset
-                </CButton>
+                </UiButton>
               </Space>
             </Col>
           </Row>

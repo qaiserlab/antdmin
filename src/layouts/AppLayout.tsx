@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Layout, Space, Drawer, Button } from 'antd'
 import { DashboardOutlined, MenuOutlined, CloseOutlined, SettingOutlined } from '@ant-design/icons'
 
-import UrlBreadcrumb from '@components/CUrlBreadcrumb/CUrlBreadcrumb'
+import UiUrlBreadcrumb from '@components/UrlBreadcrumb/UiUrlBreadcrumb'
 import RootLayout from '@layouts/RootLayout'
 import UserInfo from '@widgets/UserInfo'
 import MainMenu from '@widgets/MainMenu'
@@ -82,7 +82,7 @@ export default function AppLayout({ children }: TWrapperProps) {
           </Header>
           <Content id={'content'}>
             <header style={{textAlign: breadcrumbAlign}}>
-              <UrlBreadcrumb url={pathOnly} icon={<DashboardOutlined />} />
+              <UiUrlBreadcrumb url={pathOnly} icon={<DashboardOutlined />} />
             </header>
             <section>
               <ServerAlert />

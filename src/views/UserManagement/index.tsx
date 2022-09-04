@@ -7,8 +7,8 @@ import { AxiosError } from 'axios'
 
 import apiV1 from '@helpers/apiV1'
 import useFilterable from '@hooks/useFilterable'
-import StickArea from '@components/CStickArea/CStickArea'
-import CButton from '@components/CButton/CButton'
+import StickArea from '@components/StickArea/UiStickArea'
+import UiButton from '@components/Button/UiButton'
 import { ActivityStore } from '@stores/ActivityStore'
 
 const { confirm } = Modal
@@ -102,8 +102,8 @@ export default function UserManagement() {
       render: (text: string, record: TUserRecord) => {
         return (
           <Space>
-            <CButton icon={<EditOutlined />} onClick={() => handleEdit(record.id)} />
-            <CButton 
+            <UiButton icon={<EditOutlined />} onClick={() => handleEdit(record.id)} />
+            <UiButton 
               icon={<DeleteOutlined />} 
               onClick={
                 () => confirm({
@@ -147,14 +147,14 @@ export default function UserManagement() {
 
         <StickArea>
           <Space>
-            <CButton 
+            <UiButton 
               icon={<ReloadOutlined />}
               shape={'circle'} 
               size={'large'} 
               onClick={() => handleRefresh()}
             />
 
-            <CButton 
+            <UiButton 
               icon={<FileTextOutlined />}
               type={'primary'} 
               shape={'circle'} 

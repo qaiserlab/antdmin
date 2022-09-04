@@ -7,7 +7,7 @@ import { useFormik } from 'formik'
 import { AxiosError } from 'axios'
 
 import apiV1 from '@helpers/apiV1'
-import StickArea from '@components/CStickArea/CStickArea'
+import StickArea from '@components/StickArea/UiStickArea'
 import { ActivityStore } from '@stores/ActivityStore'
 import { TProps, initialValues, validationSchema } from './schema'
 

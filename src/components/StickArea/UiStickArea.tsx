@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 
-import style from './CStickAreaStyle.module.scss'
+import style from './StickAreaStyle.module.scss'
 import { TProps } from "./schema"
 
 const StickArea = (props: TProps) => {

@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 
 import mainMenus from '@config/mainMenus'
-import CDataMenu from '@components/CDataMenu/CDataMenu'
+import UiDataMenu from '@components/DataMenu/UiDataMenu'
 
 export default function MainMenu() {
   const router = useRouter()
@@ -16,7 +16,7 @@ export default function MainMenu() {
 
   return (
     <React.Fragment>
-      <CDataMenu 
+      <UiDataMenu 
         theme={'dark'} 
         mode={'inline'} 
         dataSource={mainMenus} 
