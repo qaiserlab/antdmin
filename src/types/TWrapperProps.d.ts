@@ -1,3 +1,3 @@
 interface TWrapperProps {
-  children?: JSX.Element
+  children?: React.ReactNode
 }
