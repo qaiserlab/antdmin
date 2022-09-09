@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 
 import AppLayout from '@layouts/AppLayout'
-import UserForm from '@views/UserManagement/UserForm'
+import UserForm from '@views/User/UserForm'
 
 export default function UserEditPage() {
   const router = useRouter()
@@ -11,10 +11,7 @@ export default function UserEditPage() {
 
   return (
     <AppLayout>
-      <UserForm 
-        isNew={isNew} 
-        id={id} 
-      />
+      <UserForm isNew={isNew} id={id} />
     </AppLayout>
   )
 }
