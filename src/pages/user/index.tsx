@@ -1,12 +1,12 @@
 import React from 'react'
 
 import AppLayout from '@layouts/AppLayout'
-import UserManagement from '@views/UserManagement'
+import UserView from '@views/UserManagement/UserView'
 
 export default function UserPage() {
   return (
     <AppLayout>
-      <UserManagement />
+      <UserView />
     </AppLayout>
   )
 }

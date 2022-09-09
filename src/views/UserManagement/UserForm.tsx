@@ -9,11 +9,11 @@ import { AxiosError } from 'axios'
 import apiV1 from '@helpers/apiV1'
 import StickArea from '@components/StickArea/UiStickArea'
 import { ActivityStore } from '@stores/ActivityStore'
-import { TProps, initialValues, validationSchema } from './schema'
+import { TProps, initialValues, validationSchema } from './UserSchema'
 
 const { Text } = Typography
 
-export default function UserManagementForm(props: TProps) {
+export default function UserForm(props: TProps) {
   const isNew = props.isNew
   const id = props.id
   const title = (isNew)?'New':'Edit'

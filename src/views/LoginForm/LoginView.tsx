@@ -13,11 +13,11 @@ import UiButton from '@components/Button/UiButton'
 import { ActivityStore } from '@stores/ActivityStore'
 import { AuthStore } from '@stores/AuthStore'
 import ServerAlert from '@widgets/ServerAlert'
-import { initialValues, validationSchema } from './schema'
+import { initialValues, validationSchema } from './LoginSchema'
 
 const { Text } = Typography
 
-export default function LoginForm() {
+export default function LoginView() {
   const router = useRouter()
   
   const { setServerSaid, clearServerSaid } = useContext(ActivityStore)

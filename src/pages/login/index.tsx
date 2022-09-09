@@ -1,12 +1,12 @@
 import React from 'react'
 
 import RootLayout from '@layouts/RootLayout'
-import LoginForm from '@views/LoginForm'
+import LoginView from '@views/LoginForm/LoginView'
 
 export default function LoginPage() {
   return (
     <RootLayout>
-      <LoginForm />
+      <LoginView />
     </RootLayout>
   )
 }

@@ -13,7 +13,7 @@ import { ActivityStore } from '@stores/ActivityStore'
 
 const { confirm } = Modal
 
-export default function UserManagement() {
+export default function UserView() {
   const router = useRouter()
   const pageSize = 5
 

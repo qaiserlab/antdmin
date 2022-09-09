@@ -1,14 +1,14 @@
 import React from 'react'
 
 import AppLayout from '@layouts/AppLayout'
-import UserManagementForm from '@views/UserManagement/form'
+import UserForm from '@views/UserManagement/UserForm'
 
 export default function UserNewPage() {
   const isNew = true
 
   return (
     <AppLayout>
-      <UserManagementForm 
+      <UserForm 
         isNew={isNew} 
       />
     </AppLayout>
