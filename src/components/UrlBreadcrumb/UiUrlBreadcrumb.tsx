@@ -2,7 +2,6 @@ import React, { RefObject } from "react"
 import Link from "next/link"
 import { Breadcrumb as AntdBreadcrumb, BreadcrumbProps} from 'antd'
 
-import { Textman } from "@helpers/Textman"
 import { TProps } from "./schema"
 
 type TBreadcrumbProps = BreadcrumbProps & TProps
@@ -57,7 +56,7 @@ export default React.forwardRef((props: TBreadcrumbProps, ref: RefObject<HTMLInp
           return (
             <AntdBreadcrumb.Item key={index}>
               <Link href={item.href}>
-                <a>{Textman.toTitleCase(item.title)}</a>
+                <a>{item.title.toTitleCase()}</a>
               </Link>
             </AntdBreadcrumb.Item>
           )
