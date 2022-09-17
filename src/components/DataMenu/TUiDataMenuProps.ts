@@ -1,5 +1,5 @@
 import { RefObject } from "react"
-import { Menu as AntdMenu} from "antd"
+import { Menu as AntdMenu, MenuProps } from "antd"
 
 export interface TItem {
   id: string
@@ -11,7 +11,9 @@ export interface TItem {
   children?: Array<TItem>
 }
 
-export interface TProps {
+export interface TMenuProps {
   ref?: RefObject<AntdMenu>
   dataSource: Array<TItem>
 }
+
+export type TUiDataMenuProps = MenuProps & TMenuProps

@@ -1,12 +1,10 @@
 import React, { RefObject } from "react"
-import { Menu as AntdMenu, MenuProps} from 'antd'
-
-import { TProps } from "./schema"
+import { Menu as AntdMenu } from 'antd'
+import { TUiDataMenuProps } from "./TUiDataMenuProps"
 
 const { SubMenu } = AntdMenu
-type TMenuProps = MenuProps & TProps
 
-const UiDataMenu = React.forwardRef((props: TMenuProps, ref: RefObject<AntdMenu>) => {
+const UiDataMenu = React.forwardRef((props: TUiDataMenuProps, ref: RefObject<AntdMenu>) => {
   const filteredProps = { ...props }
   delete filteredProps.dataSource
 

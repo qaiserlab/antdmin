@@ -1,10 +1,9 @@
 import React, { RefObject } from "react"
-import { Button as AntdButton, ButtonProps} from 'antd'
+import { Button as AntdButton } from 'antd'
 
-import { TProps } from "./schema"
-type TButtonProps = ButtonProps & TProps
+import { TUiButtonProps } from "./TUiButtonProps"
 
-export default React.forwardRef((props: TButtonProps, ref: RefObject<HTMLInputElement>) => {
+export default React.forwardRef((props: TUiButtonProps, ref: RefObject<HTMLInputElement>) => {
   return (
     <AntdButton 
       ref={ref}

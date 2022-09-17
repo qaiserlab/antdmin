@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react"
 
-import style from './StickAreaStyle.module.scss'
-import { TProps } from "./schema"
+import style from './UiStickAreaStyle.module.scss'
+import { TUiStickProps } from "./TUiStickProps"
 
-const StickArea = (props: TProps) => {
+const StickArea = (props: TUiStickProps) => {
   const rootRef = useRef()
 
   let [sectionClassName, setSectionClassName] = useState(style.init)
