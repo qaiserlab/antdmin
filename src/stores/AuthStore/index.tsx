@@ -36,6 +36,8 @@ function AuthProvider({ children }: TWrapperProps) {
         }
 
       case 'refresh':
+        const newUserInfo = jwt.verify(localStorage.accessToken, API_ACCESS_KEY)
+
         return {
           authInfo: {
             ...state.authInfo,
@@ -43,9 +45,12 @@ function AuthProvider({ children }: TWrapperProps) {
             refreshToken: localStorage.refreshToken,
             isLogin: true,
           },
+          // userInfo: {
+          //   ...state.userInfo,
+          //   ...action.payload.userInfo,
+          // }
           userInfo: {
-            ...state.userInfo,
-            ...action.payload.userInfo,
+            ...newUserInfo,
           }
         }
       case 'logout':

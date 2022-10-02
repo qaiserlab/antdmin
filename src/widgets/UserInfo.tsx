@@ -16,6 +16,9 @@ export default function UserInfo() {
 
   const refreshData = async () => {
     if (!state.authInfo.isLogin && localStorage.accessToken) {
+      dispatch({ type: 'refresh' })
+
+      /*
       try {
         setIsLoading(true)
     
@@ -53,6 +56,7 @@ export default function UserInfo() {
       finally {
         setIsLoading(false)
       }
+      */
     }
     else if (!localStorage.accessToken) {
       // setIsLoading(true)
