@@ -7,7 +7,7 @@ import { AxiosError } from 'axios'
 
 import apiV1 from '@helpers/apiV1'
 import useFilterable from '@hooks/useFilterable'
-import StickArea from '@components/StickArea/UiStickArea'
+import UiStickArea from '@components/StickArea/UiStickArea'
 import UiButton from '@components/Button/UiButton'
 import { ActivityStore } from '@stores/ActivityStore'
 
@@ -145,7 +145,7 @@ export default function UserView() {
           }
         </Space>
 
-        <StickArea>
+        <UiStickArea>
           <Space>
             <UiButton 
               icon={<ReloadOutlined />}
@@ -162,7 +162,7 @@ export default function UserView() {
               onClick={handleNew}
             />
           </Space>
-        </StickArea>
+        </UiStickArea>
       </section>
     </React.Fragment>
   )

@@ -7,13 +7,13 @@ import { Row, Col, Space, Typography } from 'antd'
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
 
 import apiV1 from '@helpers/apiV1'
-import StickArea from '@components/StickArea/UiStickArea'
 import CInput from '@components/Input/UiInput'
 import UiButton from '@components/Button/UiButton'
 import { ActivityStore } from '@stores/ActivityStore'
 import { AuthStore } from '@stores/AuthStore'
 import ServerAlert from '@widgets/ServerAlert'
 import { initialValues, validationSchema } from './LoginSchema'
+import UiStickArea from '@components/StickArea/UiStickArea'
 
 const { Text } = Typography
 
@@ -85,7 +85,7 @@ export default function LoginView() {
         <title>Login</title>
       </Head>
 
-      <StickArea align={'center'} valign={'center'}>
+      <UiStickArea align={'center'} valign={'center'}>
         <form 
           onSubmit={formik.handleSubmit}
           style={{width: '300px'}}
@@ -149,7 +149,7 @@ export default function LoginView() {
             </Col>
           </Row>
         </form>
-      </StickArea>
+      </UiStickArea>
     </React.Fragment>
   )
 }
