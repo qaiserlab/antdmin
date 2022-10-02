@@ -6,7 +6,7 @@ import { FileTextOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from "
 import { AxiosError } from 'axios'
 
 import apiV1 from '@helpers/apiV1'
-import useFilterable from '@hooks/useFilterable'
+import useFilterable from '@hooks/ui/useFilterable'
 import UiStickArea from '@components/StickArea/UiStickArea'
 import UiButton from '@components/Button/UiButton'
 import { ActivityStore } from '@stores/ActivityStore'
