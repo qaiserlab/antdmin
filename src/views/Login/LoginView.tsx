@@ -55,6 +55,7 @@ export default function LoginView() {
         router.push('/')
       }
       catch (error: AxiosError | any) {
+        console.log(error)
         const status = error?.response?.status
         const message = error?.response?.data?.error
         setServerSaid({ status, message })

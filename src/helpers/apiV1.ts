@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiV1 = axios.create({ 
-  baseURL: `${process.env.API_HOST}/v1` 
+  baseURL: `${process.env.API_HOST}/api/v1` 
 })
 
 apiV1.interceptors.request.use(function (config) {
@@ -22,7 +22,7 @@ apiV1.interceptors.request.use(function (config) {
 
 apiV1.interceptors.response.use(function (response) {
   // Do something with response data
-  response.data = (response.data).data
+  // response.data = (response.data).data
   return response
 }, function (error) {
   // Do something with response error
