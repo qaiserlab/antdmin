@@ -7,7 +7,7 @@ import { Row, Col, Space, Typography } from 'antd'
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
 
 import apiV1 from '@helpers/apiV1'
-import CInput from '@components/Input/UiInput'
+import UiInput from '@components/Input/UiInput'
 import UiButton from '@components/Button/UiButton'
 import { ActivityStore } from '@stores/ActivityStore'
 import { AuthStore } from '@stores/AuthStore'
@@ -96,7 +96,7 @@ export default function LoginView() {
           <Row gutter={[8, 16]}>
             <Col span={6}>Username</Col>
             <Col span={18}>
-              <CInput
+              <UiInput
                 ref={usernameRef}
                 name={'username'}
                 placeholder={'Username'}
@@ -113,7 +113,7 @@ export default function LoginView() {
           
             <Col span={6}>Password</Col>
             <Col span={18}>
-              <CInput
+              <UiInput
                 name="password"
                 placeholder="Password"
                 type="password"
