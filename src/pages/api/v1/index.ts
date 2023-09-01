@@ -5,6 +5,7 @@ export default function v1Handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (method === 'GET') {
     return res.status(200).json({ 
+      NODE_ENV: process.env.NODE_ENV,
       APP_NAME: process.env.APP_NAME,
       APP_VERSION: process.env.APP_VERSION,
       APP_HOST: process.env.APP_HOST,
