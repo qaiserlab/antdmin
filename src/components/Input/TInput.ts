@@ -1,8 +1,8 @@
 import { RefObject } from 'react'
 import { InputRef, InputProps } from 'antd'
 
-export interface TInputProps {
+export interface TUiInputProps {
   ref: RefObject<InputRef>
 }
 
-export type TUiInputProps = InputProps & TInputProps
+export type TInputProps = InputProps & TUiInputProps

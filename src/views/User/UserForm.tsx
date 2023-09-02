@@ -7,7 +7,7 @@ import { useFormik } from 'formik'
 import { AxiosError } from 'axios'
 
 import apiV1 from '@helpers/apiV1'
-import UiStickArea from '@components/StickArea/UiStickArea'
+import StickArea from '@components/StickArea/StickArea'
 import { ActivityStore } from '@stores/ActivityStore'
 import { TProps, initialValues, validationSchema } from './UserSchema'
 
@@ -222,7 +222,7 @@ export default function UserForm(props: TProps) {
           </Card>
         </Spin>
         
-        <UiStickArea>
+        <StickArea>
           <Space>
             <Button 
               icon={<ArrowLeftOutlined />}
@@ -240,7 +240,7 @@ export default function UserForm(props: TProps) {
               loading={formik.isSubmitting}
             />
           </Space>
-        </UiStickArea>
+        </StickArea>
       </form>
     </React.Fragment>
   )

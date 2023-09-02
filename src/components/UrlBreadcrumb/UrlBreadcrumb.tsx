@@ -2,9 +2,9 @@ import React, { RefObject } from "react"
 import Link from "next/link"
 import { Breadcrumb as AntdBreadcrumb } from 'antd'
 
-import { TUiUrlBreadcrumbProps, DataSourceItem } from "./TUiUrlBreadcrumbProps"
+import { TUrlBreadcrumbProps, DataSourceItem } from "./TUrlBreadcrumb"
 
-export default React.forwardRef((props: TUiUrlBreadcrumbProps, ref: RefObject<HTMLInputElement>) => {
+export default React.forwardRef((props: TUrlBreadcrumbProps, ref: RefObject<HTMLInputElement>) => {
 
   const getDataSource = () => {
     const urlArray = props.url.split("/")

@@ -16,4 +16,4 @@ export interface TMenuProps {
   dataSource: Array<TItem>
 }
 
-export type TUiDataMenuProps = MenuProps & TMenuProps
+export type TDataMenuProps = MenuProps & TMenuProps

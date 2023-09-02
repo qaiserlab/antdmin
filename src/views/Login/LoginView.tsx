@@ -7,13 +7,13 @@ import { Row, Col, Space, Typography } from 'antd'
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
 
 import apiV1 from '@helpers/apiV1'
-import UiInput from '@components/Input/UiInput'
-import UiButton from '@components/Button/UiButton'
+import Input from '@components/Input/Input'
+import Button from '@components/Button/Button'
 import { ActivityStore } from '@stores/ActivityStore'
 import { AuthStore } from '@stores/AuthStore'
 import ServerAlert from '@widgets/ServerAlert'
 import { initialValues, validationSchema } from './LoginSchema'
-import UiStickArea from '@components/StickArea/UiStickArea'
+import StickArea from '@components/StickArea/StickArea'
 
 const { Text } = Typography
 
@@ -86,7 +86,7 @@ export default function LoginView() {
         <title>Login</title>
       </Head>
 
-      <UiStickArea align={'center'} valign={'center'}>
+      <StickArea align={'center'} valign={'center'}>
         <form 
           onSubmit={formik.handleSubmit}
           style={{width: '300px'}}
@@ -96,7 +96,7 @@ export default function LoginView() {
           <Row gutter={[8, 16]}>
             <Col span={6}>Username</Col>
             <Col span={18}>
-              <UiInput
+              <Input
                 ref={usernameRef}
                 name={'username'}
                 placeholder={'Username'}
@@ -113,7 +113,7 @@ export default function LoginView() {
           
             <Col span={6}>Password</Col>
             <Col span={18}>
-              <UiInput
+              <Input
                 name="password"
                 placeholder="Password"
                 type="password"
@@ -131,26 +131,26 @@ export default function LoginView() {
             <Col span={6} />
             <Col span={18}>
               <Space>
-                <UiButton 
+                <Button 
                   htmlType={'submit'} 
                   type={'primary'}
                   loading={formik.isSubmitting}
                 >
                   <LoginOutlined />
                   Login
-                </UiButton>
-                <UiButton 
+                </Button>
+                <Button 
                   onClick={handleReset}
                   disabled={formik.isSubmitting}
                 >
                   <UndoOutlined />
                   Reset
-                </UiButton>
+                </Button>
               </Space>
             </Col>
           </Row>
         </form>
-      </UiStickArea>
+      </StickArea>
     </React.Fragment>
   )
 }

@@ -4,7 +4,7 @@ import { Modal } from 'antd'
 import { QuestionOutlined } from '@ant-design/icons'
 
 import settingMenus from '@config/settingMenus'
-import UiDataMenu from '@components/DataMenu/UiDataMenu'
+import DataMenu from '@components/DataMenu/DataMenu'
 import { AuthStore } from '@stores/AuthStore'
 
 const { confirm } = Modal
@@ -36,7 +36,7 @@ export default function SettingMenu() {
 
   return (
     <React.Fragment>
-      <UiDataMenu 
+      <DataMenu 
         theme={'light'} 
         mode={'inline'} 
         dataSource={settingMenus} 

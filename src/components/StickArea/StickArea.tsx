@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react"
 
-import style from './UiStickAreaStyle.module.scss'
-import { TUiStickProps } from "./TUiStickProps"
+import style from './StickAreaStyle.module.scss'
+import { TStickAreaProps } from "./TStickArea"
 
-const UiStickArea = (props: TUiStickProps) => {
+const StickArea = (props: TStickAreaProps) => {
   const rootRef = useRef()
 
   let [sectionClassName, setSectionClassName] = useState(style.init)
@@ -68,11 +68,11 @@ const UiStickArea = (props: TUiStickProps) => {
   )
 }
 
-UiStickArea.defaultProps = {
+StickArea.defaultProps = {
   // left, right, center
   align: 'right',
   // top, bottom, center
   valign: 'bottom',
 }
 
-export default UiStickArea
+export default StickArea

@@ -1,9 +1,9 @@
 import React, { useState, RefObject, FocusEvent } from "react"
 import { Input as AntdInput, InputRef} from 'antd'
 
-import { TUiInputProps } from "./TUiInputProps"
+import { TInputProps } from "./TInput"
 
-export default React.forwardRef((props: TUiInputProps, ref: RefObject<InputRef>) => {
+export default React.forwardRef((props: TInputProps, ref: RefObject<InputRef>) => {
   const stylePassive = { backgroundColor: '#fff' }
   const styleActive = { backgroundColor: '#e6f7ff' }
   

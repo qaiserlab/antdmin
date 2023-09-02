@@ -1,8 +1,8 @@
 import { RefObject } from 'react'
 import { ButtonProps } from 'antd'
 
-export interface TButtonProps {
+export interface TUiButtonProps {
   ref?: RefObject<HTMLInputElement>
 }
 
-export type TUiButtonProps = ButtonProps & TButtonProps
+export type TButtonProps = ButtonProps & TUiButtonProps

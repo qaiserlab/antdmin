@@ -1,10 +1,10 @@
 import React, { RefObject } from "react"
 import { Menu as AntdMenu } from 'antd'
-import { TUiDataMenuProps } from "./TUiDataMenuProps"
+import { TDataMenuProps } from "./TDataMenu"
 
 const { SubMenu } = AntdMenu
 
-const UiDataMenu = React.forwardRef((props: TUiDataMenuProps, ref: RefObject<AntdMenu>) => {
+const DataMenu = React.forwardRef((props: TDataMenuProps, ref: RefObject<AntdMenu>) => {
   const filteredProps = { ...props }
   delete filteredProps.dataSource
 
@@ -58,7 +58,7 @@ const UiDataMenu = React.forwardRef((props: TUiDataMenuProps, ref: RefObject<Ant
   )
 })
 
-UiDataMenu.defaultProps = {
+DataMenu.defaultProps = {
   dataSource: [],
   // horizontal, vertical, inline
   mode: 'horizontal',
@@ -69,4 +69,4 @@ UiDataMenu.defaultProps = {
   defaultSelectedKeys: [],
 }
 
-export default UiDataMenu
+export default DataMenu

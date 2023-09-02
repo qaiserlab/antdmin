@@ -7,7 +7,7 @@ export interface TBreadcrumbProps {
   url: string
 }
 
-export type TUiUrlBreadcrumbProps = BreadcrumbProps & TBreadcrumbProps
+export type TUrlBreadcrumbProps = BreadcrumbProps & TBreadcrumbProps
 
 export interface DataSourceItem {
   title: string
