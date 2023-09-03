@@ -29,12 +29,16 @@ export default function LoginView() {
     initialValues,
     validationSchema,
     
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values: TLoginForm, { setSubmitting }) => {
+      const { 
+        username, 
+        password,
+      } = values
 
       try {
         const formData = {
-          username: values.username,
-          password: values.password,
+          username,
+          password,
         }
         const response = await apiV1.post(
           '/auth/login',

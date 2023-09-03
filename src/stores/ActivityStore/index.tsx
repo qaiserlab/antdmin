@@ -9,7 +9,11 @@ interface TProps {
 }
 
 function ActivityProvider({ children }: TProps) {
-  const { serverSaid, setServerSaid, clearServerSaid } = useServerSaid()
+  const { 
+    serverSaid, 
+    setServerSaid, 
+    clearServerSaid,
+  } = useServerSaid()
   
   return (
     <Provider value={{ 
