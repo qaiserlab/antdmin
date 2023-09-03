@@ -6,7 +6,7 @@ import { useFormik } from 'formik'
 import { Row, Col, Space, Typography } from 'antd'
 import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
 
-import apiV1 from '@helpers/apiV1'
+import { apiV1 } from '@helpers/ApiHelper'
 import Input from '@components/Input/Input'
 import Button from '@components/Button/Button'
 import { ActivityStore } from '@stores/ActivityStore'

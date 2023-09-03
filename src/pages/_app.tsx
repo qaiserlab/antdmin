@@ -1,11 +1,11 @@
 import 'antd/dist/antd.css'
 import '@styles/global.scss'
 
-import applyPrototypes from '@helpers/applyPrototypes'
+import { prototypeHelper } from '@helpers/PrototypeHelper'
 import { ActivityProvider } from '@stores/ActivityStore'
 import { AuthProvider } from '@stores/AuthStore'
 
-applyPrototypes()
+prototypeHelper.applyAll()
 
 export default function App({ Component, pageProps }) {
   return (

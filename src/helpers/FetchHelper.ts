@@ -1,4 +1,4 @@
-export class Api {
+export class FetchHelper {
   baseUrl: string
   accessToken: string
 
@@ -87,4 +87,4 @@ export class Api {
   }
 }
 
-export const api = new Api(`${process.env.APP_HOST}/api?action=`)
+export const api = new FetchHelper(`${process.env.APP_HOST}/api?action=`)

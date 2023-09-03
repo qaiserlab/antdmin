@@ -1,7 +1,7 @@
-import { Api } from '@helpers/Api'
+import { FetchHelper } from '@helpers/FetchHelper'
 
 export default async function forwardApi(req: any, res: any) {
-  const api = new Api(`${process.env.API_HOST}/v1`)
+  const api = new FetchHelper(`${process.env.API_HOST}/v1`)
 
   if (req.method === 'GET' && !req.query.action) {
     res.status(200).json({ 

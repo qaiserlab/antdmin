@@ -6,7 +6,7 @@ import { SaveOutlined, ArrowLeftOutlined } from "@ant-design/icons"
 import { useFormik } from 'formik'
 import { AxiosError } from 'axios'
 
-import apiV1 from '@helpers/apiV1'
+import { apiV1 } from '@helpers/ApiHelper'
 import StickArea from '@components/StickArea/StickArea'
 import { ActivityStore } from '@stores/ActivityStore'
 import { TProps, initialValues, validationSchema } from './UserSchema'
@@ -14,11 +14,12 @@ import { TProps, initialValues, validationSchema } from './UserSchema'
 const { Text } = Typography
 
 export default function UserForm(props: TProps) {
+  const router = useRouter()
+
   const isNew = props.isNew
   const id = props.id
   const title = (isNew)?'New':'Edit'
 
-  const router = useRouter()
   const { setServerSaid, clearServerSaid } = useContext(ActivityStore)
 
   const [isLoading, setIsLoading] = useState(false)

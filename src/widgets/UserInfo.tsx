@@ -4,13 +4,14 @@ import { Spin, Space, Modal, notification } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 // import { CloseCircleOutlined } from '@ant-design/icons'
 
-import apiV1 from '@helpers/apiV1'
+import { apiV1 } from '@helpers/ApiHelper'
 import { AuthStore } from '@stores/AuthStore'
 
 // const { confirm } = Modal
 
 export default function UserInfo() {
   const router = useRouter()
+
   const { state, dispatch } = useContext(AuthStore)
   const [isLoading, setIsLoading] = useState(false)
 
