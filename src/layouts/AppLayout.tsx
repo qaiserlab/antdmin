@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { Layout, Space, Drawer, Button } from 'antd'
 import { DashboardOutlined, MenuOutlined, CloseOutlined, SettingOutlined } from '@ant-design/icons'
 
+import useEnvyConfig from '@config/useEnvyConfig'
 import UrlBreadcrumb from '@components/UrlBreadcrumb/UrlBreadcrumb'
 import RootLayout from '@layouts/RootLayout'
 import UserInfo from '@widgets/UserInfo'
@@ -13,7 +14,9 @@ import ServerAlert from '@widgets/ServerAlert'
 const { Header, Content, Footer, Sider } = Layout
 
 export default function AppLayout({ children }: TWrapperProps) {
+  const envyConfig = useEnvyConfig()
   const router = useRouter()
+
   const pathName = router.pathname
   const xPathName = pathName.split('/[')
   const pathOnly = (xPathName.length >= 1)?xPathName[0]:'/'
@@ -33,6 +36,28 @@ export default function AppLayout({ children }: TWrapperProps) {
       setBreadcrumbAlign('right')
       setCollapsedWidth(0)
     }
+  }
+
+  const handleShowEnvy = () => {
+    const {
+      NODE_ENV,
+      APP_NAME,
+      APP_VERSION,
+      APP_PORT,
+      APP_HOST,
+      API_HOST,
+      API_ACCESS_KEY,
+    } = envyConfig
+
+    alert(`
+    NODE_ENV: ${NODE_ENV}
+    APP_NAME: ${APP_NAME}
+    APP_VERSION: ${APP_VERSION}
+    APP_PORT: ${APP_PORT}
+    APP_HOST: ${APP_HOST}
+    API_HOST: ${API_HOST}
+    API_ACCESS_KEY: ${API_ACCESS_KEY}
+    `)
   }
 
   return (
@@ -91,7 +116,8 @@ export default function AppLayout({ children }: TWrapperProps) {
           </Content>
 
           <Footer id={'footer'}>
-            Next.js Admin ©2021 Created by QaiserLab/Fadlun Anaturdasa Wibawa
+            <strong onDoubleClick={handleShowEnvy}>{envyConfig.APP_NAME}</strong>&nbsp;
+            ©2021 Created by QaiserLab/Fadlun Anaturdasa Wibawa
           </Footer>
         </Layout>
       </Layout>
