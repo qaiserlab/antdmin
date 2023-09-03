@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Layout, Space, Drawer, Button } from 'antd'
 import { DashboardOutlined, MenuOutlined, CloseOutlined, SettingOutlined } from '@ant-design/icons'
 
-import useEnvyConfig from '@config/useEnvyConfig'
+import config from '@config/AllConfig'
 import UrlBreadcrumb from '@components/UrlBreadcrumb/UrlBreadcrumb'
 import RootLayout from '@layouts/RootLayout'
 import UserInfo from '@widgets/UserInfo'
@@ -14,7 +14,6 @@ import ServerAlert from '@widgets/ServerAlert'
 const { Header, Content, Footer, Sider } = Layout
 
 export default function AppLayout({ children }: TWrapperProps) {
-  const envyConfig = useEnvyConfig()
   const router = useRouter()
 
   const pathName = router.pathname
@@ -47,7 +46,7 @@ export default function AppLayout({ children }: TWrapperProps) {
       APP_HOST,
       API_HOST,
       API_ACCESS_KEY,
-    } = envyConfig
+    } = config.envy
 
     alert(`
     NODE_ENV: ${NODE_ENV}
@@ -116,7 +115,7 @@ export default function AppLayout({ children }: TWrapperProps) {
           </Content>
 
           <Footer id={'footer'}>
-            <strong onDoubleClick={handleShowEnvy}>{envyConfig.APP_NAME}</strong>&nbsp;
+            <strong onDoubleClick={handleShowEnvy}>{config.envy.APP_NAME}</strong>&nbsp;
             ©2021 Created by QaiserLab/Fadlun Anaturdasa Wibawa
           </Footer>
         </Layout>

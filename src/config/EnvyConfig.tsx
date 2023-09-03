@@ -1,4 +1,4 @@
-export default function useEnvyConfig() {
+export default function EnvyConfig() {
   return {
     NODE_ENV: String(process.env.NODE_ENV),
     APP_NAME: String(process.env.APP_NAME),

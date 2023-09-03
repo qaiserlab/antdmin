@@ -4,7 +4,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons"
 
-export default function useSettingMenuConfig() {
+export default function SettingMenuConfig() {
   return [
     { 
       id: '77117331-e96b-4d27-93cd-043fa8131815',

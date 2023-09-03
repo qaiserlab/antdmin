@@ -1,11 +1,10 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import useMainMenuConfig from '@config/useMainMenuConfig'
+import config from '@config/AllConfig'
 import DataMenu from '@components/DataMenu/DataMenu'
 
 export default function MainMenu() {
-  const mainMenuConfig = useMainMenuConfig()
   const router = useRouter()
 
   const selectedKey = router.pathname
@@ -21,7 +20,7 @@ export default function MainMenu() {
       <DataMenu 
         theme={'dark'} 
         mode={'inline'} 
-        dataSource={mainMenuConfig} 
+        dataSource={config.mainMenu} 
         onSelect={handleSelect} 
         defaultOpenKeys={[openKey]}
         defaultSelectedKeys={[selectedKey]}

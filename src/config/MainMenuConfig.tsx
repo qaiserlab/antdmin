@@ -5,7 +5,7 @@ import {
   ReadOutlined,
 } from "@ant-design/icons"
 
-export default function useMainMenuConfig() {
+export default function MainMenuConfig() {
   return [
     { 
       id: 'ed054dd1-78f6-4be9-b9bb-4fc6c790b1c8',
