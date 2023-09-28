@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import jwt from "jsonwebtoken"
 import config from "@config/AllConfig"
 
 const { ACCESS_KEY } = config.envy
@@ -45,12 +46,23 @@ export default function useAuth() {
     }
 
     if (accessToken) {
-      // Parse Access Token here
+      const {
+        // id,
+        firstName,
+        lastName,
+        username,
+        email,
+        roleId,
+        // phoneNumber,
+      }:TUserRecord = jwt.verify(accessToken, ACCESS_KEY)
 
       setMyAccount({
-        firstName: "Fadlun",
-        lastName: "Anaturdasa",
-        fullName: "Fadlun Anaturdasa",
+        fullName: `${firstName} ${lastName}`,
+        firstName,
+        lastName,
+        username,
+        email,
+        roleId,
       })
 
       setIsLoggedIn(true)
