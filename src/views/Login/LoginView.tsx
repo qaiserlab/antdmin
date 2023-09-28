@@ -8,7 +8,6 @@ import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
 
 import { apiV1 } from "@helpers/ApiHelper"
 import { ActivityStore } from "@stores/ActivityStore"
-import useAuth from "@hooks/useAuth"
 import Input from "@components/Input/Input"
 import Button from "@components/Button/Button"
 import StickArea from "@components/StickArea/StickArea"
@@ -20,8 +19,7 @@ const { Text } = Typography
 export default function LoginView() {
   const router = useRouter()
 
-  const { setServerSaid, clearServerSaid } = useContext(ActivityStore)
-  const { saveAuth } = useAuth()
+  const { saveAuth, setServerSaid, clearServerSaid } = useContext(ActivityStore)
 
   const usernameRef = useRef(null)
 
@@ -38,16 +36,16 @@ export default function LoginView() {
           password,
         }
         const response = await apiV1.post("/auth/login", formData)
-        const auth:TAuthRecord = response.data
+        const auth: TAuthRecord = response.data
 
         saveAuth(auth)
-
         clearServerSaid()
+        
         router.push("/")
       } catch (error: AxiosError | any) {
         const response = error?.response
         const status = response?.status
-        const message = response?.data?.message 
+        const message = response?.data?.message
 
         setServerSaid({ status, message })
       } finally {

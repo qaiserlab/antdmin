@@ -5,11 +5,14 @@ import { QuestionOutlined } from '@ant-design/icons'
 
 import config from '@config/AllConfig'
 import DataMenu from '@components/DataMenu/DataMenu'
+import { ActivityStore } from '@stores/ActivityStore'
 // import { AuthStore } from '@stores/AuthStore'
 
 const { confirm } = Modal
 
 export default function SettingMenu() {
+  const { dropAuth } = useContext(ActivityStore)
+
   const router = useRouter()
 
   let selectedKey = router.pathname
@@ -25,7 +28,7 @@ export default function SettingMenu() {
         icon: <QuestionOutlined />,
         content: 'Logout from Application?',
         onOk: () => {
-          // dispatch({ type: 'logout' })
+          dropAuth()
           router.push('/login')
         },
       })

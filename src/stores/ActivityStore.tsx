@@ -1,4 +1,5 @@
 import React, {createContext, useState} from 'react'
+import useAuth from '@stores/useAuth'
 import useServerSaid from '@stores/useServerSaid'
 
 const ActivityStore = createContext(null)
@@ -9,6 +10,13 @@ interface TProps {
 }
 
 function ActivityProvider({ children }: TProps) {
+  const {
+    saveAuth,
+    dropAuth,
+    isLoggedIn,
+    myAccount,
+  } = useAuth()
+
   const { 
     serverSaid, 
     setServerSaid, 
@@ -17,6 +25,12 @@ function ActivityProvider({ children }: TProps) {
   
   return (
     <Provider value={{ 
+      // Auth
+      saveAuth,
+      dropAuth,
+      isLoggedIn,
+      myAccount,
+      // Server Said
       serverSaid, 
       setServerSaid,
       clearServerSaid,

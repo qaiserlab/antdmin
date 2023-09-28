@@ -6,7 +6,7 @@ import { DashboardOutlined, MenuOutlined, CloseOutlined, SettingOutlined } from 
 import config from '@config/AllConfig'
 import UrlBreadcrumb from '@components/UrlBreadcrumb/UrlBreadcrumb'
 import RootLayout from '@layouts/RootLayout'
-import UserInfo from '@widgets/UserInfo'
+import MyAccount from '@widgets/MyAccount'
 import MainMenu from '@widgets/MainMenu'
 import SettingMenu from '@widgets/SettingMenu'
 import ServerAlert from '@widgets/ServerAlert'
@@ -85,7 +85,7 @@ export default function AppLayout({ children }: TWrapperProps) {
 
             <figure>
               <Space>
-                <UserInfo />
+                <MyAccount />
 
                 <Button 
                   icon={<SettingOutlined />} 
