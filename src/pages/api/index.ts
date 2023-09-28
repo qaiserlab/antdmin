@@ -5,7 +5,7 @@ export default async function forwardApi(req: any, res: any) {
 
   if (req.method === 'GET' && !req.query.action) {
     res.status(200).json({ 
-      NODE_ENV: process.env.NODE_ENV,
+      APP_ENV: process.env.APP_ENV,
       APP_NAME: process.env.APP_NAME,
       APP_CODE: process.env.APP_CODE,
       APP_VERSION: process.env.APP_VERSION,

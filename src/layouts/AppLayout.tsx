@@ -39,7 +39,7 @@ export default function AppLayout({ children }: TWrapperProps) {
 
   const handleShowEnvy = () => {
     const {
-      NODE_ENV,
+      APP_ENV,
       APP_NAME,
       APP_VERSION,
       APP_PORT,
@@ -49,7 +49,7 @@ export default function AppLayout({ children }: TWrapperProps) {
     } = config.envy
 
     alert(`
-    NODE_ENV: ${NODE_ENV}
+    APP_ENV: ${APP_ENV}
     APP_NAME: ${APP_NAME}
     APP_VERSION: ${APP_VERSION}
     APP_PORT: ${APP_PORT}

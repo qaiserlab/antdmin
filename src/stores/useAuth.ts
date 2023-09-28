@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react"
+import config from "@config/AllConfig"
+
+const { ACCESS_KEY } = config.envy
 
 export default function useAuth() {
   const [auth, setAuth] = useState<TAuthRecord>()
@@ -31,14 +34,13 @@ export default function useAuth() {
   }
 
   useEffect(() => {
-    let accessToken:string
-    
+    let accessToken: string
+
     if (!auth) {
       accessToken = !localStorage.getItem("accessToken")
         ? sessionStorage.getItem("accessToken")
         : localStorage.getItem("accessToken")
-    }
-    else {
+    } else {
       accessToken = auth.accessToken
     }
 
@@ -52,11 +54,9 @@ export default function useAuth() {
       })
 
       setIsLoggedIn(true)
-    }
-    else {
+    } else {
       setIsLoggedIn(false)
     }
-    
   }, [auth])
 
   return {
