@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 const records:Array<TUserRecord> = [
   {
     id: 'c1e3e130-9ac9-4703-97ab-c090bf75685b',
-    userName: 'admin',
+    username: 'admin',
     firstName: 'Fadlun',
     lastName: 'Anaturdasa',
     email: 'f.anaturdasa@gmail.com',
@@ -22,7 +22,7 @@ function getUsers(req: NextApiRequest, res: NextApiResponse) {
 function postUser(req: NextApiRequest, res: NextApiResponse) {
   const id = `id-${Math.random()}`
   const { 
-    userName, 
+    username, 
     firstName,
     lastName,
     email,
@@ -47,7 +47,7 @@ function postUser(req: NextApiRequest, res: NextApiResponse) {
 
   records.push({
     id,
-    userName,
+    username,
     firstName,
     lastName,
     email,

@@ -94,7 +94,7 @@ export default function UserView() {
 
   const columns = [
     useFilterable({ title: 'Name', dataIndex: 'firstName', onFilter: handleFilter }),
-    useFilterable({ title: 'Username', dataIndex: 'userName', onFilter: handleFilter }),
+    useFilterable({ title: 'Username', dataIndex: 'username', onFilter: handleFilter }),
     useFilterable({ title: 'Email', dataIndex: 'email', onFilter: handleFilter }),
     useFilterable({ title: 'Phone Number', dataIndex: 'phoneNumber', onFilter: handleFilter }),
     {
@@ -109,7 +109,7 @@ export default function UserView() {
               onClick={
                 () => confirm({
                   title: 'Confirm',
-                  content: <p>Delete {record.userName} data?</p>, 
+                  content: <p>Delete {record.username} data?</p>, 
                   onOk: () => handleDelete(record.id),
                 })
               } 

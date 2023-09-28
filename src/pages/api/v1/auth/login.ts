@@ -10,7 +10,7 @@ export default function loginHandler(req: NextApiRequest, res: NextApiResponse) 
 
     const userInfo:TUserRecord = {
       id: 'c1e3e130-9ac9-4703-97ab-c090bf75685b',
-      userName: 'admin',
+      username: 'admin',
       firstName: 'Fadlun',
       lastName: 'Anaturdasa',
       email: 'f.anaturdasa@gmail.com',

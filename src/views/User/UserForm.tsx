@@ -68,7 +68,7 @@ export default function UserForm(props: TProps) {
           
           formik.setFieldValue('firstName', result.data.firstName)
           formik.setFieldValue('lastName', result.data.lastName)
-          formik.setFieldValue('userName', result.data.userName)
+          formik.setFieldValue('username', result.data.username)
           formik.setFieldValue('email', result.data.email)
           // formik.setFieldValue('newPassword', result.data.newPassword)
           // formik.setFieldValue('confirmNewPassword', result.data.confirmNewPassword)
@@ -137,15 +137,15 @@ export default function UserForm(props: TProps) {
               </Col>
               <Col xs={24} lg={21}>
                 <Input 
-                  name={'userName'}
-                  value={formik.values.userName} 
+                  name={'username'}
+                  value={formik.values.username} 
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   disabled={formik.isSubmitting}
-                  status={(formik.errors.userName)?'error':null}
+                  status={(formik.errors.username)?'error':null}
                 />
-                {formik.errors.userName && formik.touched.userName && (
-                  <Text type={'danger'}>{formik.errors.userName}</Text>
+                {formik.errors.username && formik.touched.username && (
+                  <Text type={'danger'}>{formik.errors.username}</Text>
                 )}
               </Col>
 
