@@ -6,6 +6,6 @@ export default function EnvyConfig() {
     APP_PORT: Number(process.env.APP_PORT),
     APP_HOST: Number(process.env.APP_HOST),
     API_HOST: String(process.env.API_HOST),
-    API_ACCESS_KEY: String(process.env.API_ACCESS_KEY),
+    API_KEY: String(process.env.API_KEY),
   }
 }

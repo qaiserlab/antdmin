@@ -10,7 +10,6 @@ import { apiV1 } from '@helpers/ApiHelper'
 import Input from '@components/Input/Input'
 import Button from '@components/Button/Button'
 import { ActivityStore } from '@stores/ActivityStore'
-import { AuthStore } from '@stores/AuthStore'
 import ServerAlert from '@widgets/ServerAlert'
 import { initialValues, validationSchema } from './LoginSchema'
 import StickArea from '@components/StickArea/StickArea'
@@ -21,7 +20,6 @@ export default function LoginView() {
   const router = useRouter()
   
   const { setServerSaid, clearServerSaid } = useContext(ActivityStore)
-  const { dispatch } = useContext(AuthStore)
   
   const usernameRef = useRef(null)
 
@@ -45,15 +43,15 @@ export default function LoginView() {
           formData
         )
         const data = response.data
-        const authInfo = {
-          accessToken: data.accessToken,
-          refreshToken: data.refreshToken,
-        }
+        // const authInfo = {
+        //   accessToken: data.accessToken,
+        //   refreshToken: data.refreshToken,
+        // }
 
-        dispatch({
-          type: 'login',
-          payload: { authInfo }
-        })
+        // dispatch({
+        //   type: 'login',
+        //   payload: { authInfo }
+        // })
 
         clearServerSaid()
         router.push('/')

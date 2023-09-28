@@ -12,6 +12,6 @@ module.exports = {
     APP_HOST: process.env.APP_HOST,
     MOCK_HOST: process.env.MOCK_HOST,
     API_HOST: process.env.API_HOST,
-    API_ACCESS_KEY: process.env.API_ACCESS_KEY,
+    API_KEY: process.env.API_KEY,
   },
 }

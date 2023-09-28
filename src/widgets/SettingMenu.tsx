@@ -5,7 +5,7 @@ import { QuestionOutlined } from '@ant-design/icons'
 
 import config from '@config/AllConfig'
 import DataMenu from '@components/DataMenu/DataMenu'
-import { AuthStore } from '@stores/AuthStore'
+// import { AuthStore } from '@stores/AuthStore'
 
 const { confirm } = Modal
 
@@ -16,7 +16,7 @@ export default function SettingMenu() {
   const xSelectedKey = selectedKey.split('/')
   let openKey = (xSelectedKey.length >= 2)?`/${xSelectedKey[1]}`:''
 
-  const { dispatch } = useContext(AuthStore)
+  // const { dispatch } = useContext(AuthStore)
   
   const handleSelect = ({ key }) => {
     if (key === '/logout') {
@@ -25,7 +25,7 @@ export default function SettingMenu() {
         icon: <QuestionOutlined />,
         content: 'Logout from Application?',
         onOk: () => {
-          dispatch({ type: 'logout' })
+          // dispatch({ type: 'logout' })
           router.push('/login')
         },
       })

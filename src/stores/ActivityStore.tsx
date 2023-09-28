@@ -1,5 +1,5 @@
 import React, {createContext, useState} from 'react'
-import useServerSaid from '@hooks/useServerSaid'
+import useServerSaid from '@stores/useServerSaid'
 
 const ActivityStore = createContext(null)
 const { Provider } = ActivityStore

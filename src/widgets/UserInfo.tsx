@@ -5,19 +5,20 @@ import { UserOutlined } from '@ant-design/icons'
 // import { CloseCircleOutlined } from '@ant-design/icons'
 
 import { apiV1 } from '@helpers/ApiHelper'
-import { AuthStore } from '@stores/AuthStore'
+// import { AuthStore } from '@stores/AuthStore'
 
 // const { confirm } = Modal
 
 export default function UserInfo() {
   const router = useRouter()
 
-  const { state, dispatch } = useContext(AuthStore)
+  // const { state, dispatch } = useContext(AuthStore)
   const [isLoading, setIsLoading] = useState(false)
 
   const refreshData = async () => {
-    if (!state.authInfo.isLogin && localStorage.accessToken) {
-      dispatch({ type: 'refresh' })
+    // if (!state.authInfo.isLogin && localStorage.accessToken) {
+    if (localStorage.accessToken) {
+      // dispatch({ type: 'refresh' })
 
       /*
       try {
@@ -68,8 +69,8 @@ export default function UserInfo() {
       // const result = await response.json()
 
       // if (response.ok) {
-        dispatch({ type: 'logout' })
-        router.push('/login')
+        // dispatch({ type: 'logout' })
+        // router.push('/login')
       // }
       // else {
       //   notification.error({ 
@@ -88,15 +89,16 @@ export default function UserInfo() {
 
   return (
     <Spin spinning={isLoading}>
-      {state.userInfo.firstName && (
+      {/* {state.userInfo.firstName && ( */}
         <Space>
           <UserOutlined />
           <span>
-            {state.userInfo.firstName}&nbsp;
-            {state.userInfo.lastName}
+            {/* {state.userInfo.firstName}&nbsp;
+            {state.userInfo.lastName} */}
+            Admin Name
           </span>
         </Space>
-      )}
+      {/* )} */}
     </Spin>
   )
 }

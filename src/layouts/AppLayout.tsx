@@ -45,7 +45,7 @@ export default function AppLayout({ children }: TWrapperProps) {
       APP_PORT,
       APP_HOST,
       API_HOST,
-      API_ACCESS_KEY,
+      API_KEY,
     } = config.envy
 
     alert(`
@@ -55,7 +55,7 @@ export default function AppLayout({ children }: TWrapperProps) {
     APP_PORT: ${APP_PORT}
     APP_HOST: ${APP_HOST}
     API_HOST: ${API_HOST}
-    API_ACCESS_KEY: ${API_ACCESS_KEY}
+    API_KEY: ${API_KEY}
     `)
   }
 

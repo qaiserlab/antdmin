@@ -5,7 +5,7 @@ export default function loginHandler(req: NextApiRequest, res: NextApiResponse) 
   const { method } = req
 
   if (method === 'POST') {
-    const API_ACCESS_KEY:string = process.env.API_ACCESS_KEY
+    const API_KEY:string = process.env.API_KEY
     const { username, password } = req.body
 
     const userInfo:TUserRecord = {
@@ -20,13 +20,13 @@ export default function loginHandler(req: NextApiRequest, res: NextApiResponse) 
     if (username === 'admin' && password === 'admin') {
       const accessToken = jwt.sign(
         userInfo, 
-        API_ACCESS_KEY, 
+        API_KEY, 
         { expiresIn: '3h' }
       )
 
       const refreshToken = jwt.sign(
-        { key: `${Math.random()}.${API_ACCESS_KEY}` }, 
-        API_ACCESS_KEY, 
+        { key: `${Math.random()}.${API_KEY}` }, 
+        API_KEY, 
         { expiresIn: '5h' }
       )
 

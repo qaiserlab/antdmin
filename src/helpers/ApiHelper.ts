@@ -5,7 +5,7 @@ export class ApiHelper {
   mkApiV1() {
 
     const apiV1 = axios.create({ 
-      baseURL: `${process.env.API_HOST}/api/v1` 
+      baseURL: `${process.env.API_HOST}/v1` 
     })
     
     apiV1.interceptors.request.use(function (config) {
