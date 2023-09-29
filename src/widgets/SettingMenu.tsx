@@ -4,9 +4,8 @@ import { Modal } from 'antd'
 import { QuestionOutlined } from '@ant-design/icons'
 
 import config from '@config/AllConfig'
-import DataMenu from '@components/DataMenu/DataMenu'
 import { ActivityStore } from '@stores/ActivityStore'
-// import { AuthStore } from '@stores/AuthStore'
+import DataMenu from '@components/DataMenu/DataMenu'
 
 const { confirm } = Modal
 
@@ -19,8 +18,6 @@ export default function SettingMenu() {
   const xSelectedKey = selectedKey.split('/')
   let openKey = (xSelectedKey.length >= 2)?`/${xSelectedKey[1]}`:''
 
-  // const { dispatch } = useContext(AuthStore)
-  
   const handleSelect = ({ key }) => {
     if (key === '/logout') {
       return confirm({
@@ -33,7 +30,7 @@ export default function SettingMenu() {
         },
       })
     }
-
+    
     router.push(key)
   }
 

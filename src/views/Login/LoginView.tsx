@@ -17,42 +17,47 @@ import { initialValues, validationSchema } from "./LoginSchema"
 const { Text } = Typography
 
 export default function LoginView() {
+  const { setServerBox, resetServerBox, saveAuth } = useContext(ActivityStore)
   const router = useRouter()
-
-  const { saveAuth, setServerSaid, clearServerSaid } = useContext(ActivityStore)
-
   const usernameRef = useRef(null)
 
   const formik = useFormik({
     initialValues,
     validationSchema,
 
-    onSubmit: async (values: Partial<TUserRecord>, { setSubmitting }) => {
+    onSubmit: (values: Partial<TUserRecord>, { setSubmitting }) => {
       const { username, password } = values
 
-      try {
-        const formData = {
-          username,
-          password,
-        }
-        const response = await apiV1.post("/auth/login", formData)
-        const auth: TAuthRecord = response.data
-
-        saveAuth(auth)
-        clearServerSaid()
-        
-        router.push("/")
-      } catch (error: AxiosError | any) {
-        const response = error?.response
-        const status = response?.status
-        const message = response?.data?.message
-
-        setServerSaid({ status, message })
-      } finally {
-        setSubmitting(false)
+      const formData = {
+        username,
+        password,
       }
+
+      apiV1
+        .post("/auth/login", formData)
+        .then((response) => {
+          const auth: TAuthRecord = response.data
+
+          saveAuth(auth)
+          resetServerBox()
+
+          router.push("/")
+        })
+        .catch((error: AxiosError | any) => {
+          const response = error?.response
+          const status = response?.status
+          const message = response?.data?.message
+
+          setServerBox({ status, message })
+        })
+        .finally(() => setSubmitting(false))
     },
   })
+
+  const handleReset = () => {
+    formik.resetForm()
+    usernameRef.current.focus()
+  }
 
   useEffect(() => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
@@ -60,11 +65,6 @@ export default function LoginView() {
       usernameRef.current.focus()
     }
   }, [])
-
-  const handleReset = () => {
-    formik.resetForm()
-    usernameRef.current.focus()
-  }
 
   return (
     <React.Fragment>

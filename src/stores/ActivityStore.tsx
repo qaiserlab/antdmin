@@ -1,6 +1,6 @@
 import React, {createContext, useState} from 'react'
 import useAuth from '@stores/useAuth'
-import useServerSaid from '@stores/useServerSaid'
+import useServerBox from '@stores/useServerBox'
 
 const ActivityStore = createContext(null)
 const { Provider } = ActivityStore
@@ -18,10 +18,10 @@ function ActivityProvider({ children }: TProps) {
   } = useAuth()
 
   const { 
-    serverSaid, 
-    setServerSaid, 
-    clearServerSaid,
-  } = useServerSaid()
+    serverBox, 
+    setServerBox, 
+    resetServerBox,
+  } = useServerBox()
   
   return (
     <Provider value={{ 
@@ -31,9 +31,9 @@ function ActivityProvider({ children }: TProps) {
       isLoggedIn,
       myAccount,
       // Server Said
-      serverSaid, 
-      setServerSaid,
-      clearServerSaid,
+      serverBox, 
+      setServerBox,
+      resetServerBox,
     }}>
       {children}
     </Provider>

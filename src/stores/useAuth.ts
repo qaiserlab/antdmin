@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import jwt from "jsonwebtoken"
 import config from "@config/AllConfig"
+import { apiV1 } from "@helpers/ApiHelper"
 
 const { ACCESS_KEY } = config.envy
 
@@ -29,9 +30,11 @@ export default function useAuth() {
   }
 
   const dropAuth = () => {
-    setAuth(null)
-    dropStorage(localStorage)
-    dropStorage(sessionStorage)
+    apiV1.get("auth/logout").finally(() => {
+      setAuth(null)
+      dropStorage(localStorage)
+      dropStorage(sessionStorage)
+    })
   }
 
   useEffect(() => {
@@ -53,8 +56,8 @@ export default function useAuth() {
         username,
         email,
         roleId,
-        // phoneNumber,
-      }:TUserRecord = jwt.verify(accessToken, ACCESS_KEY)
+      }: // phoneNumber,
+      TUserRecord = jwt.verify(accessToken, ACCESS_KEY)
 
       setMyAccount({
         fullName: `${firstName} ${lastName}`,

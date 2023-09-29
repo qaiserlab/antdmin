@@ -20,7 +20,7 @@ export default function UserForm(props: TProps) {
   const id = props.id
   const title = (isNew)?'New':'Edit'
 
-  const { setServerSaid, clearServerSaid } = useContext(ActivityStore)
+  const { setServerBox, resetServerBox } = useContext(ActivityStore)
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -42,13 +42,13 @@ export default function UserForm(props: TProps) {
           await apiV1.put(`/users/${id}`, data)
         }
       
-        clearServerSaid()
+        resetServerBox()
         router.push('/user')
       }
       catch (error: AxiosError | any) {
         if (error.response) {
           const result = error.response.data
-          setServerSaid(result)
+          setServerBox(result)
         }
       }
       finally {
@@ -77,7 +77,7 @@ export default function UserForm(props: TProps) {
         catch (error: AxiosError | any) {
           if (error.response) {
             const result = error.response.data
-            setServerSaid(result)
+            setServerBox(result)
           }
         }
         finally {
