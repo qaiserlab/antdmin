@@ -6,7 +6,7 @@ import { DashboardOutlined, MenuOutlined, CloseOutlined, SettingOutlined } from 
 import config from '@config/AllConfig'
 import UrlBreadcrumb from '@components/UrlBreadcrumb/UrlBreadcrumb'
 import RootLayout from '@layouts/RootLayout'
-import UserInfo from '@widgets/UserInfo'
+import MyAccount from '@widgets/MyAccount'
 import MainMenu from '@widgets/MainMenu'
 import SettingMenu from '@widgets/SettingMenu'
 import ServerAlert from '@widgets/ServerAlert'
@@ -39,23 +39,23 @@ export default function AppLayout({ children }: TWrapperProps) {
 
   const handleShowEnvy = () => {
     const {
-      NODE_ENV,
+      APP_ENV,
       APP_NAME,
       APP_VERSION,
       APP_PORT,
       APP_HOST,
       API_HOST,
-      API_ACCESS_KEY,
+      API_KEY,
     } = config.envy
 
     alert(`
-    NODE_ENV: ${NODE_ENV}
+    APP_ENV: ${APP_ENV}
     APP_NAME: ${APP_NAME}
     APP_VERSION: ${APP_VERSION}
     APP_PORT: ${APP_PORT}
     APP_HOST: ${APP_HOST}
     API_HOST: ${API_HOST}
-    API_ACCESS_KEY: ${API_ACCESS_KEY}
+    API_KEY: ${API_KEY}
     `)
   }
 
@@ -85,7 +85,7 @@ export default function AppLayout({ children }: TWrapperProps) {
 
             <figure>
               <Space>
-                <UserInfo />
+                <MyAccount />
 
                 <Button 
                   icon={<SettingOutlined />} 

@@ -8,7 +8,7 @@ export interface TProps {
 export const initialValues = {
   firstName: '',
   lastName: '',
-  userName: '',
+  username: '',
   email: '',
   phoneNumber: '',
   newPassword: '',
@@ -20,7 +20,7 @@ export const validationSchema = Yup.object().shape({
     .max(50, "First Name can't more than 50 characters")
     .required("First Name required"),
   lastName: Yup.string(),
-  userName: Yup.string()
+  username: Yup.string()
     .max(50, "Username can't more than 50 characters")
     .required("Username required"),
   email: Yup.string()

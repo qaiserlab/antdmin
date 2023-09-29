@@ -13,12 +13,12 @@ import { ActivityStore } from '@stores/ActivityStore'
 
 const { confirm } = Modal
 
-export default function UserView() {
+export default function UserList() {
   const router = useRouter()
   
   const pageSize = 5
 
-  const { setServerSaid } = useContext(ActivityStore)
+  const { setServerBox } = useContext(ActivityStore)
 
   const [isLoading, setIsLoading] = useState(false)
   const [records, setRecords] = useState([])
@@ -46,7 +46,7 @@ export default function UserView() {
     catch (error: AxiosError | any) {
       if (error.response) {
         const result = error.response.data
-        setServerSaid(result)
+        setServerBox(result)
       }
     }
   }
@@ -72,8 +72,8 @@ export default function UserView() {
       })
       const result = response.data
   
-      setRecords(result.data)
-      setTotal(result.total)
+      setRecords(result.users)
+      setTotal(result.count)
       setCurrentPage(page)
     }
     catch (error: AxiosError | any) {
@@ -82,7 +82,7 @@ export default function UserView() {
 
       if (error.response) {
         const result = error.response.data
-        setServerSaid(result)
+        setServerBox(result)
       }
     }
     finally {
@@ -94,7 +94,7 @@ export default function UserView() {
 
   const columns = [
     useFilterable({ title: 'Name', dataIndex: 'firstName', onFilter: handleFilter }),
-    useFilterable({ title: 'Username', dataIndex: 'userName', onFilter: handleFilter }),
+    useFilterable({ title: 'Username', dataIndex: 'username', onFilter: handleFilter }),
     useFilterable({ title: 'Email', dataIndex: 'email', onFilter: handleFilter }),
     useFilterable({ title: 'Phone Number', dataIndex: 'phoneNumber', onFilter: handleFilter }),
     {
@@ -109,7 +109,7 @@ export default function UserView() {
               onClick={
                 () => confirm({
                   title: 'Confirm',
-                  content: <p>Delete {record.userName} data?</p>, 
+                  content: <p>Delete {record.username} data?</p>, 
                   onOk: () => handleDelete(record.id),
                 })
               } 
