@@ -28,7 +28,7 @@ export default function UserForm(props: TProps) {
     initialValues,
     validationSchema,
     
-    onSubmit: async (values: TUserForm, { setSubmitting }) => {
+    onSubmit: async (values: Partial<TUserRecord>, { setSubmitting }) => {
       try {
         const data = {
           ...values,

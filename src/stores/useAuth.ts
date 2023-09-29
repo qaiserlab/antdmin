@@ -51,10 +51,10 @@ export default function useAuth() {
   }
 
   const isLoggedIn = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise<TUserRecord>((resolve, reject) => {
       const accessToken = getAccessToken()
       if (!accessToken) reject()
-      jwt.verify(accessToken, ACCESS_KEY, (err, decoded: TUserRecord) => {
+      jwt.verify(accessToken, ACCESS_KEY, (err: any, decoded: TUserRecord) => {
         if (err) {
           console.log(err)
           return reject()

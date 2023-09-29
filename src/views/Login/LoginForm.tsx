@@ -34,9 +34,9 @@ export default function LoginView() {
       }
 
       apiV1
-        .post("/auth/login", formData)
+        .post<TAuthRecord>("/auth/login", formData)
         .then((response) => {
-          const auth: TAuthRecord = response.data
+          const auth = response.data
 
           saveAuth(auth)
           resetServerBox()

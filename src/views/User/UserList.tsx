@@ -7,6 +7,7 @@ import { AxiosError } from 'axios'
 
 import { apiV1 } from '@helpers/ApiHelper'
 import useFilterable from '@hooks/useFilterable'
+import useUser from '@hooks/useUser'
 import StickArea from '@components/StickArea/StickArea'
 import Button from '@components/Button/Button'
 import { ActivityStore } from '@stores/ActivityStore'
@@ -14,12 +15,10 @@ import { ActivityStore } from '@stores/ActivityStore'
 const { confirm } = Modal
 
 export default function UserList() {
+  const { setServerBox } = useContext(ActivityStore)
   const router = useRouter()
   
   const pageSize = 5
-
-  const { setServerBox } = useContext(ActivityStore)
-
   const [isLoading, setIsLoading] = useState(false)
   const [records, setRecords] = useState([])
   const [total, setTotal] = useState(0)
