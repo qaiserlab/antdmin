@@ -7,7 +7,6 @@ const { ACCESS_KEY } = config.envy
 
 export default function useAuth() {
   const [auth, setAuth] = useState<TAuthRecord>()
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
   const [myAccount, setMyAccount] = useState<Partial<TUserRecord>>()
 
   const saveAuth = (_auth: TAuthRecord, rememberMe: boolean = true) => {
@@ -37,7 +36,7 @@ export default function useAuth() {
     })
   }
 
-  useEffect(() => {
+  const getAccessToken = () => {
     let accessToken: string
 
     if (!auth) {
@@ -48,17 +47,26 @@ export default function useAuth() {
       accessToken = auth.accessToken
     }
 
-    if (accessToken) {
-      const {
-        // id,
-        firstName,
-        lastName,
-        username,
-        email,
-        roleId,
-      }: // phoneNumber,
-      TUserRecord = jwt.verify(accessToken, ACCESS_KEY)
+    return accessToken
+  }
 
+  const isLoggedIn = () => {
+    return new Promise((resolve, reject) => {
+      const accessToken = getAccessToken()
+      if (!accessToken) reject()
+      jwt.verify(accessToken, ACCESS_KEY, (err, decoded: TUserRecord) => {
+        if (err) {
+          console.log(err)
+          return reject()
+        }
+
+        resolve(decoded)
+      })
+    })
+  }
+
+  useEffect(() => {
+    isLoggedIn().then(({ firstName, lastName, username, email, roleId }) => {
       setMyAccount({
         fullName: `${firstName} ${lastName}`,
         firstName,
@@ -67,11 +75,7 @@ export default function useAuth() {
         email,
         roleId,
       })
-
-      setIsLoggedIn(true)
-    } else {
-      setIsLoggedIn(false)
-    }
+    })
   }, [auth])
 
   return {
