@@ -3,6 +3,9 @@ import { apiV1 } from "@helpers/ApiHelper"
 
 export default function useUser() {
   const [loading, setLoading] = useState(false)
+  const [pageActive, setPageActive] = useState(1)
+  const [pageSize, setPageSize] = useState<number>()
+  const [pageNum, setPageNum] = useState<number>()
   const [users, setUsers] = useState<TUserRecord[]>([])
   const [userActive, setUserActive] = useState<TUserRecord>()
 
@@ -10,12 +13,23 @@ export default function useUser() {
     setLoading(true)
     return new Promise<string>((resolve, reject) => {
       apiV1
-        .get<{ message: string; users: TUserRecord[] }>("/users", {
+        .get<{
+          message: string
+          users: TUserRecord[]
+          page: number
+          pageSize: number
+          pageNum: number
+        }>("/users", {
           params: { page },
         })
         .then((response) => {
           const data = response.data
+
           setUsers(data.users)
+          setPageActive(data.page)
+          setPageSize(data.pageSize)
+          setPageNum(data.pageNum)
+
           resolve(data.message)
         })
         .catch((error) => {
@@ -63,6 +77,9 @@ export default function useUser() {
 
   return {
     loading,
+    pageActive,
+    pageSize,
+    pageNum,
     users,
     userActive,
     fetchPaginateUsers,
