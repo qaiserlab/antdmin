@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "node ./next-dev",
     "start": "node ./next-start",
-    "build": "next build"
+    "build": "next build",
+    "export": "next export"
   },
   "dependencies": {
     "@ant-design/icons": "4.7.0",
