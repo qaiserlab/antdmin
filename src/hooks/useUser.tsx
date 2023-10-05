@@ -6,6 +6,7 @@ export default function useUser() {
   const [pageActive, setPageActive] = useState(1)
   const [pageSize, setPageSize] = useState<number>()
   const [pageNum, setPageNum] = useState<number>()
+  const [count, setCount] = useState<number>()
   const [users, setUsers] = useState<TUserRecord[]>([])
   const [userActive, setUserActive] = useState<TUserRecord>()
 
@@ -19,6 +20,7 @@ export default function useUser() {
           page: number
           pageSize: number
           pageNum: number
+          count: number
         }>("/users", {
           params: { page },
         })
@@ -29,6 +31,7 @@ export default function useUser() {
           setPageActive(data.page)
           setPageSize(data.pageSize)
           setPageNum(data.pageNum)
+          setCount(data.count)
 
           resolve(data.message)
         })
@@ -80,6 +83,7 @@ export default function useUser() {
     pageActive,
     pageSize,
     pageNum,
+    count,
     users,
     userActive,
     fetchPaginateUsers,

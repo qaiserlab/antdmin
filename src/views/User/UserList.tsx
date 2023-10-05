@@ -22,8 +22,15 @@ const { confirm } = Modal
 export default function UserList() {
   const { setServerBox } = useContext(ActivityStore)
   const router = useRouter()
-  const { users, fetchPaginateUsers, pageActive, pageSize, pageNum, loading } =
-    useUser()
+  const {
+    users,
+    fetchPaginateUsers,
+    pageActive,
+    pageSize,
+    pageNum,
+    count,
+    loading,
+  } = useUser()
 
   useEffect(() => {
     handleRefresh()
@@ -149,12 +156,12 @@ export default function UserList() {
             rowKey={(user) => user.id}
             pagination={false}
           />
-
-          {pageNum > pageSize && (
+          
+          {count > pageSize && (
             <Pagination
               onChange={(page: number) => handleRefresh(page)}
               pageSize={pageSize}
-              total={pageNum}
+              total={count}
               current={pageActive}
             />
           )}
