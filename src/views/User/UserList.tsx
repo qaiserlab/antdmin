@@ -25,8 +25,6 @@ export default function UserList() {
   const { users, fetchPaginateUsers, pageActive, pageSize, pageNum, loading } =
     useUser()
 
-  const [total, setTotal] = useState(0)
-
   useEffect(() => {
     handleRefresh()
   }, [])
@@ -76,10 +74,10 @@ export default function UserList() {
       const result = response.data
 
       // setRecords(result.users)
-      setTotal(result.count)
+      // setTotal(result.count)
     } catch (error: AxiosError | any) {
       // setRecords([])
-      setTotal(0)
+      // setTotal(0)
 
       if (error.response) {
         const result = error.response.data
@@ -152,7 +150,7 @@ export default function UserList() {
             pagination={false}
           />
 
-          {total > pageSize && (
+          {pageNum > pageSize && (
             <Pagination
               onChange={(page: number) => handleRefresh(page)}
               pageSize={pageSize}
