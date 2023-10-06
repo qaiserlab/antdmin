@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useEffect } from "react"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import { Space, Table, Pagination, Modal } from "antd"
+import { Space, Table, Pagination } from "antd"
+import Swal from "sweetalert2"
 import {
   FileTextOutlined,
   EditOutlined,
@@ -9,16 +10,12 @@ import {
   ReloadOutlined,
 } from "@ant-design/icons"
 
-import { ActivityStore } from "@stores/ActivityStore"
 import useFilterable from "@hooks/useFilterable"
 import useUser from "@hooks/useUser"
 import StickArea from "@components/StickArea/StickArea"
 import Button from "@components/Button/Button"
 
-const { confirm } = Modal
-
 export default function UserList() {
-  const { setServerBox } = useContext(ActivityStore)
   const router = useRouter()
   const {
     users,
@@ -32,7 +29,7 @@ export default function UserList() {
 
   const handleRefresh = async (page?: number, params?: object) => {
     fetchPaginateUsers(page, params).catch((message: string) => {
-      alert(message)
+      Swal.fire("Error", message, "error")
     })
   }
 
@@ -44,9 +41,22 @@ export default function UserList() {
   const handleEdit = (id: string) => router.push(`/user/edit/${id}`)
 
   const handleDelete = async (id: string) => {
-    deleteUserById(id)
-      .then(() => handleRefresh(pageActive))
-      .catch((message) => alert(message))
+    Swal.fire({
+      icon: "question",
+      title: "Confirm",
+      text: "Delete this data?",
+      showCancelButton: true,
+      confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteUserById(id)
+          .then((message: string) => {
+            Swal.fire("Success", message, "success")
+            handleRefresh(pageActive)
+          })
+          .catch((message: string) => Swal.fire("Error", message, "error"))
+      }
+    })
   }
 
   const columns: any = [
@@ -82,13 +92,7 @@ export default function UserList() {
             />
             <Button
               icon={<DeleteOutlined />}
-              onClick={() =>
-                confirm({
-                  title: "Confirm",
-                  content: <p>Delete {record.username} data?</p>,
-                  onOk: () => handleDelete(record.id),
-                })
-              }
+              onClick={() => handleDelete(record.id)}
             />
           </Space>
         )
@@ -101,7 +105,7 @@ export default function UserList() {
   }, [])
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>User Management</title>
       </Head>
@@ -144,6 +148,6 @@ export default function UserList() {
           </Space>
         </StickArea>
       </section>
-    </React.Fragment>
+    </>
   )
 }
