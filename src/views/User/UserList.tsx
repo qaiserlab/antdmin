@@ -8,14 +8,12 @@ import {
   DeleteOutlined,
   ReloadOutlined,
 } from "@ant-design/icons"
-import { AxiosError } from "axios"
 
-import { apiV1 } from "@helpers/ApiHelper"
+import { ActivityStore } from "@stores/ActivityStore"
 import useFilterable from "@hooks/useFilterable"
 import useUser from "@hooks/useUser"
 import StickArea from "@components/StickArea/StickArea"
 import Button from "@components/Button/Button"
-import { ActivityStore } from "@stores/ActivityStore"
 
 const { confirm } = Modal
 
@@ -25,75 +23,31 @@ export default function UserList() {
   const {
     users,
     fetchPaginateUsers,
+    deleteUserById,
     pageActive,
     pageSize,
-    pageNum,
     count,
     loading,
   } = useUser()
 
-  useEffect(() => {
-    handleRefresh()
-  }, [])
+  const handleRefresh = async (page?: number, params?: object) => {
+    fetchPaginateUsers(page, params).catch((message: string) => {
+      alert(message)
+    })
+  }
 
   const handleFilter = (dataIndex: string, keyword: string) => {
-    handleRefresh(1, [
-      {
-        id: dataIndex,
-        value: keyword,
-      },
-    ])
-  }
-
-  const handleEdit = (id: string) => router.push(`/user/edit/${id}`)
-
-  const handleDelete = async (id: string) => {
-    try {
-      await apiV1.delete(`/user/force-delete/${id}`)
-      handleRefresh()
-    } catch (error: AxiosError | any) {
-      if (error.response) {
-        const result = error.response.data
-        setServerBox(result)
-      }
-    }
-  }
-
-  const handleRefresh = async (
-    page?: number,
-    filter?: Array<{ id: string; value: string }>
-  ) => {
-    fetchPaginateUsers()
-
-    try {
-      page = page ? page : 1
-      filter = filter ? filter : []
-
-      const filtered = JSON.stringify(filter)
-
-      const response = await apiV1.get("/users", {
-        data: {
-          page,
-          pageSize,
-          filtered,
-        },
-      })
-      const result = response.data
-
-      // setRecords(result.users)
-      // setTotal(result.count)
-    } catch (error: AxiosError | any) {
-      // setRecords([])
-      // setTotal(0)
-
-      if (error.response) {
-        const result = error.response.data
-        setServerBox(result)
-      }
-    }
+    handleRefresh(1, { [dataIndex]: keyword })
   }
 
   const handleNew = () => router.push("/user/new")
+  const handleEdit = (id: string) => router.push(`/user/edit/${id}`)
+
+  const handleDelete = async (id: string) => {
+    deleteUserById(id)
+      .then(() => handleRefresh(pageActive))
+      .catch((message) => alert(message))
+  }
 
   const columns: any = [
     useFilterable({
@@ -142,6 +96,10 @@ export default function UserList() {
     },
   ]
 
+  useEffect(() => {
+    handleRefresh()
+  }, [])
+
   return (
     <React.Fragment>
       <Head>
@@ -156,7 +114,7 @@ export default function UserList() {
             rowKey={(user) => user.id}
             pagination={false}
           />
-          
+
           {count > pageSize && (
             <Pagination
               onChange={(page: number) => handleRefresh(page)}

@@ -10,19 +10,15 @@ export default function useUser() {
   const [users, setUsers] = useState<TUserRecord[]>([])
   const [userActive, setUserActive] = useState<TUserRecord>()
 
-  const fetchPaginateUsers = (page: number = 1) => {
+  const fetchPaginateUsers = (page: number = 1, params?: object) => {
     setLoading(true)
     return new Promise<string>((resolve, reject) => {
       apiV1
-        .get<{
-          message: string
-          users: TUserRecord[]
-          page: number
-          pageSize: number
-          pageNum: number
-          count: number
-        }>("/users", {
-          params: { page },
+        .get<TPagingResponse & { users: TUserRecord[] }>("/users", {
+          params: { 
+            ...params,
+            page,
+          },
         })
         .then((response) => {
           const data = response.data
@@ -43,7 +39,7 @@ export default function useUser() {
     })
   }
 
-  const fetchUserActiveById = (id: number) => {
+  const fetchUserActiveById = (id: string) => {
     setLoading(true)
     return new Promise<string>((resolve, reject) => {
       apiV1
@@ -61,7 +57,7 @@ export default function useUser() {
     })
   }
 
-  const deleteUserActiveById = (id: number) => {
+  const deleteUserById = (id: string) => {
     setLoading(true)
     return new Promise<string>((resolve, reject) => {
       apiV1
@@ -88,6 +84,6 @@ export default function useUser() {
     userActive,
     fetchPaginateUsers,
     fetchUserActiveById,
-    deleteUserActiveById,
+    deleteUserById,
   }
 }
