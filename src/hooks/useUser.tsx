@@ -15,7 +15,7 @@ export default function useUser() {
     return new Promise<string>((resolve, reject) => {
       apiV1
         .get<TPagingResponse & { users: TUserRecord[] }>("/users", {
-          params: { 
+          params: {
             ...params,
             page,
           },
@@ -74,6 +74,40 @@ export default function useUser() {
     })
   }
 
+  const createUser = (formData: TUserRecord) => {
+    setLoading(true)
+    return new Promise<string>((resolve, reject) => {
+      apiV1
+        .post<{ id: string; message: string }>("/users", formData)
+        .then((response) => {
+          const data = response.data
+          resolve(data.message)
+        })
+        .catch((error) => {
+          const data = error?.response?.data
+          reject(data?.message)
+        })
+        .finally(() => setLoading(false))
+    })
+  }
+
+  const updateUser = (id: string, formData: TUserRecord) => {
+    setLoading(true)
+    return new Promise<string>((resolve, reject) => {
+      apiV1
+        .put<{ message: string }>(`/users/${id}`, formData)
+        .then((response) => {
+          const data = response.data
+          resolve(data.message)
+        })
+        .catch((error) => {
+          const data = error?.response?.data
+          reject(data?.message)
+        })
+        .finally(() => setLoading(false))
+    })
+  }
+
   return {
     loading,
     pageActive,
@@ -85,5 +119,7 @@ export default function useUser() {
     fetchPaginateUsers,
     fetchUserActiveById,
     deleteUserById,
+    createUser,
+    updateUser,
   }
 }
