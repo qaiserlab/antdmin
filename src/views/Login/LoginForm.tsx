@@ -4,8 +4,9 @@ import { useRouter } from "next/router"
 import { AxiosError } from "axios"
 import { useFormik } from "formik"
 import { Row, Col, Space, Typography } from "antd"
-import { LoginOutlined, UndoOutlined } from "@ant-design/icons"
+import { LoginOutlined } from "@ant-design/icons"
 
+import config from '@config/AllConfig'
 import { apiV1 } from "@helpers/ApiHelper"
 import { ActivityStore } from "@stores/ActivityStore"
 import Input from "@components/Input/Input"
@@ -76,9 +77,12 @@ export default function LoginView() {
         <form onSubmit={formik.handleSubmit} style={{ width: "300px" }}>
           <ServerAlert />
 
+          {/* <h1>Welcome to {config.envy.APP_NAME}</h1>
+          <p>Please sign-in to your Account</p> */}
+
           <Row gutter={[8, 16]}>
-            <Col span={6}>Username</Col>
-            <Col span={18}>
+            <Col span={24}>
+              <label>Username or Email</label>
               <Input
                 ref={usernameRef}
                 name={"username"}
@@ -94,8 +98,8 @@ export default function LoginView() {
               )}
             </Col>
 
-            <Col span={6}>Password</Col>
-            <Col span={18}>
+            <Col span={24}>
+              <label>Password</label>
               <Input
                 name="password"
                 placeholder="Password"
@@ -111,22 +115,17 @@ export default function LoginView() {
               )}
             </Col>
 
-            <Col span={6} />
-            <Col span={18}>
-              <Space>
-                <Button
-                  htmlType={"submit"}
-                  type={"primary"}
-                  loading={formik.isSubmitting}
-                >
-                  <LoginOutlined />
-                  Login
-                </Button>
-                <Button onClick={handleReset} disabled={formik.isSubmitting}>
-                  <UndoOutlined />
-                  Reset
-                </Button>
-              </Space>
+            <Col span={24}>
+              <Button
+                htmlType="submit"
+                type="primary"
+                size="large"
+                style={{ width: "100%" }}
+                loading={formik.isSubmitting}
+              >
+                <LoginOutlined />
+                Login
+              </Button>
             </Col>
           </Row>
         </form>
