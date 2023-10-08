@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import { Space, Table, Pagination } from "antd"
@@ -15,6 +15,7 @@ import useFilterable from "@hooks/useFilterable"
 import useUser from "@hooks/useUser"
 import StickArea from "@components/StickArea/StickArea"
 import Button from "@components/Button/Button"
+import UserForm from "./UserForm"
 
 export default function UserList() {
   const router = useRouter()
@@ -28,6 +29,12 @@ export default function UserList() {
     loading,
   } = useUser()
 
+  const [toggle, setToggle] = useState<{
+    display: boolean
+    isNew?: boolean
+    id?: string
+  }>()
+
   const handleRefresh = async (page?: number, params?: object) => {
     fetchPaginateUsers(page, params).catch((message: string) => {
       Swal.fire("Error", message, "error")
@@ -38,9 +45,9 @@ export default function UserList() {
     handleRefresh(1, { [dataIndex]: keyword })
   }
 
-  const handleNew = () => router.push("/user/new")
+  const handleNew = () => setToggle({ display: true, isNew: true })
   const handleDetail = (id: string) => router.push(`/user/detail/${id}`)
-  const handleEdit = (id: string) => router.push(`/user/edit/${id}`)
+  const handleEdit = (id: string) => setToggle({ display: true, id })
 
   const handleDelete = async (id: string) => {
     Swal.fire({
@@ -154,6 +161,8 @@ export default function UserList() {
           </Space>
         </StickArea>
       </section>
+
+      <UserForm toggle={toggle} onClose={() => setToggle({ display: false })} />
     </>
   )
 }

@@ -1,22 +1,31 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import { Row, Col, Space, Button, Card, Spin } from "antd"
-import { ArrowLeftOutlined } from "@ant-design/icons"
+import { ArrowLeftOutlined, EditOutlined } from "@ant-design/icons"
 import Swal from "sweetalert2"
 
 import StickArea from "@components/StickArea/StickArea"
 import useUser from "@hooks/useUser"
+import UserForm from "./UserForm"
 
 interface TProps {
   id: string
 }
 
-export default function UserForm({ id }: TProps) {
+export default function UserDetail({ id }: TProps) {
   const router = useRouter()
   const { userActive, fetchUserActiveById, loading } = useUser()
 
   const title = "User Detail"
+
+  const [toggle, setToggle] = useState<{
+    display: boolean
+    isNew?: boolean
+    id?: string
+  }>()
+
+  const handleEdit = () => setToggle({ display: true, id })
 
   useEffect(() => {
     if (id) {
@@ -84,15 +93,18 @@ export default function UserForm({ id }: TProps) {
             onClick={() => router.push("/user")}
           />
 
-          {/* <Button
-            icon={<SaveOutlined />}
+          <Button
+            icon={<EditOutlined />}
             type={"primary"}
             htmlType={"submit"}
             shape={"circle"}
             size={"large"}
-          /> */}
+            onClick={handleEdit}
+          />
         </Space>
       </StickArea>
+
+      <UserForm toggle={toggle} onClose={() => setToggle({ display: false })} />
     </>
   )
 }

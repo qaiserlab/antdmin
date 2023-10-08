@@ -2,7 +2,17 @@ import React, { useState, useEffect, useContext } from "react"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import * as Yup from "yup"
-import { Row, Col, Space, Input, Button, Card, Spin, Typography } from "antd"
+import {
+  Modal,
+  Row,
+  Col,
+  Space,
+  Input,
+  Button,
+  Card,
+  Spin,
+  Typography,
+} from "antd"
 import { SaveOutlined, ArrowLeftOutlined } from "@ant-design/icons"
 import { useFormik } from "formik"
 import { AxiosError } from "axios"
@@ -13,19 +23,14 @@ import { ActivityStore } from "@stores/ActivityStore"
 
 const { Text } = Typography
 
-interface TProps {
-  isNew: boolean
-  id?: string
-}
-
 const initialValues = {
-  firstName: '',
-  lastName: '',
-  username: '',
-  email: '',
-  phoneNumber: '',
-  newPassword: '',
-  confirmNewPassword: '',
+  firstName: "",
+  lastName: "",
+  username: "",
+  email: "",
+  phoneNumber: "",
+  newPassword: "",
+  confirmNewPassword: "",
 }
 
 const validationSchema = Yup.object().shape({
@@ -49,12 +54,19 @@ const validationSchema = Yup.object().shape({
   phoneNumber: Yup.string(),
 })
 
-export default function UserForm(props: TProps) {
+interface TProps {
+  toggle: {
+    display: boolean
+    isNew?: boolean
+    id?: string
+  }
+  onClose: () => void
+}
+
+export default function UserForm({ toggle, onClose }: TProps) {
   const router = useRouter()
 
-  const isNew = props.isNew
-  const id = props.id
-  const title = isNew ? "New" : "Edit"
+  const title = toggle?.isNew ? "New" : "Edit"
 
   const { setServerBox, resetServerBox } = useContext(ActivityStore)
 
@@ -71,10 +83,10 @@ export default function UserForm(props: TProps) {
           RoleId: "4bae9535-df47-46fe-b395-7be379d01f31",
         }
 
-        if (isNew) {
+        if (toggle?.isNew) {
           await apiV1.post("/users", data)
         } else {
-          await apiV1.put(`/users/${id}`, data)
+          await apiV1.put(`/users/${toggle?.id}`, data)
         }
 
         resetServerBox()
@@ -92,11 +104,11 @@ export default function UserForm(props: TProps) {
 
   useEffect(() => {
     ;(async function () {
-      if (!isNew) {
+      if (!toggle?.isNew) {
         try {
           setIsLoading(true)
 
-          const response = await apiV1.get(`/user/${id}`)
+          const response = await apiV1.get(`/user/${toggle?.id}`)
           const result = response.data
 
           formik.setFieldValue("firstName", result.data.firstName)
@@ -116,10 +128,16 @@ export default function UserForm(props: TProps) {
         }
       }
     })()
-  }, [id])
+  }, [toggle?.id])
 
   return (
-    <React.Fragment>
+    <Modal
+      width="90%"
+      visible={toggle?.display}
+      onCancel={() => {
+        if (onClose) onClose()
+      }}
+    >
       <Head>
         <title>User Management</title>
       </Head>
@@ -275,6 +293,6 @@ export default function UserForm(props: TProps) {
           </Space>
         </StickArea>
       </form>
-    </React.Fragment>
+    </Modal>
   )
 }
