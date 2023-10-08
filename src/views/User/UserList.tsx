@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import { Space, Table, Pagination } from "antd"
-import Swal from "sweetalert2"
+import { Space, Table, Pagination, Modal, notification } from "antd"
 import {
   FileTextOutlined,
   EyeOutlined,
   EditOutlined,
   DeleteOutlined,
   ReloadOutlined,
+  QuestionOutlined,
 } from "@ant-design/icons"
 
 import useFilterable from "@hooks/useFilterable"
@@ -16,6 +16,8 @@ import useUser from "@hooks/useUser"
 import StickArea from "@components/StickArea/StickArea"
 import Button from "@components/Button/Button"
 import UserForm from "./UserForm"
+
+const { confirm } = Modal
 
 export default function UserList() {
   const router = useRouter()
@@ -36,8 +38,8 @@ export default function UserList() {
   }>()
 
   const handleRefresh = async (page?: number, params?: object) => {
-    fetchPaginateUsers(page, params).catch((message: string) => {
-      Swal.fire("Error", message, "error")
+    fetchPaginateUsers(page, params).catch((description: string) => {
+      notification.error({ message: "Error", description })
     })
   }
 
@@ -50,21 +52,23 @@ export default function UserList() {
   const handleEdit = (id: string) => setToggle({ display: true, id })
 
   const handleDelete = async (id: string) => {
-    Swal.fire({
-      icon: "question",
+    confirm({
       title: "Confirm",
-      text: "Delete this data?",
-      showCancelButton: true,
-      confirmButtonText: "OK",
-    }).then((result) => {
-      if (result.isConfirmed) {
+      icon: <QuestionOutlined />,
+      content: "Delete this data?",
+      onOk: () => {
         deleteUserById(id)
-          .then((message: string) => {
-            Swal.fire("Success", message, "success")
+          .then((description: string) => {
+            notification.success({
+              message: "Success",
+              description,
+            })
             handleRefresh(pageActive)
           })
-          .catch((message: string) => Swal.fire("Error", message, "error"))
-      }
+          .catch((description: string) =>
+            notification.error({ message: "Error", description })
+          )
+      },
     })
   }
 

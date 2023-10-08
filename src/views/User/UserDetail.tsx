@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import { Row, Col, Space, Button, Card, Spin } from "antd"
+import { Row, Col, Space, Button, Card, Spin, notification } from "antd"
 import { ArrowLeftOutlined, EditOutlined } from "@ant-design/icons"
-import Swal from "sweetalert2"
 
 import StickArea from "@components/StickArea/StickArea"
 import useUser from "@hooks/useUser"
@@ -29,8 +28,8 @@ export default function UserDetail({ id }: TProps) {
 
   useEffect(() => {
     if (id) {
-      fetchUserActiveById(id).catch((message: string) =>
-        Swal.fire("Error", message, "error")
+      fetchUserActiveById(id).catch((description: string) =>
+        notification.error({ message: "Error", description })
       )
     }
   }, [id])
@@ -48,37 +47,37 @@ export default function UserDetail({ id }: TProps) {
               First Name
             </Col>
             <Col xs={24} lg={21}>
-              {userActive?.firstName || '-'}
+              {userActive?.firstName || "-"}
             </Col>
             <Col xs={24} lg={3}>
               Last Name
             </Col>
             <Col xs={24} lg={21}>
-              {userActive?.lastName || '-'}
+              {userActive?.lastName || "-"}
             </Col>
             <Col xs={24} lg={3}>
               Username
             </Col>
             <Col xs={24} lg={21}>
-              {userActive?.username || '-'}
+              {userActive?.username || "-"}
             </Col>
             <Col xs={24} lg={3}>
               Email
             </Col>
             <Col xs={24} lg={21}>
-              {userActive?.email || '-'}
+              {userActive?.email || "-"}
             </Col>
             <Col xs={24} lg={3}>
               Phone Number
             </Col>
             <Col xs={24} lg={21}>
-              {userActive?.phoneNumber || '-'}
+              {userActive?.phoneNumber || "-"}
             </Col>
             <Col xs={24} lg={3}>
               Role
             </Col>
             <Col xs={24} lg={21}>
-              {userActive?.role?.roleName || '-'}
+              {userActive?.role?.roleName || "-"}
             </Col>
           </Row>
         </Card>
