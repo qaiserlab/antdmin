@@ -7,6 +7,7 @@ interface TUserRecord {
   password: string
   email: string
   roleId: number
+  role: TRoleRecord
   phoneNumber?: string
   createdAt?: string
   updatedAt?: string

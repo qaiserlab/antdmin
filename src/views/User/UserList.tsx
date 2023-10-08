@@ -5,6 +5,7 @@ import { Space, Table, Pagination } from "antd"
 import Swal from "sweetalert2"
 import {
   FileTextOutlined,
+  EyeOutlined,
   EditOutlined,
   DeleteOutlined,
   ReloadOutlined,
@@ -38,6 +39,7 @@ export default function UserList() {
   }
 
   const handleNew = () => router.push("/user/new")
+  const handleDetail = (id: string) => router.push(`/user/detail/${id}`)
   const handleEdit = (id: string) => router.push(`/user/edit/${id}`)
 
   const handleDelete = async (id: string) => {
@@ -86,6 +88,10 @@ export default function UserList() {
       render: (text: string, record: TUserRecord) => {
         return (
           <Space>
+            <Button
+              icon={<EyeOutlined />}
+              onClick={() => handleDetail(record.id)}
+            />
             <Button
               icon={<EditOutlined />}
               onClick={() => handleEdit(record.id)}
