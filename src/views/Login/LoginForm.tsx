@@ -3,21 +3,34 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 import { AxiosError } from "axios"
 import { useFormik } from "formik"
-import { Row, Col, Space, Typography } from "antd"
+import * as Yup from "yup"
+import { Row, Col, Typography } from "antd"
 import { LoginOutlined } from "@ant-design/icons"
 
-import config from '@config/AllConfig'
 import { apiV1 } from "@helpers/ApiHelper"
 import { ActivityStore } from "@stores/ActivityStore"
 import Input from "@components/Input/Input"
 import Button from "@components/Button/Button"
 import StickArea from "@components/StickArea/StickArea"
 import ServerAlert from "@widgets/ServerAlert"
-import { initialValues, validationSchema } from "./LoginSchema"
 
 const { Text } = Typography
 
-export default function LoginView() {
+const initialValues = {
+  username: "",
+  password: "",
+}
+
+const validationSchema = Yup.object().shape({
+  username: Yup.string()
+    .max(100, "Username can't more than 100 characters")
+    .required("Username required"),
+  password: Yup.string()
+    .max(100, "Password can't more than 100 characters")
+    .required("Password required"),
+})
+
+export default function LoginForm() {
   const { setServerBox, resetServerBox, saveAuth } = useContext(ActivityStore)
   const router = useRouter()
   const usernameRef = useRef(null)
