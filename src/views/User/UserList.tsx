@@ -28,7 +28,7 @@ export default function UserList() {
     pageActive,
     pageSize,
     count,
-    loading,
+    fetching,
   } = useUser()
 
   const [toggle, setToggle] = useState<{
@@ -129,7 +129,7 @@ export default function UserList() {
       <section>
         <Space direction={"vertical"} style={{ width: "100%" }}>
           <Table
-            loading={loading}
+            loading={fetching}
             columns={columns}
             dataSource={users}
             rowKey={(user) => user.id}

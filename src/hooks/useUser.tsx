@@ -2,16 +2,17 @@ import { useState } from "react"
 import { apiV1 } from "@helpers/ApiHelper"
 
 export default function useUser() {
+  const [fetching, setFetching] = useState(false)
   const [loading, setLoading] = useState(false)
   const [pageActive, setPageActive] = useState(1)
   const [pageSize, setPageSize] = useState<number>()
   const [pageNum, setPageNum] = useState<number>()
   const [count, setCount] = useState<number>()
   const [users, setUsers] = useState<TUserRecord[]>([])
-  const [userActive, setUserActive] = useState<TUserRecord>()
+  const [user, setUser] = useState<TUserRecord>()
 
   const fetchPaginateUsers = (page: number = 1, params?: object) => {
-    setLoading(true)
+    setFetching(true)
     return new Promise<string>((resolve, reject) => {
       apiV1
         .get<TPagingResponse & { users: TUserRecord[] }>("/users", {
@@ -35,25 +36,25 @@ export default function useUser() {
           const data = error?.response?.data
           reject(data?.message)
         })
-        .finally(() => setLoading(false))
+        .finally(() => setFetching(false))
     })
   }
 
-  const fetchUserActiveById = (id: string) => {
-    setLoading(true)
+  const fetchUserById = (id: string) => {
+    setFetching(true)
     return new Promise<string>((resolve, reject) => {
       apiV1
         .get<{ message: string; user: TUserRecord }>(`/users/${id}`)
         .then((response) => {
           const data = response.data
-          setUserActive(data.user)
+          setUser(data.user)
           resolve(data.message)
         })
         .catch((error) => {
           const data = error?.response?.data
           reject(data?.message)
         })
-        .finally(() => setLoading(false))
+        .finally(() => setFetching(false))
     })
   }
 
@@ -109,15 +110,16 @@ export default function useUser() {
   }
 
   return {
+    fetching,
     loading,
     pageActive,
     pageSize,
     pageNum,
     count,
     users,
-    userActive,
+    user,
     fetchPaginateUsers,
-    fetchUserActiveById,
+    fetchUserById,
     deleteUserById,
     createUser,
     updateUser,

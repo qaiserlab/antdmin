@@ -14,7 +14,7 @@ interface TProps {
 
 export default function UserDetail({ id }: TProps) {
   const router = useRouter()
-  const { userActive, fetchUserActiveById, loading } = useUser()
+  const { user, fetchUserById, fetching } = useUser()
 
   const title = "User Detail"
 
@@ -28,7 +28,7 @@ export default function UserDetail({ id }: TProps) {
 
   useEffect(() => {
     if (id) {
-      fetchUserActiveById(id).catch((description: string) =>
+      fetchUserById(id).catch((description: string) =>
         notification.error({ message: "Error", description })
       )
     }
@@ -40,44 +40,44 @@ export default function UserDetail({ id }: TProps) {
         <title>{title}</title>
       </Head>
 
-      <Spin spinning={loading}>
+      <Spin spinning={fetching}>
         <Card title={title}>
           <Row gutter={[8, 8]}>
             <Col xs={24} lg={3}>
               First Name
             </Col>
             <Col xs={24} lg={21}>
-              {userActive?.firstName || "-"}
+              {user?.firstName || "-"}
             </Col>
             <Col xs={24} lg={3}>
               Last Name
             </Col>
             <Col xs={24} lg={21}>
-              {userActive?.lastName || "-"}
+              {user?.lastName || "-"}
             </Col>
             <Col xs={24} lg={3}>
               Username
             </Col>
             <Col xs={24} lg={21}>
-              {userActive?.username || "-"}
+              {user?.username || "-"}
             </Col>
             <Col xs={24} lg={3}>
               Email
             </Col>
             <Col xs={24} lg={21}>
-              {userActive?.email || "-"}
+              {user?.email || "-"}
             </Col>
             <Col xs={24} lg={3}>
               Phone Number
             </Col>
             <Col xs={24} lg={21}>
-              {userActive?.phoneNumber || "-"}
+              {user?.phoneNumber || "-"}
             </Col>
             <Col xs={24} lg={3}>
               Role
             </Col>
             <Col xs={24} lg={21}>
-              {userActive?.role?.roleName || "-"}
+              {user?.role?.roleName || "-"}
             </Col>
           </Row>
         </Card>
