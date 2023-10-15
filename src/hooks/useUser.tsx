@@ -75,7 +75,7 @@ export default function useUser() {
     })
   }
 
-  const createUser = (formData: TUserRecord) => {
+  const createUser = (formData: Partial<TUserRecord>) => {
     setLoading(true)
     return new Promise<string>((resolve, reject) => {
       apiV1
@@ -92,7 +92,7 @@ export default function useUser() {
     })
   }
 
-  const updateUser = (id: string, formData: TUserRecord) => {
+  const updateUser = (id: string, formData: Partial<TUserRecord>) => {
     setLoading(true)
     return new Promise<string>((resolve, reject) => {
       apiV1

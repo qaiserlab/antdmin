@@ -5,6 +5,7 @@ interface TUserRecord {
   fullName?: string
   username: string
   password: string
+  retypePassword?: string
   email: string
   roleId: number
   role: TRoleRecord

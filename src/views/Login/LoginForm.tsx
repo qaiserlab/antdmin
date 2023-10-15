@@ -4,8 +4,8 @@ import { useRouter } from "next/router"
 import { AxiosError } from "axios"
 import { useFormik } from "formik"
 import * as Yup from "yup"
-import { Row, Col, Typography } from "antd"
-import { LoginOutlined } from "@ant-design/icons"
+import { Row, Col, Typography, Modal } from "antd"
+import { LoginOutlined, WarningOutlined } from "@ant-design/icons"
 
 import { apiV1 } from "@helpers/ApiHelper"
 import { ActivityStore } from "@stores/ActivityStore"
@@ -15,6 +15,7 @@ import StickArea from "@components/StickArea/StickArea"
 import ServerAlert from "@widgets/ServerAlert"
 
 const { Text } = Typography
+const { warning } = Modal
 
 const initialValues = {
   username: "",
@@ -31,7 +32,7 @@ const validationSchema = Yup.object().shape({
 })
 
 export default function LoginForm() {
-  const { setServerBox, resetServerBox, saveAuth } = useContext(ActivityStore)
+  const { saveAuth } = useContext(ActivityStore)
   const router = useRouter()
   const usernameRef = useRef(null)
 
@@ -51,27 +52,22 @@ export default function LoginForm() {
         .post<TAuthRecord>("/auth/login", formData)
         .then((response) => {
           const auth = response.data
-
           saveAuth(auth)
-          resetServerBox()
-
           router.push("/")
         })
         .catch((error: AxiosError | any) => {
           const response = error?.response
-          const status = response?.status
-          const message = response?.data?.message
+          const content = response?.data?.message
 
-          setServerBox({ status, message })
+          warning({
+            title: "Invalid",
+            icon: <WarningOutlined />,
+            content,
+          })
         })
         .finally(() => setSubmitting(false))
     },
   })
-
-  const handleReset = () => {
-    formik.resetForm()
-    usernameRef.current.focus()
-  }
 
   useEffect(() => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
@@ -103,8 +99,8 @@ export default function LoginForm() {
                 value={formik.values.username}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                disabled={formik.isSubmitting}
                 status={formik.errors.username ? "error" : null}
+                disabled={formik.isSubmitting}
               />
               {formik.errors.username && formik.touched.username && (
                 <Text type={"danger"}>{formik.errors.username}</Text>
@@ -120,8 +116,8 @@ export default function LoginForm() {
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                disabled={formik.isSubmitting}
                 status={formik.errors.password ? "error" : null}
+                disabled={formik.isSubmitting}
               />
               {formik.errors.password && formik.touched.password && (
                 <Text type={"danger"}>{formik.errors.password}</Text>

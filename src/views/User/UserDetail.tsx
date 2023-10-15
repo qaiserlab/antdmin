@@ -4,8 +4,8 @@ import { useRouter } from "next/router"
 import { Row, Col, Space, Button, Card, Spin, notification } from "antd"
 import { ArrowLeftOutlined, EditOutlined } from "@ant-design/icons"
 
-import StickArea from "@components/StickArea/StickArea"
 import useUser from "@hooks/useUser"
+import StickArea from "@components/StickArea/StickArea"
 import UserForm from "./UserForm"
 
 interface TProps {
@@ -15,8 +15,6 @@ interface TProps {
 export default function UserDetail({ id }: TProps) {
   const router = useRouter()
   const { user, fetchUserById, fetching } = useUser()
-
-  const title = "User Detail"
 
   const [toggle, setToggle] = useState<{
     display: boolean
@@ -37,11 +35,11 @@ export default function UserDetail({ id }: TProps) {
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>User Detail</title>
       </Head>
 
       <Spin spinning={fetching}>
-        <Card title={title}>
+        <Card title="User Detail">
           <Row gutter={[8, 8]}>
             <Col xs={24} lg={3}>
               First Name
@@ -86,19 +84,19 @@ export default function UserDetail({ id }: TProps) {
       <StickArea>
         <Space>
           <Button
+            onClick={() => router.push("/user")}
             icon={<ArrowLeftOutlined />}
             shape={"circle"}
             size={"large"}
-            onClick={() => router.push("/user")}
           />
 
           <Button
+            onClick={handleEdit}
             icon={<EditOutlined />}
             type={"primary"}
             htmlType={"submit"}
             shape={"circle"}
             size={"large"}
-            onClick={handleEdit}
           />
         </Space>
       </StickArea>

@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useContext } from "react"
-import { useRouter } from "next/router"
-import * as Yup from "yup"
-import { Modal, Row, Col, Input, Spin, Typography, Space } from "antd"
+import React, { useEffect } from "react"
+import { Modal, Row, Col, Spin, Typography, Space, notification } from "antd"
 import { useFormik } from "formik"
-import { AxiosError } from "axios"
+import * as Yup from "yup"
 
-import { apiV1 } from "@helpers/ApiHelper"
-import { ActivityStore } from "@stores/ActivityStore"
 import useUser from "@hooks/useUser"
+import Input from "@components/Input/Input"
 import Button from "@components/Button/Button"
+import { WarningOutlined } from "@ant-design/icons"
 
 const { Text } = Typography
+const { warning } = Modal
 
 const initialValues = {
   firstName: "",
@@ -18,8 +17,8 @@ const initialValues = {
   username: "",
   email: "",
   phoneNumber: "",
-  newPassword: "",
-  confirmNewPassword: "",
+  password: "",
+  retypePassword: "",
 }
 
 const validationSchema = Yup.object().shape({
@@ -34,10 +33,10 @@ const validationSchema = Yup.object().shape({
     .max(50, "Email can't more than 50 characters")
     .required("Email required")
     .email("Invalid Email format"),
-  newPassword: Yup.string()
+  password: Yup.string()
     .max(50, "New Password can't more than 50 characters")
     .required("New Password required"),
-  confirmNewPassword: Yup.string()
+  retypePassword: Yup.string()
     .max(50, "Confirm New Password can't more than 50 characters")
     .required("Confirm New Password required"),
   phoneNumber: Yup.string(),
@@ -53,42 +52,45 @@ interface TProps {
 }
 
 export default function UserForm({ toggle, onClose }: TProps) {
-  const router = useRouter()
-
   const title = toggle?.isNew ? "New" : "Edit"
-  const { setServerBox, resetServerBox } = useContext(ActivityStore)
+
+  const { user, fetchUserById, createUser, updateUser, fetching, loading } =
+    useUser()
 
   const formik = useFormik({
     initialValues,
     validationSchema,
 
-    onSubmit: async (values: Partial<TUserRecord>, { setSubmitting }) => {
-      try {
-        const data = {
-          ...values,
-          RoleId: "4bae9535-df47-46fe-b395-7be379d01f31",
-        }
-
-        if (toggle?.isNew) {
-          await apiV1.post("/users", data)
-        } else {
-          await apiV1.put(`/users/${toggle?.id}`, data)
-        }
-
-        resetServerBox()
-        router.push("/user")
-      } catch (error: AxiosError | any) {
-        if (error.response) {
-          const result = error.response.data
-          setServerBox(result)
-        }
-      } finally {
-        setSubmitting(false)
+    onSubmit: (values: Partial<TUserRecord>) => {
+      if (toggle?.isNew) {
+        createUser(values)
+          .then((description: string) => {
+            notification.success({ message: "Success", description })
+            onClose()
+          })
+          .catch((content: string) => {
+            warning({
+              title: "Invalid",
+              icon: <WarningOutlined />,
+              content,
+            })
+          })
+      } else {
+        updateUser(toggle?.id, values)
+          .then((description: string) => {
+            notification.success({ message: "Success", description })
+            onClose()
+          })
+          .catch((content: string) => {
+            warning({
+              title: "Invalid",
+              icon: <WarningOutlined />,
+              content,
+            })
+          })
       }
     },
   })
-
-  const { user, fetchUserById, fetching, loading } = useUser()
 
   useEffect(() => {
     if (toggle?.display && !toggle?.isNew) {
@@ -97,8 +99,8 @@ export default function UserForm({ toggle, onClose }: TProps) {
         formik.setFieldValue("lastName", user?.lastName)
         formik.setFieldValue("username", user?.username)
         formik.setFieldValue("email", user?.email)
-        // formik.setFieldValue('newPassword', user?.newPassword)
-        // formik.setFieldValue('confirmNewPassword', user?.confirmNewPassword)
+        // formik.setFieldValue('password', user?.password)
+        // formik.setFieldValue('retypePassword', user?.retypePassword)
         formik.setFieldValue("phoneNumber", user?.phoneNumber)
       } else {
         fetchUserById(toggle?.id)
@@ -128,8 +130,8 @@ export default function UserForm({ toggle, onClose }: TProps) {
                 value={formik.values.firstName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                disabled={formik.isSubmitting}
                 status={formik.errors.firstName ? "error" : null}
+                disabled={loading}
               />
               {formik.errors.firstName && formik.touched.firstName && (
                 <Text type={"danger"}>{formik.errors.firstName}</Text>
@@ -145,8 +147,8 @@ export default function UserForm({ toggle, onClose }: TProps) {
                 value={formik.values.lastName}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                disabled={formik.isSubmitting}
                 status={formik.errors.lastName ? "error" : null}
+                disabled={loading}
               />
               {formik.errors.lastName && formik.touched.lastName && (
                 <Text type={"danger"}>{formik.errors.lastName}</Text>
@@ -162,8 +164,8 @@ export default function UserForm({ toggle, onClose }: TProps) {
                 value={formik.values.username}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                disabled={formik.isSubmitting}
                 status={formik.errors.username ? "error" : null}
+                disabled={loading}
               />
               {formik.errors.username && formik.touched.username && (
                 <Text type={"danger"}>{formik.errors.username}</Text>
@@ -179,8 +181,8 @@ export default function UserForm({ toggle, onClose }: TProps) {
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                disabled={formik.isSubmitting}
                 status={formik.errors.email ? "error" : null}
+                disabled={loading}
               />
               {formik.errors.email && formik.touched.email && (
                 <Text type={"danger"}>{formik.errors.email}</Text>
@@ -196,8 +198,8 @@ export default function UserForm({ toggle, onClose }: TProps) {
                 value={formik.values.phoneNumber}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                disabled={formik.isSubmitting}
                 status={formik.errors.phoneNumber ? "error" : null}
+                disabled={loading}
               />
               {formik.errors.phoneNumber && formik.touched.phoneNumber && (
                 <Text type={"danger"}>{formik.errors.phoneNumber}</Text>
@@ -209,16 +211,16 @@ export default function UserForm({ toggle, onClose }: TProps) {
             </Col>
             <Col xs={24} lg={21}>
               <Input
-                name={"newPassword"}
+                name={"password"}
                 type={"password"}
-                value={formik.values.newPassword}
+                value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                disabled={formik.isSubmitting}
-                status={formik.errors.newPassword ? "error" : null}
+                status={formik.errors.password ? "error" : null}
+                disabled={loading}
               />
-              {formik.errors.newPassword && formik.touched.newPassword && (
-                <Text type={"danger"}>{formik.errors.newPassword}</Text>
+              {formik.errors.password && formik.touched.password && (
+                <Text type={"danger"}>{formik.errors.password}</Text>
               )}
             </Col>
 
@@ -227,27 +229,31 @@ export default function UserForm({ toggle, onClose }: TProps) {
             </Col>
             <Col xs={24} lg={21}>
               <Input
-                name={"confirmNewPassword"}
+                name={"retypePassword"}
                 type={"password"}
-                value={formik.values.confirmNewPassword}
+                value={formik.values.retypePassword}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                disabled={formik.isSubmitting}
-                status={formik.errors.confirmNewPassword ? "error" : null}
+                status={formik.errors.retypePassword ? "error" : null}
+                disabled={loading}
               />
-              {formik.errors.confirmNewPassword &&
-                formik.touched.confirmNewPassword && (
-                  <Text type={"danger"}>
-                    {formik.errors.confirmNewPassword}
-                  </Text>
+              {formik.errors.retypePassword &&
+                formik.touched.retypePassword && (
+                  <Text type={"danger"}>{formik.errors.retypePassword}</Text>
                 )}
             </Col>
             <Col span={24}>
               <Space style={{ marginTop: 16, float: "right" }}>
-                <Button htmlType="submit" size="large" type="primary">
+                <Button
+                  loading={loading}
+                  disabled={loading}
+                  htmlType="submit"
+                  size="large"
+                  type="primary"
+                >
                   Save
                 </Button>
-                <Button onClick={onClose} size="large">
+                <Button onClick={onClose} disabled={loading} size="large">
                   Cancel
                 </Button>
               </Space>

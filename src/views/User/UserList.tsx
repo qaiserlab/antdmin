@@ -43,14 +43,10 @@ export default function UserList() {
     })
   }
 
-  const handleFilter = (dataIndex: string, keyword: string) => {
-    handleRefresh(1, { [dataIndex]: keyword })
-  }
-
   const handleNew = () => setToggle({ display: true, isNew: true })
   const handleDetail = (id: string) => router.push(`/user/detail/${id}`)
   const handleEdit = (id: string) => setToggle({ display: true, id })
-
+  
   const handleDelete = async (id: string) => {
     confirm({
       title: "Confirm",
@@ -70,6 +66,10 @@ export default function UserList() {
           )
       },
     })
+  }
+
+  const handleFilter = (dataIndex: string, keyword: string) => {
+    handleRefresh(1, { [dataIndex]: keyword })
   }
 
   const columns: any = [
@@ -124,7 +124,7 @@ export default function UserList() {
   return (
     <>
       <Head>
-        <title>User Management</title>
+        <title>User List</title>
       </Head>
       <section>
         <Space direction={"vertical"} style={{ width: "100%" }}>
