@@ -11,8 +11,8 @@ interface TProps {
 
 function ActivityProvider({ children }: TProps) {
   const {
-    saveAuth,
-    dropAuth,
+    logout,
+    login,
     isLoggedIn,
     myAccount,
   } = useAuth()
@@ -26,8 +26,8 @@ function ActivityProvider({ children }: TProps) {
   return (
     <Provider value={{ 
       // Auth
-      saveAuth,
-      dropAuth,
+      logout,
+      login,
       isLoggedIn,
       myAccount,
       // Server Said

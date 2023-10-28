@@ -10,7 +10,7 @@ import DataMenu from '@components/DataMenu/DataMenu'
 const { confirm } = Modal
 
 export default function SettingMenu() {
-  const { dropAuth } = useContext(ActivityStore)
+  const { logout } = useContext(ActivityStore)
 
   const router = useRouter()
 
@@ -25,7 +25,7 @@ export default function SettingMenu() {
         icon: <QuestionOutlined />,
         content: 'Logout from Application?',
         onOk: () => {
-          dropAuth()
+          logout()
           router.push('/login')
         },
       })

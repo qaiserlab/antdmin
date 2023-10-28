@@ -6,6 +6,7 @@ import { apiV1 } from "@helpers/ApiHelper"
 const { ACCESS_KEY } = config.envy
 
 export default function useAuth() {
+  const [loading, setLoading] = useState(false)
   const [auth, setAuth] = useState<TAuthRecord>()
   const [myAccount, setMyAccount] = useState<Partial<TUserRecord>>()
 
@@ -50,6 +51,44 @@ export default function useAuth() {
     return accessToken
   }
 
+  const login = (formData: Partial<TUserRecord>) => {
+    setLoading(true)
+    return new Promise<string>((resolve, reject) => {
+      apiV1
+        .post<TAuthRecord & { message: string }>("/auth/login", formData)
+        .then((response) => {
+          const data = response.data
+          saveAuth(data)
+          resolve(data.message)
+        })
+        .catch((error) => {
+          const data = error?.response?.data
+          reject(data?.message)
+        })
+        .finally(() => setLoading(false))
+    })
+  }
+
+  const logout = () => {
+    setLoading(true)
+    return new Promise<string>((resolve, reject) => {
+      apiV1
+        .get<{ message: string }>(`/auth/logout`)
+        .then((response) => {
+          const data = response.data
+          resolve(data.message)
+        })
+        .catch((error) => {
+          const data = error?.response?.data
+          reject(data?.message)
+        })
+        .finally(() => {
+          dropAuth()
+          setLoading(false)
+        })
+    })
+  }
+
   const isLoggedIn = () => {
     return new Promise<TUserRecord>((resolve, reject) => {
       const accessToken = getAccessToken()
@@ -79,8 +118,9 @@ export default function useAuth() {
   }, [auth])
 
   return {
-    saveAuth,
-    dropAuth,
+    loading,
+    login,
+    logout,
     isLoggedIn,
     myAccount,
   }

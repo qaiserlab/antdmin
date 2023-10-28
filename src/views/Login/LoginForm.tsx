@@ -1,13 +1,11 @@
 import React, { useEffect, useContext, useRef } from "react"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import { AxiosError } from "axios"
 import { useFormik } from "formik"
 import * as Yup from "yup"
-import { Row, Col, Typography, Modal } from "antd"
+import { Row, Col, Typography, Modal, notification } from "antd"
 import { LoginOutlined, WarningOutlined } from "@ant-design/icons"
 
-import { apiV1 } from "@helpers/ApiHelper"
 import { ActivityStore } from "@stores/ActivityStore"
 import Input from "@components/Input/Input"
 import Button from "@components/Button/Button"
@@ -32,7 +30,7 @@ const validationSchema = Yup.object().shape({
 })
 
 export default function LoginForm() {
-  const { saveAuth } = useContext(ActivityStore)
+  const { login } = useContext(ActivityStore)
   const router = useRouter()
   const usernameRef = useRef(null)
 
@@ -41,24 +39,12 @@ export default function LoginForm() {
     validationSchema,
 
     onSubmit: (values: Partial<TUserRecord>, { setSubmitting }) => {
-      const { username, password } = values
-
-      const formData = {
-        username,
-        password,
-      }
-
-      apiV1
-        .post<TAuthRecord>("/auth/login", formData)
-        .then((response) => {
-          const auth = response.data
-          saveAuth(auth)
+      login(values)
+        .then((description: string) => {
+          notification.success({ message: "Success", description })
           router.push("/")
         })
-        .catch((error: AxiosError | any) => {
-          const response = error?.response
-          const content = response?.data?.message
-
+        .catch((content: string) => {
           warning({
             title: "Invalid",
             icon: <WarningOutlined />,
@@ -131,6 +117,7 @@ export default function LoginForm() {
                 size="large"
                 style={{ width: "100%" }}
                 loading={formik.isSubmitting}
+                disabled={formik.isSubmitting}
               >
                 <LoginOutlined />
                 Login
